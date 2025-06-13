@@ -34,21 +34,3 @@ OpeningHours.nextOpeningDate(wednesday) === fridayMorning
 ```
 
 
-Choose whatever language you like. (PS: Valerie likes Haskell and Elixir).
-
-
-## don't be shy
-
-If you want to share what you came up with, don't hesitate to open an issue with a link to your repository.
-I will link it here and we both will live a long and happy life.
-
-Submitted solutions:
-
-- [petemcfarlane/opening-hours-kata ~ Haskell](https://github.com/petemcfarlane/opening-hours-kata)
-- [MatteoPierro/opening-hours-kata ~ Scala](https://github.com/MatteoPierro/opening-hours-kata)
-- [tiagomartinho/opening-hours-kata ~ Swift](https://github.com/tiagomartinho/opening-hours-kata)
-- [AndrewSinclair/opening-hours-kata ~ Clojure](https://github.com/AndrewSinclair/opening-hours-kata)
-- [amirci/opening-hours-kata-hs ~ Haskell](https://github.com/amirci/opening-hours-kata-hs)
-- [shanecharles/opening-hours-kata-solutions ~ Erlang & Commodore 64](https://github.com/shanecharles/opening-hours-kata-solutions/)
-- [fain182/opening-hours-kata ~ PHP](https://github.com/fain182/opening-hours-kata)
-- [dlion/opening-hours-kata ~ Go](https://github.com/dlion/opening-hours-kata)
