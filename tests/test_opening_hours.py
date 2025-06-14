@@ -13,6 +13,7 @@ def shop_hours():
 def test_is_open_on(shop_hours: OpeningHours):
     results = {
         "wednesday": shop_hours.isOpenOn("2016-05-11T12:22:11.824Z"),
+        "wednesday_after_hours": shop_hours.isOpenOn("2016-05-11T16:01:00.000Z"),
         "thursday": shop_hours.isOpenOn("2016-05-12T12:22:11.824Z"),
     }
     verify(str(results))

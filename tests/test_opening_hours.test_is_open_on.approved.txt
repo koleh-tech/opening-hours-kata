@@ -1,1 +1,1 @@
-{'wednesday': True, 'thursday': False}
+{'wednesday': True, 'wednesday_after_hours': False, 'thursday': False}
