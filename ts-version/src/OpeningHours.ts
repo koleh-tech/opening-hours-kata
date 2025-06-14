@@ -1,3 +1,19 @@
-export function sum(a, b) {
-  return a + b;
+export class OpeningHours {
+    constructor(
+        public days: string[],
+        public openTime: string,
+        public closeTime: string,
+    ) {}
+
+    isOpenOn(date: string) {
+        return false
+    }
+
+    nextOpeningDate(date: string) {
+        return ""
+    }
+
+    dayNameFor(date: string) {
+        return ""
+    }
 }
