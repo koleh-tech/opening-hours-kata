@@ -12,9 +12,9 @@ def shop_hours():
 
 def test_is_open_on(shop_hours: OpeningHours):
     results = {
-        "wednesday": shop_hours.isOpenOn("2016-05-11T12:22:11.824Z"),
-        "wednesday_after_hours": shop_hours.isOpenOn("2016-05-11T16:01:00.000Z"),
-        "thursday": shop_hours.isOpenOn("2016-05-12T12:22:11.824Z"),
+        "wednesday": shop_hours.is_open_on("2016-05-11T12:22:11.824Z"),
+        "wednesday_after_hours": shop_hours.is_open_on("2016-05-11T16:01:00.000Z"),
+        "thursday": shop_hours.is_open_on("2016-05-12T12:22:11.824Z"),
     }
 
     verify(f"{header_for_hours(shop_hours)}{results}")
@@ -28,7 +28,7 @@ def test_next_opening_date(shop_hours: OpeningHours):
         "2016-05-15T12:22:11.824Z",
     ]
     results = [
-        f"{input} ({shop_hours.day_name_for(input)}) => {shop_hours.nextOpeningDate(input)}"
+        f"{input} ({shop_hours.day_name_for(input)}) => {shop_hours.next_opening_date(input)}"
         for input in inputs
     ]
     to_verify = "\n".join(results)

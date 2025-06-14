@@ -12,7 +12,7 @@ class OpeningHours:
         local_dt = datetime.fromisoformat(dt.replace("Z", "+00:00"))
         return calendar.day_name[local_dt.weekday()].lower()
 
-    def isOpenOn(self, dt: str):
+    def is_open_on(self, dt: str):
         local_dt = datetime.fromisoformat(dt.replace("Z", "+00:00"))
 
         return (
@@ -20,7 +20,7 @@ class OpeningHours:
             and self.open_time <= local_dt.time() <= self.close_time
         )
 
-    def nextOpeningDate(self, dt: str):
+    def next_opening_date(self, dt: str):
         current_dt = datetime.fromisoformat(dt.replace("Z", "+00:00"))
         for i in range(8):
             candidate = current_dt + timedelta(days=i)
