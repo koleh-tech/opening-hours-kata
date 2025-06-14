@@ -9,8 +9,8 @@ class OpeningHours:
         self.close_time = time.fromisoformat(close_time)
 
     def weekday_for(self, dt: str):
-        local_dt2 = datetime.fromisoformat(dt.replace("Z", "+00:00"))
-        return calendar.day_name[local_dt2.weekday()].lower()
+        local_dt = datetime.fromisoformat(dt.replace("Z", "+00:00"))
+        return calendar.day_name[local_dt.weekday()].lower()
 
     def isOpenOn(self, dt: str):
         local_dt = datetime.fromisoformat(dt.replace("Z", "+00:00"))
