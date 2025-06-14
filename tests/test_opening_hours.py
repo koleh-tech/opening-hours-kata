@@ -28,6 +28,7 @@ def test_next_opening_date(shop_hours: OpeningHours):
         "2016-05-10T12:22:11.824Z",
         "2016-05-11T12:22:11.824Z",
         "2016-05-13T12:22:11.824Z",
+        "2016-05-15T12:22:11.824Z",
     ]
     results = [
         f"{input} ({shop_hours.day_name_for(input)}) => {shop_hours.nextOpeningDate(input)}"
