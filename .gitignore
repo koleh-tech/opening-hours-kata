@@ -1,2 +1,3 @@
 .coverage
 __pycache__
+.approval_tests_temp
