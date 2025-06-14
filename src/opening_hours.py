@@ -8,17 +8,15 @@ class OpeningHours:
         self.open_time = time.fromisoformat(open_time)
         self.close_time = time.fromisoformat(close_time)
 
-    def thing(self, dt: str) -> None:
+    def weekday_for(self, dt: str):
         local_dt2 = datetime.fromisoformat(dt.replace("Z", "+00:00"))
-        weekday = calendar.day_name[local_dt2.weekday()].lower()
-        return weekday
+        return calendar.day_name[local_dt2.weekday()].lower()
 
     def isOpenOn(self, dt: str):
         local_dt = datetime.fromisoformat(dt.replace("Z", "+00:00"))
-        weekday = self.thing(dt)
 
         return (
-            weekday[:3] in self.days
+            self.weekday_for(dt)[:3] in self.days
             and self.open_time <= local_dt.time() <= self.close_time
         )
 
