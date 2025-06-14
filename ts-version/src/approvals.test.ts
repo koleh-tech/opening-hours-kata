@@ -1,12 +1,16 @@
-var approvals = require("approvals")
+import { describe, it } from "vitest"
+import approvals from "approvals"
+
+approvals.configure({
+    reporters: ["kompare"],
+})
 describe("When running some tests", function () {
-    beforeEach(function () {
-        this.setOptions({
-            reporters: ["meld"],
-        })
-    })
     it("should be able to use Approvals", function () {
         var data = "Hello World!"
-        this.verify(data, { reporters: ["meld"] }) // or this.verifyAsJSON(data)
+        approvals.verify(
+            __dirname,
+            "sample-approval-test",
+            "some text to verify",
+        )
     })
 })
