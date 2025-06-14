@@ -26,7 +26,7 @@ def test_next_opening_date(shop_hours: OpeningHours):
     opening_days = f"Opening days: {shop_hours.days}"
     inputs = ["2016-05-11T12:22:11.824Z"]
     results = [
-        f"{input} ({shop_hours.weekday_for(input)}) => {shop_hours.nextOpeningDate(input)}"
+        f"{input} ({shop_hours.day_name_for(input)}) => {shop_hours.nextOpeningDate(input)}"
         for input in inputs
     ]
     to_verify = "\n".join(results)

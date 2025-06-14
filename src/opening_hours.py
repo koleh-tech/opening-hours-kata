@@ -8,7 +8,7 @@ class OpeningHours:
         self.open_time = time.fromisoformat(open_time)
         self.close_time = time.fromisoformat(close_time)
 
-    def weekday_for(self, dt: str):
+    def day_name_for(self, dt: str):
         local_dt = datetime.fromisoformat(dt.replace("Z", "+00:00"))
         return calendar.day_name[local_dt.weekday()].lower()
 
@@ -16,7 +16,7 @@ class OpeningHours:
         local_dt = datetime.fromisoformat(dt.replace("Z", "+00:00"))
 
         return (
-            self.weekday_for(dt)[:3] in self.days
+            self.day_name_for(dt)[:3] in self.days
             and self.open_time <= local_dt.time() <= self.close_time
         )
 
