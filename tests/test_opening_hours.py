@@ -10,7 +10,7 @@ def shop_hours():
     )
 
 
-def test_is_open_on(shop_hours):
+def test_is_open_on(shop_hours: OpeningHours):
     results = {
         "wednesday": shop_hours.isOpenOn("2016-05-11T12:22:11.824Z"),
         "thursday": shop_hours.isOpenOn("2016-05-12T12:22:11.824Z"),
@@ -18,6 +18,6 @@ def test_is_open_on(shop_hours):
     verify(str(results))
 
 
-def test_next_opening_date(shop_hours):
+def test_next_opening_date(shop_hours: OpeningHours):
     next_open = shop_hours.nextOpeningDate("2016-05-11T12:22:11.824Z")
     verify(next_open)
