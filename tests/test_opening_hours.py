@@ -24,7 +24,11 @@ def test_is_open_on(shop_hours: OpeningHours):
 def test_next_opening_date(shop_hours: OpeningHours):
     opening_hours = f"Opening hours: {shop_hours.open_time} - {shop_hours.close_time}"
     opening_days = f"Opening days: {shop_hours.days}"
-    inputs = ["2016-05-10T12:22:11.824Z", "2016-05-11T12:22:11.824Z"]
+    inputs = [
+        "2016-05-10T12:22:11.824Z",
+        "2016-05-11T12:22:11.824Z",
+        "2016-05-13T12:22:11.824Z",
+    ]
     results = [
         f"{input} ({shop_hours.day_name_for(input)}) => {shop_hours.nextOpeningDate(input)}"
         for input in inputs
