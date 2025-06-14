@@ -21,16 +21,7 @@ def test_is_open_on(shop_hours: OpeningHours):
     verify(f"OPEN HOURS: {opening_hours}\nOPEN DAYS: {opening_days}\n\n{results}")
 
 
-def header_for_hours(shop_hours: OpeningHours):
-    opening_hours = f"Opening hours: {shop_hours.open_time} - {shop_hours.close_time}"
-    opening_days = f"Opening days: {shop_hours.days}"
-    header = f"OPEN HOURS: {opening_hours}\nOPEN DAYS: {opening_days}\n\n"
-    return header
-
-
 def test_next_opening_date(shop_hours: OpeningHours):
-    header = header_for_hours(shop_hours)
-
     inputs = [
         "2016-05-09T12:22:11.824Z",
         "2016-05-11T12:22:11.824Z",
@@ -42,4 +33,10 @@ def test_next_opening_date(shop_hours: OpeningHours):
         for input in inputs
     ]
     to_verify = "\n".join(results)
-    verify(f"{header}{to_verify}")
+    verify(f"{header_for_hours(shop_hours)}{to_verify}")
+
+
+def header_for_hours(shop_hours: OpeningHours):
+    opening_hours = f"Opening hours: {shop_hours.open_time} - {shop_hours.close_time}"
+    opening_days = f"Opening days: {shop_hours.days}"
+    return f"OPEN HOURS: {opening_hours}\nOPEN DAYS: {opening_days}\n\n"
