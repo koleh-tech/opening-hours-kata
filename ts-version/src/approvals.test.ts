@@ -7,10 +7,10 @@ approvals.configure({
 })
 
 describe("OpeningHours", function () {
+    const days = ["Mon", "Wed", "Fri"]
+    const openHours = new OpeningHours(days, "08:00", "16:00")
+    const header = `CONFIG:\nDAYS OPEN: ${days}\nHOURS OPEN: ${"08:00"} - ${"16:00"}\n`
     it("is open on days", function () {
-        const days = ["Mon", "Wed", "Fri"]
-        const openHours = new OpeningHours(days, "08:00", "16:00")
-        const header = `CONFIG:\nDAYS OPEN: ${days}\nHOURS OPEN: ${"08:00"} - ${"16:00"}\n`
         const inputDays = [
             ...[16, 17, 18, 19].map(
                 (dayNum) => `2016-05-${dayNum}T12:22:11.824Z`,
@@ -26,9 +26,6 @@ describe("OpeningHours", function () {
     })
 
     it("is open on hours", function () {
-        const days = ["Mon", "Wed", "Fri"]
-        const openHours = new OpeningHours(days, "08:00", "16:00")
-        const header = `CONFIG:\nDAYS OPEN: ${days}\nHOURS OPEN: ${"08:00"} - ${"16:00"}\n`
         const inputHours = [
             ...[`2016-05-10T22:29:11.824Z`],
             ...[`2016-05-10T22:30:11.824Z`],
