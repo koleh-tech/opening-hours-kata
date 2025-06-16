@@ -12,8 +12,10 @@ export class OpeningHours {
         )
     }
     isOpenOn(date: string) {
-        const dayString = this.dayNameFor(date)
-        return this.days.includes(dayString) && this.withinOpeningHours(date)
+        return (
+            this.days.includes(this.dayNameFor(date)) &&
+            this.withinOpeningHours(date)
+        )
     }
 
     nextOpeningDate(date: string) {
