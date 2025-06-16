@@ -1,3 +1,4 @@
 CONFIG:
-DAYS OPEN: mon,wed,friMonday => CLOSED
+DAYS OPEN: mon,wed,fri
+Monday => CLOSED
 Wednesday => CLOSED
