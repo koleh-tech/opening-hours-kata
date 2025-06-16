@@ -38,8 +38,8 @@ describe("OpeningHours", function () {
         ]
         const result = inputHours
             .map((input) => {
-                const openText = openHours.isOpenOn(input) ? "OPEN" : "CLOSED"
-                return `${openHours.dayNameFor(input)} ${openHours.timeFor(input)} => ${openText}`
+                const inputText = `${openHours.dayNameFor(input)} ${openHours.timeFor(input)}`
+                return `${inputText} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")
         approvals.verify(__dirname, "open-on-hours", header + result)
