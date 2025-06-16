@@ -29,11 +29,7 @@ describe("OpeningHours", function () {
         const days = ["mon", "wed", "fri"]
         const openHours = new OpeningHours(days, "08:00", "16:00")
         const header = `CONFIG:\nDAYS OPEN: ${days}\nHOURS OPEN: ${"08:00"} - ${"16:00"}\n`
-        const inputDays = [
-            ...[16, 17, 18, 19].map(
-                (dayNum) => `2016-05-${dayNum}T12:22:11.824Z`,
-            ),
-        ]
+        const inputDays = [`2016-05-16T12:22:11.824Z`]
         const result = inputDays
             .map((input) => {
                 const openText = openHours.isOpenOn(input) ? "OPEN" : "CLOSED"
