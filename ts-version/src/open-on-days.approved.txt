@@ -3,3 +3,4 @@ DAYS OPEN: mon,wed,fri
 Monday => CLOSED
 Tuesday => CLOSED
 Wednesday => CLOSED
+Thursday => CLOSED

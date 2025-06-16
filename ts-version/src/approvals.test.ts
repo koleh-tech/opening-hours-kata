@@ -18,6 +18,7 @@ describe("OpeningHours", function () {
             "2016-05-09T12:22:11.824Z",
             "2016-05-10T12:22:11.824Z",
             "2016-05-11T12:22:11.824Z",
+            "2016-05-12T12:22:11.824Z",
         ]
         const result = inputs
             .map((input) => {
