@@ -19,8 +19,12 @@ export class OpeningHours {
         )
     }
 
-    nextOpeningDate(date: string) {
-        return ""
+    nextOpeningDate(datetime: string) {
+        const dayname = this.dayNameFor(datetime)
+        const nextDay = this.days.indexOf(dayname) + 1
+        const nextDate = new Date(datetime)
+        nextDate.setDate(nextDate.getDate() + nextDay)
+        return nextDate.toISOString()
     }
 
     dayNameFor(date: string) {
