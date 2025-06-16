@@ -1,4 +1,4 @@
-2016-05-12T12:22:11.824ZCONFIG:
+CONFIG:
 DAYS OPEN: mon,wed,fri
 Monday => CLOSED
 Tuesday => CLOSED
