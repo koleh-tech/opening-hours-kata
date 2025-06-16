@@ -31,6 +31,7 @@ describe("OpeningHours", function () {
         const header = `CONFIG:\nDAYS OPEN: ${days}\nHOURS OPEN: ${"08:00"} - ${"16:00"}\n`
         const inputHours = [
             ...[`2016-05-10T21:22:11.824Z`],
+            ...[`2016-05-10T22:49:11.824Z`],
             ...[`2016-05-16T12:22:11.824Z`],
         ]
         const result = inputHours
