@@ -41,4 +41,19 @@ describe("OpeningHours", function () {
             .join("\n")
         approvals.verify(__dirname, "open-on-hours", header + result)
     })
+
+    it("next opening day", function () {
+        const inputDays = [
+            ...[16, 17, 18, 19].map(
+                (dayNum) => `2016-05-${dayNum}T12:22:11.824Z`,
+            ),
+        ]
+        const result = inputDays
+            .map((input) => {
+                const inputText = openHours.dayNameFor(input)
+                return `${inputText} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
+            })
+            .join("\n")
+        approvals.verify(__dirname, "next-opening-day", header + result)
+    })
 })
