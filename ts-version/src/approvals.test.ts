@@ -15,11 +15,8 @@ describe("OpeningHours", function () {
             "08:00",
             "16:00",
         ).isOpenOn(input)
-        approvals.verify(
-            __dirname,
-            "open-on-days",
-            `${input} => ${toApprove ? "OPEN" : "CLOSED"}`,
-        )
+        const result = `${input} => ${toApprove ? "OPEN" : "CLOSED"}`
+        approvals.verify(__dirname, "open-on-days", result)
     })
 })
 
