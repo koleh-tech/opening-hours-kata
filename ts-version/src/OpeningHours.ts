@@ -6,11 +6,24 @@ class OpeningDay {
 }
 
 export class OpeningHours {
+    public newInterfaceDays: OpeningDay[]
     constructor(
         public days: string[],
         public openTime: string,
         public closeTime: string,
-    ) {}
+    ) {
+        this.newInterfaceDays = [
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat",
+            "Sun",
+        ].map((day) => {
+            return new OpeningDay(day, days.includes(day))
+        })
+    }
 
     withinOpeningHours(datetime: string) {
         const time = new Date(datetime).getHours()
