@@ -5,17 +5,16 @@ export class OpeningHours {
         public closeTime: string,
     ) {}
 
-    withinOpeningHours(time) {
-        const thi =
+    withinOpeningHours(datetime: string) {
+        const time = new Date(datetime).getHours()
+        return (
             time >= parseInt(this.openTime) && time < parseInt(this.closeTime)
-        return thi
+        )
     }
     isOpenOn(date: string) {
         const dayString = this.dayNameFor(date)
         if (this.days.includes(dayString)) {
-            const time = new Date(date).getHours()
-            const thi = this.withinOpeningHours(time)
-            return thi
+            return this.withinOpeningHours(date)
         }
         return false
     }
