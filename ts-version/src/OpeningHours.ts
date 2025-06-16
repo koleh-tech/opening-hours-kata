@@ -25,6 +25,10 @@ export class OpeningHours {
         )
     }
 
+    get inputDays() {
+        return this.days.filter((day) => day.isOpen).map((day) => day.day)
+    }
+
     isOpenOn(date: string) {
         return (
             this.inputDays.includes(this.dayNameFor(date)) &&
