@@ -1,3 +1,10 @@
+class OpeningDay {
+    constructor(
+        public day: string,
+        public isOpen: boolean,
+    ) {}
+}
+
 export class OpeningHours {
     constructor(
         public days: string[],
