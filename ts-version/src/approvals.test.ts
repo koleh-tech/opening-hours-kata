@@ -26,7 +26,11 @@ describe("OpeningHours", function () {
                 return `${openHours.dayNameFor(input)} => ${openText}`
             })
             .join("\n")
-        approvals.verify(__dirname, "open-on-days", header + result)
+        approvals.verify(
+            __dirname,
+            "open-on-days",
+            `2016-05-12T12:22:11.824Z` + header + result,
+        )
     })
 })
 
