@@ -30,13 +30,13 @@ describe("OpeningHours", function () {
         const openHours = new OpeningHours(days, "08:00", "16:00")
         const header = `CONFIG:\nDAYS OPEN: ${days}\nHOURS OPEN: ${"08:00"} - ${"16:00"}\n`
         const inputHours = [
-            ...[`2016-05-16T12:22:11.824Z`],
+            ...[`2016-05-16T08:00:11.824Z`],
             ...[`2016-05-16T12:22:11.824Z`],
         ]
         const result = inputHours
             .map((input) => {
                 const openText = openHours.isOpenOn(input) ? "OPEN" : "CLOSED"
-                return `${openHours.dayNameFor(input)} => ${openText}`
+                return `${openHours.timeFor(input)} => ${openText}`
             })
             .join("\n")
         approvals.verify(__dirname, "open-on-hours", header + result)

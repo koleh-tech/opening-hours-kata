@@ -22,4 +22,11 @@ export class OpeningHours {
             weekday: "short",
         })
     }
+
+    timeFor(date: string) {
+        return new Date(date).toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+        })
+    }
 }
