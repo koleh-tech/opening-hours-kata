@@ -20,7 +20,7 @@ describe("OpeningHours", function () {
                 "2016-05-10T12:22:11.824Z",
                 "2016-05-11T12:22:11.824Z",
             ],
-            ...[12].map((dayNum) => `2016-05-${12}T12:22:11.824Z`),
+            ...[12].map((dayNum) => `2016-05-${dayNum}T12:22:11.824Z`),
         ]
         const fourth = openHours.dayNameFor(inputs[3])
         // __AUTO_GENERATED_PRINT_VAR_START__
