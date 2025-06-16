@@ -14,9 +14,14 @@ describe("OpeningHours", function () {
             "08:00",
             "16:00",
         )
-        const input = ["2016-05-11T12:22:11.824Z"][0]
+        const inputs = ["2016-05-11T12:22:11.824Z"]
 
-        const result = `${openHours.dayNameFor(input)} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
+        const result = inputs
+            .map(
+                (input) =>
+                    `${openHours.dayNameFor(input)} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`,
+            )
+            .join("\n")
         approvals.verify(__dirname, "open-on-days", result)
     })
 })
