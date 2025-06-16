@@ -15,7 +15,7 @@ describe("OpeningHours", function () {
         )
         const header = `CONFIG:\nDAYS OPEN: ${["mon", "wed", "fri"]}\n`
         const inputs = [
-            ...[16, 10, 11, 12].map(
+            ...[16, 17, 18, 19].map(
                 (dayNum) => `2016-05-${dayNum}T12:22:11.824Z`,
             ),
         ]
