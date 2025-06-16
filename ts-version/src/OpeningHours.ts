@@ -6,23 +6,17 @@ class OpeningDay {
 }
 
 export class OpeningHours {
-    public newInterfaceDays: OpeningDay[]
+    public days: OpeningDay[]
     constructor(
-        public days: string[],
+        public daysOld: string[],
         public openTime: string,
         public closeTime: string,
     ) {
-        this.newInterfaceDays = [
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-        ].map((day) => {
-            return new OpeningDay(day, days.includes(day))
-        })
+        this.days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
+            (day) => {
+                return new OpeningDay(day, daysOld.includes(day))
+            },
+        )
     }
 
     withinOpeningHours(datetime: string) {
@@ -34,14 +28,14 @@ export class OpeningHours {
 
     isOpenOn(date: string) {
         return (
-            this.days.includes(this.dayNameFor(date)) &&
+            this.daysOld.includes(this.dayNameFor(date)) &&
             this.withinOpeningHours(date)
         )
     }
 
     nextOpeningDate(datetime: string) {
         const dayname = this.dayNameFor(datetime)
-        const nextDay = this.days.indexOf(dayname) + 1
+        const nextDay = this.daysOld.indexOf(dayname) + 1
         const nextDate = new Date(datetime)
         nextDate.setDate(nextDate.getDate() + nextDay)
         return nextDate.toISOString()
