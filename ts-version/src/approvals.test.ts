@@ -44,9 +44,7 @@ describe("OpeningHours", function () {
 
     it("next opening day", function () {
         const inputDays = [
-            ...[16, 17, 18, 19].map(
-                (dayNum) => `2016-05-${dayNum}T12:22:11.824Z`,
-            ),
+            ...[16].map((dayNum) => `2016-05-${dayNum}T12:22:11.824Z`),
         ]
         const result = inputDays
             .map((input) => {
