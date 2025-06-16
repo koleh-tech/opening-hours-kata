@@ -3,4 +3,4 @@ DAYS OPEN: Mon,Wed,Fri
 HOURS OPEN: 08:00 - 16:00
 Wed 06:52 am => CLOSED
 Wed 08:19 am => OPEN
-Mon 09:52 pm => CLOSED
+Wed 08:19 am => OPEN
