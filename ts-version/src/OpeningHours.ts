@@ -6,6 +6,10 @@ export class OpeningHours {
     ) {}
 
     isOpenOn(date: string) {
+        const dayString = this.dayNameFor(date)
+        if (this.days.includes(dayString)) {
+            return true
+        }
         return false
     }
 
@@ -15,7 +19,7 @@ export class OpeningHours {
 
     dayNameFor(date: string) {
         return new Date(date).toLocaleDateString("en-US", {
-            weekday: "long",
+            weekday: "short",
         })
     }
 }

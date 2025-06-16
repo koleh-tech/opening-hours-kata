@@ -1,4 +1,4 @@
 CONFIG:
 DAYS OPEN: mon,wed,fri
 HOURS OPEN: 08:00 - 16:00
-Monday => CLOSED
+Mon => CLOSED
