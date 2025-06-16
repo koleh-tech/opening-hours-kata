@@ -3,20 +3,22 @@ import approvals from "approvals"
 import { OpeningHours } from "./OpeningHours"
 
 approvals.configure({
-    reporters: ["kompare"],
+    // reporters: ["kompare"],
+    reporters: ["meld"],
 })
 
 describe("OpeningHours", function () {
     it("is open on days", function () {
+        const input = "2016-05-11T12:22:11.824Z"
         const toApprove = new OpeningHours(
             ["mon", "wed", "fri"],
             "08:00",
             "16:00",
-        ).isOpenOn("2016-05-11T12:22:11.824Z")
+        ).isOpenOn(input)
         approvals.verify(
             __dirname,
             "open-on-days",
-            toApprove ? "OPEN" : "CLOSED",
+            `${input} => ${toApprove ? "OPEN" : "CLOSED"}`,
         )
     })
 })
