@@ -18,13 +18,13 @@ export class OpeningHours {
     }
 
     dayNameFor(date: string) {
-        return new Date(date).toLocaleDateString("en-US", {
+        return new Date(date).toLocaleDateString("en-AU", {
             weekday: "short",
         })
     }
 
     timeFor(date: string) {
-        return new Date(date).toLocaleTimeString("en-US", {
+        return new Date(date).toLocaleTimeString("en-AU", {
             hour: "2-digit",
             minute: "2-digit",
         })
