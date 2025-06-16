@@ -26,19 +26,39 @@ export class OpeningHours {
     }
 
     get openDays() {
+        return this.days.filter((day) => day.isOpen)
+    }
+
+    get openDayNames() {
         return this.days.filter((day) => day.isOpen).map((day) => day.name)
     }
 
     isOpenOn(date: string) {
         return (
-            this.openDays.includes(this.dayNameFor(date)) &&
+            this.openDayNames.includes(this.dayNameFor(date)) &&
             this.withinOpeningHours(date)
         )
     }
 
     nextOpeningDate(datetime: string) {
         const dayname = this.dayNameFor(datetime)
-        const nextDay = this.openDays.indexOf(dayname) + 1
+        const allDayNames = this.days.map((day) => day.name)
+        const sliceAfterDate = this.days.slice(allDayNames.indexOf(dayname) + 1)
+        const nextOpenDayIndex = sliceAfterDate.findIndex((day) => day.isOpen)
+        const inputDay = new Date(datetime)
+        inputDay.setDate(inputDay.getDate() + nextOpenDayIndex)
+        return inputDay.toISOString()
+        this.days.forEach((day) => {
+            if (day.isOpen) {
+                const nextDay = day.name.indexOf(dayname) + 1
+                const nextDate = new Date(datetime)
+                nextDate.setDate(nextDate.getDate() + nextDay)
+                if (nextDate > new Date()) {
+                    return nextDate.toISOString()
+                }
+            }
+        })
+        const nextDay = this.openDayNames.indexOf(dayname) + 1
         const nextDate = new Date(datetime)
         nextDate.setDate(nextDate.getDate() + nextDay)
         return nextDate.toISOString()
