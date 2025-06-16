@@ -32,7 +32,7 @@ describe("OpeningHours", function () {
         const inputHours = [
             ...[`2016-05-10T21:22:11.824Z`],
             ...[`2016-05-10T22:49:11.824Z`],
-            ...[`2016-05-11T06:49:11.824Z`],
+            ...[`2016-05-11T06:31:11.824Z`],
         ]
         const result = inputHours
             .map((input) => {
