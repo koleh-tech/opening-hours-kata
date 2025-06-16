@@ -3,8 +3,7 @@ import approvals from "approvals"
 import { OpeningHours } from "./OpeningHours"
 
 approvals.configure({
-    // reporters: ["kompare"],
-    reporters: ["meld"],
+    reporters: ["kompare"],
 })
 
 describe("OpeningHours", function () {
@@ -15,7 +14,11 @@ describe("OpeningHours", function () {
             "16:00",
         )
         const header = `CONFIG:\nDAYS OPEN: ${["mon", "wed", "fri"]}\n`
-        const inputs = ["2016-05-09T12:22:11.824Z", "2016-05-11T12:22:11.824Z"]
+        const inputs = [
+            "2016-05-09T12:22:11.824Z",
+            "2016-05-10T12:22:11.824Z",
+            "2016-05-11T12:22:11.824Z",
+        ]
         const result = inputs
             .map((input) => {
                 const openText = openHours.isOpenOn(input) ? "OPEN" : "CLOSED"
