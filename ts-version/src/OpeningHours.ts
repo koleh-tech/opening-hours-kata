@@ -14,6 +14,8 @@ export class OpeningHours {
     }
 
     dayNameFor(date: string) {
-        return ""
+        return new Date(date).toLocaleDateString("en-US", {
+            weekday: "long",
+        })
     }
 }
