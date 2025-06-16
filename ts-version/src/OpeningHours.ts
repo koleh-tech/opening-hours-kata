@@ -8,7 +8,15 @@ export class OpeningHours {
     isOpenOn(date: string) {
         const dayString = this.dayNameFor(date)
         if (this.days.includes(dayString)) {
-            return true
+            const time = new Date(date).getHours()
+            if (
+                time >= parseInt(this.openTime) &&
+                time < parseInt(this.closeTime)
+            ) {
+                return true
+            } else {
+                return false
+            }
         }
         return false
     }

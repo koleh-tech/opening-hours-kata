@@ -1,6 +1,6 @@
 CONFIG:
 DAYS OPEN: mon,wed,fri
 HOURS OPEN: 08:00 - 16:00
-06:52 am => CLOSED
-08:19 am => CLOSED
-09:52 pm => CLOSED
+Wed 06:52 am => CLOSED
+Wed 08:19 am => CLOSED
+Mon 09:52 pm => CLOSED
