@@ -1,2 +1,2 @@
-Wednesday => CLOSED
+Monday => CLOSED
 Wednesday => CLOSED
