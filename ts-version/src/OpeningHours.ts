@@ -1,3 +1,4 @@
+const allDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 class OpeningDay {
     constructor(
         public day: string,
@@ -12,10 +13,8 @@ export class OpeningHours {
         public openTime: string,
         public closeTime: string,
     ) {
-        this.days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
-            (day) => {
-                return new OpeningDay(day, inputDays.includes(day))
-            },
+        this.days = allDays.map(
+            (day) => new OpeningDay(day, inputDays.includes(day)),
         )
     }
 
