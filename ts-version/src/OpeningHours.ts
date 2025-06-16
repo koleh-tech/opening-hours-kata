@@ -1,7 +1,7 @@
 const allDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 class OpeningDay {
     constructor(
-        public day: string,
+        public name: string,
         public isOpen: boolean,
     ) {}
 }
@@ -25,20 +25,20 @@ export class OpeningHours {
         )
     }
 
-    get inputDays() {
-        return this.days.filter((day) => day.isOpen).map((day) => day.day)
+    get openDays() {
+        return this.days.filter((day) => day.isOpen).map((day) => day.name)
     }
 
     isOpenOn(date: string) {
         return (
-            this.inputDays.includes(this.dayNameFor(date)) &&
+            this.openDays.includes(this.dayNameFor(date)) &&
             this.withinOpeningHours(date)
         )
     }
 
     nextOpeningDate(datetime: string) {
         const dayname = this.dayNameFor(datetime)
-        const nextDay = this.inputDays.indexOf(dayname) + 1
+        const nextDay = this.openDays.indexOf(dayname) + 1
         const nextDate = new Date(datetime)
         nextDate.setDate(nextDate.getDate() + nextDay)
         return nextDate.toISOString()
