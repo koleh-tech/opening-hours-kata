@@ -11,6 +11,7 @@ export class OpeningHours {
             time >= parseInt(this.openTime) && time < parseInt(this.closeTime)
         )
     }
+
     isOpenOn(date: string) {
         return (
             this.days.includes(this.dayNameFor(date)) &&
