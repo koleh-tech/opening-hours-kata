@@ -9,13 +9,14 @@ approvals.configure({
 
 describe("OpeningHours", function () {
     it("is open on days", function () {
-        const input = "2016-05-11T12:22:11.824Z"
-        const toApprove = new OpeningHours(
+        const openHours = new OpeningHours(
             ["mon", "wed", "fri"],
             "08:00",
             "16:00",
-        ).isOpenOn(input)
-        const result = `${input} => ${toApprove ? "OPEN" : "CLOSED"}`
+        )
+        const input = "2016-05-11T12:22:11.824Z"
+        const toApprove = openHours.isOpenOn(input)
+        const result = `${openHours.dayNameFor(input)} => ${toApprove ? "OPEN" : "CLOSED"}`
         approvals.verify(__dirname, "open-on-days", result)
     })
 })
