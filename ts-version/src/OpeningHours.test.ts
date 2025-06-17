@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { Period, Datetime, OpeningHours } from "./OpeningHours"
+import { Period, Datetime, OpeningHours, Time } from "./OpeningHours"
 
 describe("OpeningHours", () => {
     it("Can be open on all days", () => {
@@ -50,5 +50,18 @@ describe("Period", () => {
                 "08:00 am - 11:30 pm",
             )
         })
+    })
+})
+
+describe("Time.setTimeOn", () => {
+    it("sets morning time", () => {
+        const input = new Datetime("2016-05-07T21:01:00.824Z")
+        expect(input.toDate().toUTCString()).toEqual(
+            "Sat, 07 May 2016 21:01:00 GMT",
+        )
+        const time = new Time(8, 0)
+        const result = time.setTimeOn(input).toDate()
+        expect(result.toLocaleString()).toEqual("5/8/2016, 8:00:00 AM")
+        expect(result.toUTCString()).toEqual("Sat, 07 May 2016 22:30:00 GMT")
     })
 })

@@ -44,7 +44,13 @@ export class Datetime {
     }
 }
 
-class Time {
+export class Time {
+    setTimeOn(input: Datetime) {
+        const date = input.toDate()
+        date.setHours(this.hour, this.minute)
+        date.setMinutes(this.minute)
+        return new Datetime(date.toUTCString())
+    }
     constructor(
         public hour: number,
         public minute: number,
@@ -63,10 +69,6 @@ const NullTime = () => new Time(-1, -1)
 export class Period {
     private openTime: Time = NullTime()
     private closeTime: Time = NullTime()
-
-    fromString(input: string) {
-        return
-    }
 
     constructor(
         private openTimeOld: string,
