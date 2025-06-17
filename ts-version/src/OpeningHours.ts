@@ -45,7 +45,7 @@ export class Datetime {
 }
 
 export class Time {
-    setTimeOn(input: Datetime) {
+    setTimeFor(input: Datetime) {
         const date = input.toDate()
         date.setHours(this.hour, this.minute)
         date.setMinutes(this.minute)
@@ -98,9 +98,10 @@ export class Period {
     }
 
     formatInLocalTime() {
-        const openDate = new Date(`2016-05-13T11:11:00.000Z`)
-        openDate.setHours(this.openTime.hour, this.openTime.minute)
-        const opensOnLocal = openDate.toLocaleTimeString("en-AU", {
+        const openDate = this.openTime.setTimeFor(
+            new Datetime(`2016-05-13T11:11:00.000Z`),
+        )
+        const opensOnLocal = openDate.toDate().toLocaleTimeString("en-AU", {
             hour: "2-digit",
             minute: "2-digit",
         })
