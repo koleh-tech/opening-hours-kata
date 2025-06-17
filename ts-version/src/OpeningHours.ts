@@ -51,6 +51,12 @@ export class OpeningHours {
         )
     }
 
+    thi(date: string, incrementBy) {
+        const inputDay = new Date(date)
+        inputDay.setDate(inputDay.getDate() + incrementBy)
+        return inputDay
+    }
+
     nextOpeningDate(date: string) {
         const daysAfter = this.days.slice(
             this.days
@@ -59,9 +65,9 @@ export class OpeningHours {
         )
         const nextOpenDayIndex =
             [...daysAfter, ...this.days].findIndex((day) => day.isOpen) + 1
-        const inputDay = new Date(date)
-        inputDay.setDate(inputDay.getDate() + nextOpenDayIndex)
-        return inputDay.toISOString()
+        const newDay = this.thi(date, nextOpenDayIndex)
+
+        return newDay.toISOString()
     }
 
     timeFor(date: string) {
