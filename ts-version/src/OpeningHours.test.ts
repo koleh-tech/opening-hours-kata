@@ -32,10 +32,10 @@ describe("Period.includes", () => {
 })
 
 describe("Period.formatInLocalTime", () => {
-    it.skip("Hours can go into next day", () => {
-        const input = new Datetime("2016-05-07T06:30:11.824Z")
-        expect(input.dayName()).toBe("Sat")
-        expect(new Period("22:30", "06:30").includes(input)).toBe(true)
+    it("Hours can go into next day", () => {
+        expect(new Period("22:30", "06:30").formatInLocalTime()).toBe(
+            "08:00 am - 04:00 pm",
+        )
     })
 
     it("Basic", () => {
