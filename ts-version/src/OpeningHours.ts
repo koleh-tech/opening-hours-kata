@@ -1,9 +1,14 @@
 const allDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
 class OpeningDay {
     constructor(
         public name: string,
         public isOpen: boolean,
     ) {}
+}
+
+class Datetime {
+    constructor(public date: Date) {}
 }
 
 export class OpeningHours {
