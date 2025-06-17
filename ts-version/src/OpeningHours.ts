@@ -21,6 +21,11 @@ export class Datetime {
         inputDay.setDate(inputDay.getDate() + incrementBy)
         return inputDay
     }
+
+    format(datetime, input) {
+        const inputText = `${input} (${datetime.dayName()})`
+        return inputText
+    }
 }
 
 export class OpeningHours {
@@ -57,14 +62,13 @@ export class OpeningHours {
         )
     }
 
-    nextOpeningDate(date: Datetime) {
-        const datetime = date
+    nextOpeningDate(input: Datetime) {
         const daysAfter = this.days.slice(
-            this.days.map((day) => day.name).indexOf(datetime.dayName()) + 1,
+            this.days.map((day) => day.name).indexOf(input.dayName()) + 1,
         )
         const nextOpenDayIndex =
             [...daysAfter, ...this.days].findIndex((day) => day.isOpen) + 1
-        const newDay = datetime.incrementBy(nextOpenDayIndex)
+        const newDay = input.incrementBy(nextOpenDayIndex)
 
         return newDay.toISOString()
     }

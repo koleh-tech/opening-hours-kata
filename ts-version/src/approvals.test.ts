@@ -46,10 +46,18 @@ describe("OpeningHours", function () {
         const inputDays = [
             ...[16, 17, 22].map((dayNum) => `2016-05-${dayNum}T12:22:11.824Z`),
         ]
+
+        function format(datetime, input) {
+            return new Datetime(datetime).format(datetime, input)
+            const inputText = `${input} (${datetime.dayName()})`
+            return inputText
+        }
+
         const result = inputDays
             .map((input) => {
                 const datetime = new Datetime(input)
-                const inputText = `${input} (${datetime.dayName()})`
+                const inputText = format(datetime, input)
+
                 const result = openHours.nextOpeningDate(datetime)
                 return `${inputText} => ${result} (${new Datetime(result).dayName()})`
             })
