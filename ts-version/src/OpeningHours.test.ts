@@ -9,7 +9,7 @@ describe("Period", () => {
     })
 
     describe(".includes", () => {
-        it.skip("Hours can go into next day", () => {
+        it("Hours can go into next day", () => {
             const input = new Datetime("2016-05-07T06:30:11.824Z")
             expect(input.dayName()).toBe("Sat")
             expect(new Period("22:30", "06:30").includes(input)).toBe(true)
