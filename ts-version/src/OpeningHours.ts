@@ -42,9 +42,17 @@ export class OpeningHours {
 
     nextOpeningDate(datetime: string) {
         const dayname = this.dayNameFor(datetime)
+        // __AUTO_GENERATED_PRINT_VAR_START__
+        console.log("OpeningHours#nextOpeningDate dayname: %s", dayname) // __AUTO_GENERATED_PRINT_VAR_END__
         const allDayNames = this.days.map((day) => day.name)
         const sliceAfterDate = this.days.slice(allDayNames.indexOf(dayname) + 1)
-        const nextOpenDayIndex = sliceAfterDate.findIndex((day) => day.isOpen)
+        // __AUTO_GENERATED_PRINT_VAR_START__
+        console.log(
+            "OpeningHours#nextOpeningDate sliceAfterDate: %s",
+            JSON.stringify(sliceAfterDate),
+        ) // __AUTO_GENERATED_PRINT_VAR_END__
+        const nextOpenDayIndex =
+            sliceAfterDate.findIndex((day) => day.isOpen) + 1
         const inputDay = new Date(datetime)
         inputDay.setDate(inputDay.getDate() + nextOpenDayIndex)
         return inputDay.toISOString()
