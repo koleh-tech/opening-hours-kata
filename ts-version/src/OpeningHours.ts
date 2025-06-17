@@ -45,11 +45,11 @@ export class OpeningHoursNew {
     }
 }
 
-export class OpeningHours {
+export class ShopBusinessHours {
     public days: OpeningDay[]
     constructor(
         inputDays: string[],
-        public newOpeningHours: OpeningHoursNew,
+        public openingHours: OpeningHoursNew,
     ) {
         this.days = allDays.map(
             (day) => new OpeningDay(day, inputDays.includes(day)),
@@ -67,7 +67,7 @@ export class OpeningHours {
     isOpenOn(date: string) {
         return (
             this.openDayNames.includes(new Datetime(date).dayName()) &&
-            this.newOpeningHours.withinOpeningHours(date)
+            this.openingHours.withinOpeningHours(date)
         )
     }
 

@@ -1,6 +1,6 @@
 import { describe, it } from "vitest"
 import approvals from "approvals"
-import { Datetime, OpeningHours, OpeningHoursNew } from "./OpeningHours"
+import { Datetime, ShopBusinessHours, OpeningHoursNew } from "./OpeningHours"
 
 approvals.configure({
     reporters: ["kompare"],
@@ -8,7 +8,7 @@ approvals.configure({
 
 describe("OpeningHours", function () {
     const days = ["Mon", "Wed", "Fri"]
-    const openHours = new OpeningHours(
+    const openHours = new ShopBusinessHours(
         days,
         new OpeningHoursNew("08:00", "16:00"),
     )
