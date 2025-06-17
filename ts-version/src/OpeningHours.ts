@@ -41,9 +41,11 @@ export class OpeningHours {
     }
 
     nextOpeningDate(datetime: string) {
-        const dayname = this.dayNameFor(datetime)
-        const allDayNames = this.days.map((day) => day.name)
-        const sliceAfterDate = this.days.slice(allDayNames.indexOf(dayname) + 1)
+        const sliceAfterDate = this.days.slice(
+            this.days
+                .map((day) => day.name)
+                .indexOf(this.dayNameFor(datetime)) + 1,
+        )
         const nextOpenDayIndex =
             sliceAfterDate.findIndex((day) => day.isOpen) + 1
         const inputDay = new Date(datetime)
