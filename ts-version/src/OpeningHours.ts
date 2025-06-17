@@ -15,6 +15,12 @@ export class Datetime {
             weekday: "short",
         })
     }
+
+    incrementBy(date: string, incrementBy) {
+        const inputDay = new Date(date)
+        inputDay.setDate(inputDay.getDate() + incrementBy)
+        return inputDay
+    }
 }
 
 export class OpeningHours {
@@ -51,10 +57,8 @@ export class OpeningHours {
         )
     }
 
-    thi(date: string, incrementBy) {
-        const inputDay = new Date(date)
-        inputDay.setDate(inputDay.getDate() + incrementBy)
-        return inputDay
+    incrementBy(date: string, incrementBy) {
+        return new Datetime(date).incrementBy(date, incrementBy)
     }
 
     nextOpeningDate(date: string) {
@@ -65,7 +69,7 @@ export class OpeningHours {
         )
         const nextOpenDayIndex =
             [...daysAfter, ...this.days].findIndex((day) => day.isOpen) + 1
-        const newDay = this.thi(date, nextOpenDayIndex)
+        const newDay = this.incrementBy(date, nextOpenDayIndex)
 
         return newDay.toISOString()
     }
