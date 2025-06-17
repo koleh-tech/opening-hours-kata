@@ -7,7 +7,7 @@ class OpeningDay {
     ) {}
 }
 
-class Datetime {
+export class Datetime {
     constructor(public date: string) {}
 
     dayName() {

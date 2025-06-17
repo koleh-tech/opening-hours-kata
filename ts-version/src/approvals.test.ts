@@ -1,6 +1,6 @@
 import { describe, it } from "vitest"
 import approvals from "approvals"
-import { OpeningHours } from "./OpeningHours"
+import { Datetime, OpeningHours } from "./OpeningHours"
 
 approvals.configure({
     reporters: ["kompare"],
@@ -18,7 +18,7 @@ describe("OpeningHours", function () {
         ]
         const result = inputDays
             .map((input) => {
-                const inputText = openHours.dayNameFor(input)
+                const inputText = new Datetime(input).dayName()
                 return `${inputText} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")
@@ -35,7 +35,7 @@ describe("OpeningHours", function () {
         ]
         const result = inputHours
             .map((input) => {
-                const inputText = `${openHours.dayNameFor(input)} ${openHours.timeFor(input)}`
+                const inputText = `${new Datetime(input).dayName()} ${openHours.timeFor(input)}`
                 return `${inputText} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")
@@ -48,9 +48,9 @@ describe("OpeningHours", function () {
         ]
         const result = inputDays
             .map((input) => {
-                const inputText = `${input} (${openHours.dayNameFor(input)})`
+                const inputText = `${input} (${new Datetime(input).dayName()})`
                 const result = openHours.nextOpeningDate(input)
-                return `${inputText} => ${result} (${openHours.dayNameFor(result)})`
+                return `${inputText} => ${result} (${new Datetime(result).dayName()})`
             })
             .join("\n")
         approvals.verify(__dirname, "next-opening-day", header + result)
