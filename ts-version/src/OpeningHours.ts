@@ -23,7 +23,7 @@ export class Datetime {
     }
 
     format(input) {
-        return `${input} (${this.dayName()})`
+        return `${this.date} (${this.dayName()})`
     }
 }
 

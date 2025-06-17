@@ -44,15 +44,15 @@ describe("OpeningHours", function () {
 
     it("next opening day", function () {
         const inputDays = [
-            ...[16, 17, 22].map((dayNum) => `2016-05-${dayNum}T12:22:11.824Z`),
+            ...[16, 17, 22].map(
+                (dayNum) => new Datetime(`2016-05-${dayNum}T12:22:11.824Z`),
+            ),
         ]
 
         const result = inputDays
             .map((input) => {
-                const datetime = new Datetime(input)
-
-                const result = openHours.nextOpeningDate(datetime)
-                return `${datetime.format(input)} => ${result} (${new Datetime(result).dayName()})`
+                const result = openHours.nextOpeningDate(input)
+                return `${input.format(input)} => ${result} (${new Datetime(result).dayName()})`
             })
             .join("\n")
         approvals.verify(__dirname, "next-opening-day", header + result)
