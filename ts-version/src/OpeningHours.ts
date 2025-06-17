@@ -42,13 +42,19 @@ export class OpeningHours {
     public days: OpeningDay[]
     constructor(
         inputDays: string[],
-        public openTime: string,
-        public closeTime: string,
         public newOpeningHours: OpeningHoursNew,
     ) {
         this.days = allDays.map(
             (day) => new OpeningDay(day, inputDays.includes(day)),
         )
+    }
+
+    get openTime() {
+        return this.newOpeningHours.openTime
+    }
+
+    get closeTime() {
+        return this.newOpeningHours.closeTime
     }
 
     withinOpeningHours(datetime: string) {

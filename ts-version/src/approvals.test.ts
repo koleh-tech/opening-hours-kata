@@ -10,8 +10,6 @@ describe("OpeningHours", function () {
     const days = ["Mon", "Wed", "Fri"]
     const openHours = new OpeningHours(
         days,
-        "08:00",
-        "16:00",
         new OpeningHoursNew("08:00", "16:00"),
     )
     const header = `CONFIG:\nDAYS OPEN: ${days}\nHOURS OPEN: ${"08:00"} - ${"16:00"}\n`
