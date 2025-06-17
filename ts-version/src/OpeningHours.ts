@@ -8,7 +8,7 @@ class OpeningDay {
 }
 
 class Datetime {
-    constructor(public date: Date) {}
+    constructor(public date: string) {}
 }
 
 export class OpeningHours {
@@ -59,6 +59,7 @@ export class OpeningHours {
     }
 
     dayNameFor(date: string) {
+        const theDate = new Datetime(date)
         return new Date(date).toLocaleDateString("en-AU", {
             weekday: "short",
         })
