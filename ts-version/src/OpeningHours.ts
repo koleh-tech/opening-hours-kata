@@ -39,31 +39,42 @@ export class Datetime {
 }
 
 export class Period {
+    private openTime: { hour: number; minute: number }
+    private closeTime: { hour: number; minute: number }
     constructor(
-        private openTime: string,
-        private closeTime: string,
-    ) {}
+        private openTimeOld: string,
+        private closeTimeOld: string,
+    ) {
+        this.openTime = {
+            hour: parseInt(openTimeOld.split(":")[0]),
+            minute: parseInt(openTimeOld.split(":")[1]),
+        }
+        this.closeTime = {
+            hour: parseInt(closeTimeOld.split(":")[0]),
+            minute: parseInt(closeTimeOld.split(":")[1]),
+        }
+    }
 
     includes(datetime: Datetime) {
         const time = datetime.toDate().getUTCHours()
         const opensOn = new Date(
-            `2016-05-13T${this.openTime}:00.000Z`,
+            `2016-05-13T${this.openTimeOld}:00.000Z`,
         ).getUTCHours()
         const closesOn = new Date(
-            `2016-05-13T${this.closeTime}:00.000Z`,
+            `2016-05-13T${this.closeTimeOld}:00.000Z`,
         ).getUTCHours()
         return time >= opensOn && time < closesOn
     }
 
     formatInLocalTime() {
         const opensOnLocal = new Date(
-            `2016-05-13T${this.openTime}:00.000Z`,
+            `2016-05-13T${this.openTimeOld}:00.000Z`,
         ).toLocaleTimeString("en-AU", {
             hour: "2-digit",
             minute: "2-digit",
         })
         const closesOnLocal = new Date(
-            `2016-05-13T${this.closeTime}:00.000Z`,
+            `2016-05-13T${this.closeTimeOld}:00.000Z`,
         ).toLocaleTimeString("en-AU", {
             hour: "2-digit",
             minute: "2-digit",
