@@ -67,9 +67,9 @@ export class Period {
     }
 
     formatInLocalTime() {
-        const opensOnLocal = new Date(
-            `2016-05-13T${this.openTimeOld}:00.000Z`,
-        ).toLocaleTimeString("en-AU", {
+        const openDate = new Date(`2016-05-13T11:11:00.000Z`)
+        openDate.setHours(this.openTime.hour, this.openTime.minute)
+        const opensOnLocal = openDate.toLocaleTimeString("en-AU", {
             hour: "2-digit",
             minute: "2-digit",
         })

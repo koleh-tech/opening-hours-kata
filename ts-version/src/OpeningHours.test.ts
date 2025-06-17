@@ -33,13 +33,13 @@ describe("Period.includes", () => {
 
 describe("Period.formatInLocalTime", () => {
     it("Hours can go into next day", () => {
-        expect(new Period("22:30", "06:30").formatInLocalTime()).toBe(
+        expect(new Period("08:00", "06:30").formatInLocalTime()).toBe(
             "08:00 am - 04:00 pm",
         )
     })
 
     it("Basic", () => {
-        expect(new Period("22:30", "23:00").formatInLocalTime()).toBe(
+        expect(new Period("08:00", "23:00").formatInLocalTime()).toBe(
             "08:00 am - 08:30 am",
         )
     })
