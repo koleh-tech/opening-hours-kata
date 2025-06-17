@@ -64,8 +64,8 @@ export class ShopBusinessHours {
         return this.openDays.map((day) => day.name)
     }
 
-    isOpenOn(date: string) {
-        const input = new Datetime(date)
+    isOpenOn(date: Datetime) {
+        const input = date
         return (
             this.openDayNames.includes(input.dayName()) &&
             this.openingHours.withinOpeningHours(input)

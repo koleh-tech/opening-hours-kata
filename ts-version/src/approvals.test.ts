@@ -22,7 +22,7 @@ describe("OpeningHours", function () {
         const result = inputDays
             .map((input) => {
                 const inputText = new Datetime(input).dayName()
-                return `${inputText} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
+                return `${inputText} => ${openHours.isOpenOn(new Datetime(input)) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")
         approvals.verify(__dirname, "open-on-days", header + result)
@@ -39,7 +39,7 @@ describe("OpeningHours", function () {
         const result = inputHours
             .map((input) => {
                 const inputText = `${new Datetime(input).dayName()} ${openHours.timeFor(input)}`
-                return `${inputText} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
+                return `${inputText} => ${openHours.isOpenOn(new Datetime(input)) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")
         approvals.verify(__dirname, "open-on-hours", header + result)
