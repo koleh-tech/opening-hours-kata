@@ -1,4 +1,0 @@
-OPEN HOURS: Opening hours: 08:00:00 - 16:00:00
-OPEN DAYS: Opening days: ['mon', 'wed', 'fri']
-
-{'wednesday': True, 'wednesday_after_hours': False, 'thursday': False}
