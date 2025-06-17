@@ -27,15 +27,15 @@ describe("OpeningHours", function () {
 
     it("is open on hours", function () {
         const inputHours = [
-            ...[`2016-05-10T22:29:11.824Z`],
-            ...[`2016-05-10T22:30:11.824Z`],
-            ...[`2016-05-10T22:31:11.824Z`],
-            ...[`2016-05-11T06:29:11.824Z`],
-            ...[`2016-05-11T06:30:11.824Z`],
-        ]
+            "2016-05-10T22:29:11.824Z",
+            "2016-05-10T22:30:11.824Z",
+            "2016-05-10T22:31:11.824Z",
+            "2016-05-11T06:29:11.824Z",
+            "2016-05-11T06:30:11.824Z",
+        ].map((input) => new Datetime(input))
         const result = inputHours
             .map((input) => {
-                const datettimeINput = new Datetime(input)
+                const datettimeINput = input
                 const inputText = `${datettimeINput.dayName()} ${datettimeINput.time()}`
                 return `${inputText} => ${openHours.isOpenOn(datettimeINput) ? "OPEN" : "CLOSED"}`
             })
