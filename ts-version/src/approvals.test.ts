@@ -13,7 +13,7 @@ describe("OpeningHours", function () {
     it("is open on days", function () {
         const inputDays = [
             ...[16, 17, 18, 19].map(
-                (dayNum) => `2016-05-${dayNum}T12:22:11.824Z`,
+                (dayNum) => `2016-05-${dayNum}T06:29:11.824Z`,
             ),
         ]
         const result = inputDays
