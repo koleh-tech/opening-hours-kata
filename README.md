@@ -1,54 +1,36 @@
-# React + TypeScript + Vite
+# opening-hours-kata
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Amy and Valerie, the shop owners, need you to develop a simple program that satisfies the following requirements:
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- The opening days and hours of the shop need to be configurable, and can be scattered in the week (e.g. Mon, Wed, Fri from 08:00 to 16:00)
+- Amy needs to display the date of the next opening on a billboard outside of the shop
+- Amy also wants to display on the website of the shop whether it is opened or closed at the moment
 
-## Expanding the ESLint configuration
+Write a small module that follows this contract, so that Valerie can easily integrate it:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+OpeningHours.isOpenOn(date)
+OpeningHours.nextOpeningDate(date)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## test cases
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+You can use the following test cases to get started:
+
 ```
+Shop opening days: Mon, Wed, Fri
+Shop opening hours: 08:00 - 16:00
+
+wednesday = '2016-05-11T12:22:11.824Z'
+thursday = '2016-05-12T12:22:11.824Z'
+fridayMorning = '2016-05-13T08:00:00.000Z'
+
+OpeningHours.isOpenOn(wednesday) == true
+OpeningHours.isOpenOn(thursday) == false
+
+OpeningHours.nextOpeningDate(wednesday) === fridayMorning
+```
+
+
