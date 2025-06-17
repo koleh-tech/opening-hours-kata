@@ -45,7 +45,7 @@ export class Period {
     }
 }
 
-export class ShopBusinessHours {
+export class OpeningHours {
     public allDays: OpeningDay[]
     constructor(
         openDays: string[],
