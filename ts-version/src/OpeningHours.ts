@@ -44,20 +44,28 @@ export class Datetime {
     }
 }
 
-type Time = {
-    hour: number
-    minute: number
+class Time {
+    constructor(
+        public hour: number,
+        public minute: number,
+    ) {}
+
+    static fromString(input: string) {
+        return new Time(
+            parseInt(input.split(":")[0]),
+            parseInt(input.split(":")[1]),
+        )
+    }
 }
 
+const NullTime = () => new Time(-1, -1)
+
 export class Period {
-    private openTime: Time
-    private closeTime: Time
+    private openTime: Time = NullTime()
+    private closeTime: Time = NullTime()
 
     fromString(input: string) {
-        return {
-            hour: parseInt(input.split(":")[0]),
-            minute: parseInt(input.split(":")[1]),
-        }
+        return Time.fromString(input)
     }
 
     constructor(
