@@ -56,18 +56,6 @@ export class OpeningHours {
         )
     }
 
-    get openTime() {
-        return this.newOpeningHours.openTime
-    }
-
-    get closeTime() {
-        return this.newOpeningHours.closeTime
-    }
-
-    withinOpeningHours(datetime: string) {
-        return this.newOpeningHours.withinOpeningHours(datetime)
-    }
-
     get openDays() {
         return this.days.filter((day) => day.isOpen)
     }
@@ -79,7 +67,7 @@ export class OpeningHours {
     isOpenOn(date: string) {
         return (
             this.openDayNames.includes(new Datetime(date).dayName()) &&
-            this.withinOpeningHours(date)
+            this.newOpeningHours.withinOpeningHours(date)
         )
     }
 
