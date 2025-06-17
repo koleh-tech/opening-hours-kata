@@ -31,13 +31,13 @@ export class Datetime {
     }
 }
 
-export class OpeningHours {
+export class Period {
     constructor(
         public openTime: string,
         public closeTime: string,
     ) {}
 
-    withinOpeningHours(datetime: Datetime) {
+    includes(datetime: Datetime) {
         const time = new Date(datetime.toDate()).getHours()
         return (
             time >= parseInt(this.openTime) && time < parseInt(this.closeTime)
@@ -49,7 +49,7 @@ export class ShopBusinessHours {
     public allDays: OpeningDay[]
     constructor(
         openDays: string[],
-        public openingHours: OpeningHours,
+        public openingPeriod: Period,
     ) {
         this.allDays = allDays.map(
             (day) => new OpeningDay(day, openDays.includes(day)),
@@ -68,7 +68,7 @@ export class ShopBusinessHours {
         const input = date
         return (
             this.openDayNames.includes(input.dayName()) &&
-            this.openingHours.withinOpeningHours(input)
+            this.openingPeriod.includes(input)
         )
     }
 
