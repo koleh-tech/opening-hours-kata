@@ -1,6 +1,10 @@
 import { describe, it } from "vitest"
 import approvals from "approvals"
-import { Datetime, ShopBusinessHours, OpeningHoursNew } from "./OpeningHours"
+import {
+    Datetime,
+    ShopBusinessHours,
+    OpeningHoursNew,
+} from "./ShopBusinessHours"
 
 approvals.configure({
     reporters: ["kompare"],
