@@ -16,7 +16,8 @@ export class Datetime {
         })
     }
 
-    incrementBy(date: string, incrementBy) {
+    incrementBy(incrementBy) {
+        const date = this.date
         const inputDay = new Date(date)
         inputDay.setDate(inputDay.getDate() + incrementBy)
         return inputDay
@@ -58,7 +59,7 @@ export class OpeningHours {
     }
 
     incrementBy(date: string, incrementBy) {
-        return new Datetime(date).incrementBy(date, incrementBy)
+        return new Datetime(date).incrementBy(incrementBy)
     }
 
     nextOpeningDate(date: string) {
