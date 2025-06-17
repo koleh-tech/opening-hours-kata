@@ -37,8 +37,8 @@ export class OpeningHours {
         public closeTime: string,
     ) {}
 
-    withinOpeningHours(datetime: string) {
-        const time = new Date(datetime).getHours()
+    withinOpeningHours(datetime: Datetime) {
+        const time = new Date(datetime.toDate()).getHours()
         return (
             time >= parseInt(this.openTime) && time < parseInt(this.closeTime)
         )
@@ -65,9 +65,10 @@ export class ShopBusinessHours {
     }
 
     isOpenOn(date: string) {
+        const input = new Datetime(date)
         return (
-            this.openDayNames.includes(new Datetime(date).dayName()) &&
-            this.openingHours.withinOpeningHours(date)
+            this.openDayNames.includes(input.dayName()) &&
+            this.openingHours.withinOpeningHours(input)
         )
     }
 
