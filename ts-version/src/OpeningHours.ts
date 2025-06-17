@@ -75,13 +75,17 @@ export class OpeningHours {
     }
 
     nextOpeningDate(input: Datetime) {
-        const daysAfter = this.allDays.slice(
-            this.allDays.map((day) => day.name).indexOf(input.dayName()) + 1,
-        )
-        const nextOpenDayIndex =
-            [...daysAfter, ...this.allDays].findIndex((day) => day.isOpen) + 1
-        const newDay = input.incrementBy(nextOpenDayIndex)
+        const daysAfterInput = [...this.daysAfter(input), ...this.allDays]
+        return input
+            .incrementBy(daysAfterInput.findIndex((day) => day.isOpen) + 1)
+            .toISOString()
+    }
 
-        return newDay.toISOString()
+    daysAfter(input: Datetime) {
+        return this.allDays.slice(this.weekIndexFor(input))
+    }
+
+    weekIndexFor(input: Datetime) {
+        return this.allDays.map((day) => day.name).indexOf(input.dayName()) + 1
     }
 }
