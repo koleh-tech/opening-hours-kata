@@ -7,6 +7,8 @@ class Day {
     ) {}
 }
 
+class ClosesBeforeOpeningError extends Error {}
+
 export class Datetime {
     constructor(private date: string) {}
 
@@ -54,11 +56,15 @@ export class Period {
             minute: parseInt(closeTimeOld.split(":")[1]),
         }
         if (this.openTime.hour > this.closeTime.hour) {
-            throw Error("Open must be before close")
+            throw new ClosesBeforeOpeningError(
+                "Store must close after it opens",
+            )
         }
         if (this.openTime.hour === this.closeTime.hour) {
             if (this.openTime.minute > this.closeTime.minute) {
-                throw Error("Open must be before close")
+                throw new ClosesBeforeOpeningError(
+                    "Store must close after it opens",
+                )
             }
         }
     }

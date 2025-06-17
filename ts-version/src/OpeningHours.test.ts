@@ -42,7 +42,7 @@ describe("Period", () => {
         it("Open must be before close", () => {
             expect(() =>
                 new Period("08:00", "06:30").formatInLocalTime(),
-            ).toThrowError("Open must be before close")
+            ).toThrowError("Store must close after it opens")
         })
 
         it("Basic", () => {
