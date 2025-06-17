@@ -76,7 +76,10 @@ export class OpeningHours {
     }
 
     nextOpeningDate(input: Datetime) {
-        const daysAfterInput = [...this.daysAfter(input), ...this.allDays]
+        const daysAfterInput = [
+            ...this.daysAfter(input),
+            ...this.allDays, // loop back to the beginning of the week
+        ]
         return input
             .incrementBy(daysAfterInput.findIndex((day) => day.isOpen) + 1)
             .toISOString()
