@@ -64,13 +64,13 @@ export class OpeningHours {
         )
     }
 
-    get openDayNames() {
+    openDayNames() {
         return this.allDays.filter((day) => day.isOpen).map((day) => day.name)
     }
 
     isOpenOn(input: Datetime) {
         return (
-            this.openDayNames.includes(input.dayName()) &&
+            this.openDayNames().includes(input.dayName()) &&
             this.openingPeriod.includes(input)
         )
     }
