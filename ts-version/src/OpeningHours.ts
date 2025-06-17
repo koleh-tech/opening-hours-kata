@@ -9,9 +9,9 @@ class OpeningDay {
 
 class Datetime {
     constructor(public date: string) {}
-    dayNameFor() {
-        const date = this.date
-        return new Date(date).toLocaleDateString("en-AU", {
+
+    dayName() {
+        return new Date(this.date).toLocaleDateString("en-AU", {
             weekday: "short",
         })
     }
@@ -46,26 +46,26 @@ export class OpeningHours {
 
     isOpenOn(date: string) {
         return (
-            this.openDayNames.includes(this.dayNameFor(date)) &&
+            this.openDayNames.includes(new Datetime(date).dayName()) &&
             this.withinOpeningHours(date)
         )
     }
 
-    nextOpeningDate(datetime: string) {
+    nextOpeningDate(date: string) {
         const daysAfter = this.days.slice(
             this.days
                 .map((day) => day.name)
-                .indexOf(this.dayNameFor(datetime)) + 1,
+                .indexOf(new Datetime(date).dayName()) + 1,
         )
         const nextOpenDayIndex =
             [...daysAfter, ...this.days].findIndex((day) => day.isOpen) + 1
-        const inputDay = new Date(datetime)
+        const inputDay = new Date(date)
         inputDay.setDate(inputDay.getDate() + nextOpenDayIndex)
         return inputDay.toISOString()
     }
 
     dayNameFor(date: string) {
-        return new Datetime(date).dayNameFor()
+        return new Datetime(date).dayName()
     }
 
     timeFor(date: string) {
