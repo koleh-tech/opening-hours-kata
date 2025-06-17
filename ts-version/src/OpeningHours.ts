@@ -16,9 +16,8 @@ export class Datetime {
         })
     }
 
-    incrementBy(incrementBy) {
-        const date = this.date
-        const inputDay = new Date(date)
+    incrementBy(incrementBy: number) {
+        const inputDay = new Date(this.date)
         inputDay.setDate(inputDay.getDate() + incrementBy)
         return inputDay
     }
@@ -58,10 +57,6 @@ export class OpeningHours {
         )
     }
 
-    incrementBy(date: string, incrementBy) {
-        return new Datetime(date).incrementBy(incrementBy)
-    }
-
     nextOpeningDate(date: string) {
         const daysAfter = this.days.slice(
             this.days
@@ -70,7 +65,7 @@ export class OpeningHours {
         )
         const nextOpenDayIndex =
             [...daysAfter, ...this.days].findIndex((day) => day.isOpen) + 1
-        const newDay = this.incrementBy(date, nextOpenDayIndex)
+        const newDay = new Datetime(date).incrementBy(nextOpenDayIndex)
 
         return newDay.toISOString()
     }
