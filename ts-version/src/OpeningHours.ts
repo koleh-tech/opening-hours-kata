@@ -29,6 +29,13 @@ export class Datetime {
     format() {
         return `${this.date} (${this.dayName()})`
     }
+
+    timeFor(date: string) {
+        return new Date(date).toLocaleTimeString("en-AU", {
+            hour: "2-digit",
+            minute: "2-digit",
+        })
+    }
 }
 
 export class Period {
@@ -79,9 +86,6 @@ export class OpeningHours {
     }
 
     timeFor(date: string) {
-        return new Date(date).toLocaleTimeString("en-AU", {
-            hour: "2-digit",
-            minute: "2-digit",
-        })
+        return new Datetime(date).timeFor(date)
     }
 }
