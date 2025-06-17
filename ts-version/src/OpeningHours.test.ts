@@ -56,9 +56,7 @@ describe("Period", () => {
 describe("Time.setTimeOn", () => {
     it("sets morning time", () => {
         const input = new Datetime("2016-05-07T21:01:00.824Z")
-        expect(input.toDate().toUTCString()).toEqual(
-            "Sat, 07 May 2016 21:01:00 GMT",
-        )
+        expect(input.toDate().toLocaleString()).toEqual("5/8/2016, 6:31:00 AM")
         const time = new Time(8, 0)
         const result = time.setTimeOn(input).toDate()
         expect(result.toLocaleString()).toEqual("5/8/2016, 8:00:00 AM")
