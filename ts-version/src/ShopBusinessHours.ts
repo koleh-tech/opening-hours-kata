@@ -31,7 +31,7 @@ export class Datetime {
     }
 }
 
-export class OpeningHoursNew {
+export class OpeningHours {
     constructor(
         public openTime: string,
         public closeTime: string,
@@ -46,18 +46,18 @@ export class OpeningHoursNew {
 }
 
 export class ShopBusinessHours {
-    public days: OpeningDay[]
+    public allDays: OpeningDay[]
     constructor(
-        inputDays: string[],
-        public openingHours: OpeningHoursNew,
+        openDays: string[],
+        public openingHours: OpeningHours,
     ) {
-        this.days = allDays.map(
-            (day) => new OpeningDay(day, inputDays.includes(day)),
+        this.allDays = allDays.map(
+            (day) => new OpeningDay(day, openDays.includes(day)),
         )
     }
 
     get openDays() {
-        return this.days.filter((day) => day.isOpen)
+        return this.allDays.filter((day) => day.isOpen)
     }
 
     get openDayNames() {
@@ -72,11 +72,11 @@ export class ShopBusinessHours {
     }
 
     nextOpeningDate(input: Datetime) {
-        const daysAfter = this.days.slice(
-            this.days.map((day) => day.name).indexOf(input.dayName()) + 1,
+        const daysAfter = this.allDays.slice(
+            this.allDays.map((day) => day.name).indexOf(input.dayName()) + 1,
         )
         const nextOpenDayIndex =
-            [...daysAfter, ...this.days].findIndex((day) => day.isOpen) + 1
+            [...daysAfter, ...this.allDays].findIndex((day) => day.isOpen) + 1
         const newDay = input.incrementBy(nextOpenDayIndex)
 
         return newDay.toISOString()

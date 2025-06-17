@@ -1,10 +1,6 @@
 import { describe, it } from "vitest"
 import approvals from "approvals"
-import {
-    Datetime,
-    ShopBusinessHours,
-    OpeningHoursNew,
-} from "./ShopBusinessHours"
+import { Datetime, ShopBusinessHours, OpeningHours } from "./ShopBusinessHours"
 
 approvals.configure({
     reporters: ["kompare"],
@@ -14,7 +10,7 @@ describe("OpeningHours", function () {
     const days = ["Mon", "Wed", "Fri"]
     const openHours = new ShopBusinessHours(
         days,
-        new OpeningHoursNew("08:00", "16:00"),
+        new OpeningHours("08:00", "16:00"),
     )
     const header = `CONFIG:\nDAYS OPEN: ${days}\nHOURS OPEN: ${"08:00"} - ${"16:00"}\n`
     it("is open on days", function () {
