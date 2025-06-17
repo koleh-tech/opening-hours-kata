@@ -57,8 +57,8 @@ export class OpeningHours {
         )
     }
 
-    nextOpeningDate(date: string) {
-        const datetime = new Datetime(date)
+    nextOpeningDate(date: Datetime) {
+        const datetime = date
         const daysAfter = this.days.slice(
             this.days.map((day) => day.name).indexOf(datetime.dayName()) + 1,
         )

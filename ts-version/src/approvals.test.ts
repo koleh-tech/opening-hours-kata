@@ -48,8 +48,9 @@ describe("OpeningHours", function () {
         ]
         const result = inputDays
             .map((input) => {
-                const inputText = `${input} (${new Datetime(input).dayName()})`
-                const result = openHours.nextOpeningDate(input)
+                const datetime = new Datetime(input)
+                const inputText = `${input} (${datetime.dayName()})`
+                const result = openHours.nextOpeningDate(datetime)
                 return `${inputText} => ${result} (${new Datetime(result).dayName()})`
             })
             .join("\n")
