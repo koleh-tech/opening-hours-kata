@@ -53,6 +53,14 @@ export class Period {
             hour: parseInt(closeTimeOld.split(":")[0]),
             minute: parseInt(closeTimeOld.split(":")[1]),
         }
+        if (this.openTime.hour > this.closeTime.hour) {
+            throw Error("Open must be before close")
+        }
+        if (this.openTime.hour === this.closeTime.hour) {
+            if (this.openTime.minute > this.closeTime.minute) {
+                throw Error("Open must be before close")
+            }
+        }
     }
 
     includes(datetime: Datetime) {
@@ -73,9 +81,10 @@ export class Period {
             hour: "2-digit",
             minute: "2-digit",
         })
-        const closesOnLocal = new Date(
-            `2016-05-13T${this.closeTimeOld}:00.000Z`,
-        ).toLocaleTimeString("en-AU", {
+
+        const closeDate = new Date(`2016-05-13T11:11:00.000Z`)
+        closeDate.setHours(this.closeTime.hour, this.closeTime.minute)
+        const closesOnLocal = closeDate.toLocaleTimeString("en-AU", {
             hour: "2-digit",
             minute: "2-digit",
         })

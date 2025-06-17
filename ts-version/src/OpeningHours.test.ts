@@ -18,29 +18,37 @@ describe("OpeningHours", () => {
     })
 })
 
-describe("Period.includes", () => {
-    it.skip("Hours can go into next day", () => {
-        const input = new Datetime("2016-05-07T06:30:11.824Z")
-        expect(input.dayName()).toBe("Sat")
-        expect(new Period("22:30", "06:30").includes(input)).toBe(true)
-    })
-
-    it("Hourly", () => {
-        const input = new Datetime("2016-05-07T21:01:11.824Z")
-        expect(new Period("21:00", "22:00").includes(input)).toBe(true)
-    })
-})
-
-describe("Period.formatInLocalTime", () => {
-    it("Hours can go into next day", () => {
-        expect(new Period("08:00", "06:30").formatInLocalTime()).toBe(
-            "08:00 am - 04:00 pm",
+describe("Period", () => {
+    it("Configured using local time", () => {
+        expect(new Period("08:00", "16:30").formatInLocalTime()).toBe(
+            "08:00 am - 04:30 pm",
         )
     })
 
-    it("Basic", () => {
-        expect(new Period("08:00", "23:00").formatInLocalTime()).toBe(
-            "08:00 am - 08:30 am",
-        )
+    describe(".includes", () => {
+        it.skip("Hours can go into next day", () => {
+            const input = new Datetime("2016-05-07T06:30:11.824Z")
+            expect(input.dayName()).toBe("Sat")
+            expect(new Period("22:30", "06:30").includes(input)).toBe(true)
+        })
+
+        it("Hourly", () => {
+            const input = new Datetime("2016-05-07T21:01:11.824Z")
+            expect(new Period("21:00", "22:00").includes(input)).toBe(true)
+        })
+    })
+
+    describe("formatInLocalTime", () => {
+        it("Open must be before close", () => {
+            expect(() =>
+                new Period("08:00", "06:30").formatInLocalTime(),
+            ).toThrowError("Open must be before close")
+        })
+
+        it("Basic", () => {
+            expect(new Period("08:00", "23:30").formatInLocalTime()).toBe(
+                "08:00 am - 11:30 pm",
+            )
+        })
     })
 })
