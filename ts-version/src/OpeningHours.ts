@@ -56,12 +56,8 @@ export class OpeningHours {
         )
     }
 
-    get openDays() {
-        return this.allDays.filter((day) => day.isOpen)
-    }
-
     get openDayNames() {
-        return this.openDays.map((day) => day.name)
+        return this.allDays.filter((day) => day.isOpen).map((day) => day.name)
     }
 
     isOpenOn(date: Datetime) {
