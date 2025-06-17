@@ -53,10 +53,11 @@ export class Period {
 }
 
 export class OpeningHours {
-    public allDays: Day[]
+    private allDays: Day[]
+
     constructor(
         openDays: string[],
-        public openingPeriod: Period,
+        private openingPeriod: Period,
     ) {
         this.allDays = allDays.map(
             (day) => new Day(day, openDays.includes(day)),
