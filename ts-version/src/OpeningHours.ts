@@ -44,21 +44,28 @@ export class Datetime {
     }
 }
 
+type Time = {
+    hour: number
+    minute: number
+}
+
 export class Period {
-    private openTime: { hour: number; minute: number }
-    private closeTime: { hour: number; minute: number }
+    private openTime: Time
+    private closeTime: Time
+
+    fromString(input: string) {
+        return {
+            hour: parseInt(input.split(":")[0]),
+            minute: parseInt(input.split(":")[1]),
+        }
+    }
+
     constructor(
         private openTimeOld: string,
         private closeTimeOld: string,
     ) {
-        this.openTime = {
-            hour: parseInt(openTimeOld.split(":")[0]),
-            minute: parseInt(openTimeOld.split(":")[1]),
-        }
-        this.closeTime = {
-            hour: parseInt(closeTimeOld.split(":")[0]),
-            minute: parseInt(closeTimeOld.split(":")[1]),
-        }
+        this.openTime = this.fromString(openTimeOld)
+        this.closeTime = this.fromString(closeTimeOld)
         if (this.openTime.hour > this.closeTime.hour) {
             throw new ClosesBeforeOpeningError()
         }
