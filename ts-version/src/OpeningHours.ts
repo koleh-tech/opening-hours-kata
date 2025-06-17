@@ -98,17 +98,18 @@ export class Period {
     }
 
     formatInLocalTime() {
-        const openDate = this.openTime.setTimeFor(
+        const opensOnLocal = this.openTime
+            .setTimeFor(new Datetime(`2016-05-13T11:11:00.000Z`))
+            .toDate()
+            .toLocaleTimeString("en-AU", {
+                hour: "2-digit",
+                minute: "2-digit",
+            })
+
+        const closeDate = this.closeTime.setTimeFor(
             new Datetime(`2016-05-13T11:11:00.000Z`),
         )
-        const opensOnLocal = openDate.toDate().toLocaleTimeString("en-AU", {
-            hour: "2-digit",
-            minute: "2-digit",
-        })
-
-        const closeDate = new Date(`2016-05-13T11:11:00.000Z`)
-        closeDate.setHours(this.closeTime.hour, this.closeTime.minute)
-        const closesOnLocal = closeDate.toLocaleTimeString("en-AU", {
+        const closesOnLocal = closeDate.toDate().toLocaleTimeString("en-AU", {
             hour: "2-digit",
             minute: "2-digit",
         })
