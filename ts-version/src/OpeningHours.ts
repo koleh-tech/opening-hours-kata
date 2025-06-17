@@ -8,7 +8,7 @@ class Day {
 }
 
 export class Datetime {
-    constructor(public date: string) {}
+    constructor(private date: string) {}
 
     toDate() {
         return new Date(this.date)
@@ -40,8 +40,8 @@ export class Datetime {
 
 export class Period {
     constructor(
-        public openTime: string,
-        public closeTime: string,
+        private openTime: string,
+        private closeTime: string,
     ) {}
 
     includes(datetime: Datetime) {
