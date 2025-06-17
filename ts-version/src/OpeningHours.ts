@@ -45,10 +45,30 @@ export class Period {
     ) {}
 
     includes(datetime: Datetime) {
-        const time = new Date(datetime.toDate()).getHours()
-        return (
-            time >= parseInt(this.openTime) && time < parseInt(this.closeTime)
-        )
+        const time = datetime.toDate().getUTCHours()
+        const opensOn = new Date(
+            `2016-05-13T${this.openTime}:00.000Z`,
+        ).getUTCHours()
+        const closesOn = new Date(
+            `2016-05-13T${this.closeTime}:00.000Z`,
+        ).getUTCHours()
+        return time >= opensOn && time < closesOn
+    }
+
+    formatInLocalTime() {
+        const opensOnLocal = new Date(
+            `2016-05-13T${this.openTime}:00.000Z`,
+        ).toLocaleTimeString("en-AU", {
+            hour: "2-digit",
+            minute: "2-digit",
+        })
+        const closesOnLocal = new Date(
+            `2016-05-13T${this.closeTime}:00.000Z`,
+        ).toLocaleTimeString("en-AU", {
+            hour: "2-digit",
+            minute: "2-digit",
+        })
+        return `${opensOnLocal} - ${closesOnLocal}`
     }
 }
 
