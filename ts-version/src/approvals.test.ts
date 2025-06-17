@@ -52,7 +52,7 @@ describe("OpeningHours", function () {
         const result = inputDays
             .map((input) => {
                 const result = openHours.nextOpeningDate(input)
-                return `${input.format(input)} => ${result} (${new Datetime(result).dayName()})`
+                return `${input.format()} => ${result} (${new Datetime(result).dayName()})`
             })
             .join("\n")
         approvals.verify(__dirname, "next-opening-day", header + result)
