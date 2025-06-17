@@ -88,9 +88,13 @@ export class Period {
 
     includes(datetime: Datetime) {
         const time = datetime.toDate().getUTCHours()
-        const opensOn = new Date(
-            `2016-05-13T${this.openTimeOld}:00.000Z`,
-        ).getUTCHours()
+
+        const opensOn = this.openTime
+            .setTimeFor(datetime)
+            .toDate()
+            .getUTCHours()
+        // __AUTO_GENERATED_PRINT_VAR_START__
+        console.log("Period#includes opensOn: %s", opensOn) // __AUTO_GENERATED_PRINT_VAR_END__
         const closesOn = new Date(
             `2016-05-13T${this.closeTimeOld}:00.000Z`,
         ).getUTCHours()
@@ -105,14 +109,13 @@ export class Period {
                 hour: "2-digit",
                 minute: "2-digit",
             })
-
-        const closeDate = this.closeTime.setTimeFor(
-            new Datetime(`2016-05-13T11:11:00.000Z`),
-        )
-        const closesOnLocal = closeDate.toDate().toLocaleTimeString("en-AU", {
-            hour: "2-digit",
-            minute: "2-digit",
-        })
+        const closesOnLocal = this.closeTime
+            .setTimeFor(new Datetime(`2016-05-13T11:11:00.000Z`))
+            .toDate()
+            .toLocaleTimeString("en-AU", {
+                hour: "2-digit",
+                minute: "2-digit",
+            })
         return `${opensOnLocal} - ${closesOnLocal}`
     }
 }

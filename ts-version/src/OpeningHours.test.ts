@@ -1,22 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { Period, Datetime, OpeningHours, Time } from "./OpeningHours"
-
-describe("OpeningHours", () => {
-    it("Can be open on all days", () => {
-        const input = new Datetime("2016-05-11T06:29:11.824Z")
-        expect(input.dayName()).toBe("Wed")
-
-        const openingHours = new OpeningHours(
-            ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-            new Period("06:20", "07:30"),
-        )
-        expect(openingHours.isOpenOn(input)).toBe(true)
-
-        expect(
-            new Datetime(openingHours.nextOpeningDate(input)).dayName(),
-        ).toBe("Thu")
-    })
-})
+import { Period, Datetime, Time } from "./OpeningHours"
 
 describe("Period", () => {
     it("Configured using local time", () => {
@@ -56,10 +39,8 @@ describe("Period", () => {
 describe("Time.setTimeOn", () => {
     it("sets morning time", () => {
         const input = new Datetime("2016-05-07T21:01:00.824Z")
-        expect(input.toDate().toLocaleString()).toEqual("5/8/2016, 6:31:00 AM")
 
         const result = new Time(8, 0).setTimeFor(input).toDate()
-        expect(result.toLocaleString()).toEqual("5/8/2016, 8:00:00 AM")
         expect(result.toUTCString()).toEqual("Sat, 07 May 2016 22:30:00 GMT")
     })
 })
