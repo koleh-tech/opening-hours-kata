@@ -64,10 +64,6 @@ export class OpeningHours {
         return inputDay.toISOString()
     }
 
-    dayNameFor(date: string) {
-        return new Datetime(date).dayName()
-    }
-
     timeFor(date: string) {
         return new Date(date).toLocaleTimeString("en-AU", {
             hour: "2-digit",
