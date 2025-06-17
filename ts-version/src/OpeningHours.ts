@@ -22,7 +22,8 @@ export class Datetime {
         return inputDay
     }
 
-    format(datetime, input) {
+    format(input) {
+        datetime = this.date
         const inputText = `${input} (${datetime.dayName()})`
         return inputText
     }

@@ -48,9 +48,7 @@ describe("OpeningHours", function () {
         ]
 
         function format(datetime, input) {
-            return new Datetime(datetime).format(datetime, input)
-            const inputText = `${input} (${datetime.dayName()})`
-            return inputText
+            return new Datetime(datetime).format(input)
         }
 
         const result = inputDays
