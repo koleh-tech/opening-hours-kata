@@ -16,4 +16,19 @@ describe("OpeningHours", () => {
             new Datetime(openingHours.nextOpeningDate(input)).dayName(),
         ).toBe("Thu")
     })
+
+    it("Hours are configured in UTC", () => {
+        const input = new Datetime("2016-05-07T06:29:11.824Z")
+        expect(input.dayName()).toBe("Sat")
+
+        const openingHours = new OpeningHours(
+            ["Sat", "Sun"],
+            new Period("22:30", "06:30"),
+        )
+        expect(openingHours.isOpenOn(input)).toBe(true)
+
+        expect(
+            new Datetime(openingHours.nextOpeningDate(input)).dayName(),
+        ).toBe("Thu")
+    })
 })
