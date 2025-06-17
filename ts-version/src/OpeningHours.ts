@@ -30,7 +30,8 @@ export class Datetime {
         return `${this.date} (${this.dayName()})`
     }
 
-    timeFor(date: string) {
+    timeFor() {
+        const date = this.date
         return new Date(date).toLocaleTimeString("en-AU", {
             hour: "2-digit",
             minute: "2-digit",
@@ -86,6 +87,6 @@ export class OpeningHours {
     }
 
     timeFor(date: string) {
-        return new Datetime(date).timeFor(date)
+        return new Datetime(date).timeFor()
     }
 }
