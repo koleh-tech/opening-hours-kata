@@ -31,8 +31,8 @@ export class Datetime {
     }
 
     timeFor() {
-        const date = this.date
-        return new Date(date).toLocaleTimeString("en-AU", {
+        
+        return new Date(this.date).toLocaleTimeString("en-AU", {
             hour: "2-digit",
             minute: "2-digit",
         })
