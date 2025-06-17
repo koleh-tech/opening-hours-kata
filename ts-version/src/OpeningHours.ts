@@ -10,14 +10,18 @@ class OpeningDay {
 export class Datetime {
     constructor(public date: string) {}
 
+    toDate() {
+        return new Date(this.date)
+    }
+
     dayName() {
-        return new Date(this.date).toLocaleDateString("en-AU", {
+        return this.toDate().toLocaleDateString("en-AU", {
             weekday: "short",
         })
     }
 
     incrementBy(incrementBy: number) {
-        const inputDay = new Date(this.date)
+        const inputDay = this.toDate()
         inputDay.setDate(inputDay.getDate() + incrementBy)
         return inputDay
     }
@@ -27,12 +31,20 @@ export class Datetime {
     }
 }
 
+export class OpeningHoursNew {
+    constructor(
+        public openTime: string,
+        public closeTime: string,
+    ) {}
+}
+
 export class OpeningHours {
     public days: OpeningDay[]
     constructor(
         inputDays: string[],
         public openTime: string,
         public closeTime: string,
+        public newOpeningHours: OpeningHoursNew,
     ) {
         this.days = allDays.map(
             (day) => new OpeningDay(day, inputDays.includes(day)),
