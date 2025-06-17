@@ -35,7 +35,7 @@ describe("OpeningHours", function () {
         ]
         const result = inputHours
             .map((input) => {
-                const inputText = `${new Datetime(input).dayName()} ${openHours.timeFor(input)}`
+                const inputText = `${new Datetime(input).dayName()} ${new Datetime(input).timeFor()}`
                 return `${inputText} => ${openHours.isOpenOn(new Datetime(input)) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")
