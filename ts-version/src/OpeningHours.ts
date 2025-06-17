@@ -23,9 +23,7 @@ export class Datetime {
     }
 
     format(input) {
-        datetime = this.date
-        const inputText = `${input} (${datetime.dayName()})`
-        return inputText
+        return `${input} (${this.dayName()})`
     }
 }
 
