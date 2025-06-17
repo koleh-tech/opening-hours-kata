@@ -65,15 +65,15 @@ export class Period {
     private closeTime: Time = NullTime()
 
     fromString(input: string) {
-        return Time.fromString(input)
+        return
     }
 
     constructor(
         private openTimeOld: string,
         private closeTimeOld: string,
     ) {
-        this.openTime = this.fromString(openTimeOld)
-        this.closeTime = this.fromString(closeTimeOld)
+        this.openTime = Time.fromString(openTimeOld)
+        this.closeTime = Time.fromString(closeTimeOld)
         if (this.openTime.hour > this.closeTime.hour) {
             throw new ClosesBeforeOpeningError()
         }
