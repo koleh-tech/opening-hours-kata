@@ -36,6 +36,13 @@ export class OpeningHoursNew {
         public openTime: string,
         public closeTime: string,
     ) {}
+
+    withinOpeningHours(datetime: string) {
+        const time = new Date(datetime).getHours()
+        return (
+            time >= parseInt(this.openTime) && time < parseInt(this.closeTime)
+        )
+    }
 }
 
 export class OpeningHours {
@@ -58,10 +65,7 @@ export class OpeningHours {
     }
 
     withinOpeningHours(datetime: string) {
-        const time = new Date(datetime).getHours()
-        return (
-            time >= parseInt(this.openTime) && time < parseInt(this.closeTime)
-        )
+        return this.newOpeningHours.withinOpeningHours(datetime)
     }
 
     get openDays() {
