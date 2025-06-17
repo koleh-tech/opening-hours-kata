@@ -1,6 +1,6 @@
 const allDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
-class OpeningDay {
+class Day {
     constructor(
         public name: string,
         public isOpen: boolean,
@@ -46,13 +46,13 @@ export class Period {
 }
 
 export class OpeningHours {
-    public allDays: OpeningDay[]
+    public allDays: Day[]
     constructor(
         openDays: string[],
         public openingPeriod: Period,
     ) {
         this.allDays = allDays.map(
-            (day) => new OpeningDay(day, openDays.includes(day)),
+            (day) => new Day(day, openDays.includes(day)),
         )
     }
 
@@ -60,8 +60,7 @@ export class OpeningHours {
         return this.allDays.filter((day) => day.isOpen).map((day) => day.name)
     }
 
-    isOpenOn(date: Datetime) {
-        const input = date
+    isOpenOn(input: Datetime) {
         return (
             this.openDayNames.includes(input.dayName()) &&
             this.openingPeriod.includes(input)
