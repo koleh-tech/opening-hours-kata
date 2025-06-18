@@ -32,5 +32,3 @@ OpeningHours.isOpenOn(thursday) == false
 
 OpeningHours.nextOpeningDate(wednesday) === fridayMorning
 ```
-
-
