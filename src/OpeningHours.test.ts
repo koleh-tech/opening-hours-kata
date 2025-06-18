@@ -8,6 +8,12 @@ describe("Period", () => {
         )
     })
 
+    it.skip("Can print in local time", () => {
+        expect(new Period("08:00", "16:30").formatInLocalTime()).toBe(
+            "08:00 am - 04:30 pm",
+        )
+    })
+
     describe(".includes", () => {
         it("Hours can go into next day", () => {
             const input = new Datetime("2016-05-07T06:30:11.824Z")
