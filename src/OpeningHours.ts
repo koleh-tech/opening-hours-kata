@@ -93,8 +93,6 @@ export class Period {
             .setTimeFor(datetime)
             .toDate()
             .getUTCHours()
-        // __AUTO_GENERATED_PRINT_VAR_START__
-        console.log("Period#includes opensOn: %s", opensOn) // __AUTO_GENERATED_PRINT_VAR_END__
         const closesOn = new Date(
             `2016-05-13T${this.closeTimeOld}:00.000Z`,
         ).getUTCHours()
