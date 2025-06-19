@@ -2,7 +2,8 @@ import { useState } from "react"
 import "./App.css"
 import { Datetime, Day, OpeningHours, Period, Time } from "./OpeningHours"
 import openingHoursLogo from "./assets/opening-hours.png"
-
+import closingHoursLogo from "./assets/closing-hours.png"
+// <a href="https://www.flaticon.com/free-icons/closed" title="closed icons">Closed icons created by Freepik - Flaticon</a>
 function App() {
     const [datetimeToCheck, setDatetimeToCheck] = useState(
         new Datetime(new Date(Date.now()).toISOString()),
@@ -58,6 +59,19 @@ function App() {
                 >
                     <img
                         src={openingHoursLogo}
+                        alt="Opening-hours-business-icon"
+                    />
+                </a>
+                <p>The business, on: </p>
+            </div>
+            <div>
+                <a
+                    href="https://www.flaticon.com/free-icons/opening-hours"
+                    title="opening hours icons"
+                    className="logo"
+                >
+                    <img
+                        src={closingHoursLogo}
                         alt="Opening-hours-business-icon"
                     />
                 </a>
