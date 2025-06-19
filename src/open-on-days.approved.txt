@@ -1,7 +1,7 @@
 CONFIG:
 DAYS OPEN: Mon,Wed,Fri
 HOURS OPEN: 08:00 - 16:00
-Mon => CLOSED
+Mon => OPEN
 Tue => CLOSED
-Wed => CLOSED
+Wed => OPEN
 Thu => CLOSED

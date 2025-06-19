@@ -2,7 +2,7 @@ CONFIG:
 DAYS OPEN: Mon,Wed,Fri
 HOURS OPEN: 08:00 - 16:00
 Wed 07:59 am (Tue, 10 May 2016 22:29:11 GMT) => CLOSED
-Wed 08:00 am (Tue, 10 May 2016 22:30:11 GMT) => CLOSED
-Wed 08:01 am (Tue, 10 May 2016 22:31:11 GMT) => CLOSED
-Wed 03:59 pm (Wed, 11 May 2016 06:29:11 GMT) => CLOSED
+Wed 08:00 am (Tue, 10 May 2016 22:30:11 GMT) => OPEN
+Wed 08:01 am (Tue, 10 May 2016 22:31:11 GMT) => OPEN
+Wed 03:59 pm (Wed, 11 May 2016 06:29:11 GMT) => OPEN
 Wed 04:00 pm (Wed, 11 May 2016 06:30:11 GMT) => CLOSED

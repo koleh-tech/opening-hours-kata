@@ -45,16 +45,17 @@ export class Datetime {
 }
 
 export class Time {
+    constructor(
+        public hour: number,
+        public minute: number,
+    ) {}
+
     setTimeFor(input: Datetime) {
         const date = input.toDate()
         date.setHours(this.hour, this.minute)
         date.setMinutes(this.minute)
         return new Datetime(date.toUTCString())
     }
-    constructor(
-        public hour: number,
-        public minute: number,
-    ) {}
 
     static fromString(input: string) {
         return new Time(
@@ -87,15 +88,10 @@ export class Period {
     }
 
     includes(datetime: Datetime) {
-        const time = datetime.toDate().getUTCHours()
+        const time = datetime.toDate()
 
-        const opensOn = this.openTime
-            .setTimeFor(datetime)
-            .toDate()
-            .getUTCHours()
-        const closesOn = new Date(
-            `2016-05-13T${this.closeTimeOld}:00.000Z`,
-        ).getUTCHours()
+        const opensOn = this.openTime.setTimeFor(datetime).toDate()
+        const closesOn = this.closeTime.setTimeFor(datetime).toDate()
         return time >= opensOn && time < closesOn
     }
 
