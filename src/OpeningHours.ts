@@ -138,7 +138,7 @@ export class Period {
         )
     }
 
-    formatInLocalTime() {
+    formatInLocaleTime() {
         const opensOnLocal = this.openTime
             .asSeenOn(new Date(`2016-05-13T11:11:00.000Z`))
             .toLocaleTimeString(this.locale, {
