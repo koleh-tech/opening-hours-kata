@@ -100,17 +100,21 @@ function App() {
                 </div>
 
                 <h3>Configure days:</h3>
-                <fieldset>
-                    <div className="day">
-                        <input
-                            type="checkbox"
-                            id="scales"
-                            name="scales"
-                            checked
-                        />
-                        <label>{openingHours.allDays[0].name}</label>
-                    </div>
-                </fieldset>
+                <div>
+                    {openingHours.allDays.map((day) => (
+                        <div>
+                            <div className="day">
+                                <input
+                                    type="checkbox"
+                                    id="scales"
+                                    name="scales"
+                                    checked
+                                />
+                                <label>{day.name}</label>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </>
     )
