@@ -60,9 +60,9 @@ function App() {
                     openingHours.nextOpeningDate(datetimeToCheck),
                 ).longDayName()}
             </p>
-            <div className="opening-hours">
+            <div className="configuration">
                 <h3>Configure hours:</h3>
-                <div className="configuration">
+                <div className="configuration-option">
                     <input
                         type="time"
                         value={openingHours.openingPeriod.formatOpenTime()}
@@ -80,7 +80,7 @@ function App() {
                     ></input>
                     <label>Open</label>
                 </div>
-                <div className="configuration">
+                <div className="configuration-option">
                     <input
                         type="time"
                         value={openingHours.openingPeriod.formatCloseTime()}
@@ -102,7 +102,10 @@ function App() {
                 <h3>Configure days:</h3>
                 <div>
                     {openingHours.allDays.map((checkboxDay, idx) => (
-                        <div key={checkboxDay.name} className="configuration">
+                        <div
+                            key={checkboxDay.name}
+                            className="configuration-option"
+                        >
                             <input
                                 type="checkbox"
                                 id={`day-${idx}`}
