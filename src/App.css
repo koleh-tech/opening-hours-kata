@@ -29,7 +29,7 @@ label {
     font: inherit;
 }
 
-.configuration {
+.configuration-option {
     display: flex;
     align-items: center;
     margin-bottom: 0.5rem;
@@ -38,7 +38,7 @@ label {
     gap: 0.5rem;
 }
 
-.opening-hours {
+.configuration {
     border: 1px solid #2b2a33;
     border-radius: 8px;
     background-color: #2b2a33;
