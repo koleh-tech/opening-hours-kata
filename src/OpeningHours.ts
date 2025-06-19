@@ -59,14 +59,17 @@ export class OpeningHours {
 }
 
 export class Datetime {
-    constructor(private date: string) {}
+    constructor(
+        private date: string,
+        public locale = "en-AU",
+    ) {}
 
     asDate() {
         return new Date(this.date)
     }
 
     dayName() {
-        return this.asDate().toLocaleDateString("en-AU", {
+        return this.asDate().toLocaleDateString(this.locale, {
             weekday: "short",
         })
     }
@@ -82,7 +85,7 @@ export class Datetime {
     }
 
     time() {
-        return new Date(this.date).toLocaleTimeString("en-AU", {
+        return new Date(this.date).toLocaleTimeString(this.locale, {
             hour: "2-digit",
             minute: "2-digit",
         })
@@ -121,7 +124,6 @@ export class Period {
     constructor(
         private openTime: Time,
         private closeTime: Time,
-        public locale = "en-AU",
     ) {
         if (this.openTime.hour > this.closeTime.hour)
             throw new ClosesBeforeOpeningError()
