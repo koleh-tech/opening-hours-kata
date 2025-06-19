@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { Period, ClosesBeforeOpeningError } from "./OpeningHours"
+import { Period, ClosesBeforeOpeningError, Datetime } from "./OpeningHours"
 
 describe("Period", () => {
     // TODO remove this once 'handles closing next day' is working
@@ -30,5 +30,11 @@ describe("Period", () => {
                 false,
             )
         })
+    })
+})
+
+describe("Datetime", () => {
+    it("Can format the time for display", () => {
+        expect(new Datetime("2016-05-07T11:00:11.824Z").time()).toBe("20:30")
     })
 })
