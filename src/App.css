@@ -16,30 +16,31 @@
 .logo:hover {
     filter: drop-shadow(0 0 2em #646cffaa);
 }
-.logo.react:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
-}
 
 input {
     border: none;
     color: #a4e1ff;
     display: inherit;
-    /* font-size: 35px; */
     font-size: inherit;
     font-family: inherit;
     border-radius: 8px;
 }
 
 label {
-  font: inherit
+    font: inherit;
 }
 
-input[type="checkbox"] {
-  margin: 0.4rem;
+.hours{
+    display: inline;
 }
 
-.hours,.day {
-    display: inline
+.day {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+    position: relative;
+    left: 35%;
+  gap: 0.5rem; // spacing between checkbox and label
 }
 
 .opening-hours {
