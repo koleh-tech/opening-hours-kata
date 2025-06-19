@@ -71,10 +71,7 @@ export class Period {
     private openTime: Time = NullTime()
     private closeTime: Time = NullTime()
 
-    constructor(
-        private openTimeOld: string,
-        private closeTimeOld: string,
-    ) {
+    constructor(openTimeOld: string, closeTimeOld: string) {
         this.openTime = Time.fromString(openTimeOld)
         this.closeTime = Time.fromString(closeTimeOld)
         if (this.openTime.hour > this.closeTime.hour) {

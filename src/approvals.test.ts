@@ -1,8 +1,9 @@
 import { describe, it } from "vitest"
-import approvals from "approvals"
 import { Datetime, OpeningHours, Period } from "./OpeningHours"
+import { configure } from "approvals/lib/config"
+import { verify } from "approvals"
 
-approvals.configure({
+configure({
     reporters: ["kompare"],
 })
 
@@ -22,7 +23,7 @@ describe("OpeningHours", function () {
                 return `${input.dayName()} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")
-        approvals.verify(__dirname, "open-on-days", header + result)
+        verify(__dirname, "open-on-days", header + result)
     })
 
     it("is open on hours", function () {
@@ -39,7 +40,7 @@ describe("OpeningHours", function () {
                 return `${inputText} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")
-        approvals.verify(__dirname, "open-on-hours", header + result)
+        verify(__dirname, "open-on-hours", header + result)
     })
 
     it("next opening day", function () {
@@ -54,6 +55,6 @@ describe("OpeningHours", function () {
                 return `${input.format()} => ${result} (${new Datetime(result).dayName()})`
             })
             .join("\n")
-        approvals.verify(__dirname, "next-opening-day", header + result)
+        verify(__dirname, "next-opening-day", header + result)
     })
 })
