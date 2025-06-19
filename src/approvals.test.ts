@@ -22,7 +22,7 @@ describe("OpeningHours", function () {
         ]
         const result = inputDays
             .map((input) => {
-                return `${input.dayName()} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
+                return `${input.shortDayName()} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")
         approvals.verify(__dirname, "open-on-days", header + result)
@@ -38,7 +38,7 @@ describe("OpeningHours", function () {
         ].map((input) => new Datetime(input))
         const result = inputHours
             .map((input) => {
-                const inputText = `${input.dayName()} ${input.time()} (${input.asDate().toUTCString()})`
+                const inputText = `${input.shortDayName()} ${input.time()} (${input.asDate().toUTCString()})`
                 return `${inputText} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")
@@ -54,8 +54,8 @@ describe("OpeningHours", function () {
         const result = input
             .map((input) => {
                 const result = openHours.nextOpeningDate(input)
-                const formattedInput = `${input.asDate().toISOString()} (${input.dayName()})`
-                return `${formattedInput} => ${result} (${new Datetime(result).dayName()})`
+                const formattedInput = `${input.asDate().toISOString()} (${input.shortDayName()})`
+                return `${formattedInput} => ${result} (${new Datetime(result).shortDayName()})`
             })
             .join("\n")
         approvals.verify(__dirname, "next-opening-day", header + result)

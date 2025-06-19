@@ -8,7 +8,6 @@ function App() {
     const [datetimeToCheck, setDatetimeToCheck] = useState(
         new Datetime(new Date(Date.now()).toISOString()),
     )
-    const [minute, setMinute] = useState(59)
 
     return (
         <>
@@ -24,40 +23,28 @@ function App() {
                     />
                 </a>
             </div>
+            <h1>Business on {datetimeToCheck.longDayName()} at </h1>
+            <input
+                type="time"
+                value={`${datetimeToCheck.time()}`}
+                onChange={(e) => {
+                    const newTime = Time.fromString(e.target.value)
+                    return setDatetimeToCheck(
+                        Datetime.fromDate(
+                            newTime.asSeenOn(datetimeToCheck.asDate()),
+                        ),
+                    )
+                }}
+            ></input>
             <h1>
-                Business on {datetimeToCheck.dayName()} at{" "}
-                {datetimeToCheck.time()}{" "}
+                is{" "}
                 {new OpeningHours(
-                    ["Mon", "Fri"],
+                    ["Mon", "Thu"],
                     Period.fromStrings("08:00", "16:30"),
-                ).isOpenOn(new Datetime(new Date(Date.now()).toISOString()))
+                ).isOpenOn(datetimeToCheck)
                     ? "open"
                     : "closed"}
             </h1>
-            Time to check:
-            <div className="card">
-                <input
-                    type="time"
-                    value={`${datetimeToCheck.time()}`}
-                    onChange={(e) => {
-                        const newTime = Time.fromString(e.target.value)
-                        return setDatetimeToCheck(
-                            Datetime.fromDate(
-                                newTime.asSeenOn(datetimeToCheck.asDate()),
-                            ),
-                        )
-                    }}
-                ></input>
-                <button onClick={() => setMinute((count) => count + 1)}>
-                    {minute}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
         </>
     )
 }

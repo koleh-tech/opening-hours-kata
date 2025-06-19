@@ -34,7 +34,7 @@ export class OpeningHours {
 
     isOpenOn(input: Datetime) {
         return (
-            this.openDayNames().includes(input.dayName()) &&
+            this.openDayNames().includes(input.shortDayName()) &&
             this.openingPeriod.includes(input.asDate())
         )
     }
@@ -54,7 +54,10 @@ export class OpeningHours {
     }
 
     weekIndexFor(input: Datetime) {
-        return this.allDays.map((day) => day.name).indexOf(input.dayName()) + 1
+        return (
+            this.allDays.map((day) => day.name).indexOf(input.shortDayName()) +
+            1
+        )
     }
 }
 
@@ -72,9 +75,15 @@ export class Datetime {
         return new Date(this.date)
     }
 
-    dayName() {
+    shortDayName() {
         return this.asDate().toLocaleDateString(this.localeFormat, {
             weekday: "short",
+        })
+    }
+
+    longDayName() {
+        return this.asDate().toLocaleDateString(this.localeFormat, {
+            weekday: "long",
         })
     }
 
@@ -85,7 +94,7 @@ export class Datetime {
     }
 
     format() {
-        return `${this.date} (${this.dayName()})`
+        return `${this.date} (${this.shortDayName()})`
     }
 
     time() {
