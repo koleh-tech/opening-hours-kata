@@ -5,7 +5,7 @@ import "./App.css"
 import { Datetime, OpeningHours, Period } from "./OpeningHours"
 
 function App() {
-    const [timeToCheck, setTimeToCheck] = useState(
+    const [datetimeToCheck, setDatetimeToCheck] = useState(
         new Datetime(new Date(Date.now()).toISOString()),
     )
     const [minute, setMinute] = useState(59)
@@ -25,7 +25,8 @@ function App() {
                 </a>
             </div>
             <h1>
-                Business on {timeToCheck.dayName()} at {timeToCheck.time()}{" "}
+                Business on {datetimeToCheck.dayName()} at{" "}
+                {datetimeToCheck.time()}{" "}
                 {new OpeningHours(
                     ["Mon", "Fri"],
                     Period.fromStrings("08:00", "16:30"),
@@ -37,13 +38,13 @@ function App() {
             <div className="card">
                 <input
                     type="time"
-                    value={`${timeToCheck.time()}`}
+                    value={`${datetimeToCheck.time()}`}
                     onChange={(e) => {
                         const thi = e.target.value
-                        const newDate = timeToCheck.asDate()
+                        const newDate = datetimeToCheck.asDate()
                         newDate.setHours(parseInt(thi.split(":")[0]))
                         newDate.setMinutes(parseInt(thi.split(":")[1]))
-                        return setTimeToCheck(
+                        return setDatetimeToCheck(
                             new Datetime(newDate.toISOString()),
                         )
                     }}
