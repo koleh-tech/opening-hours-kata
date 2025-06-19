@@ -25,7 +25,7 @@ function App() {
                 Business at {new Date(Date.now()).toLocaleTimeString()}{" "}
                 {new OpeningHours(
                     ["Mon", "Fri"],
-                    Period.fromStrings("22:30", "06:30"),
+                    Period.fromStrings("08:00", "04:30"),
                 ).isOpenOn(new Datetime(new Date(Date.now()).toISOString()))
                     ? "open"
                     : "closed"}

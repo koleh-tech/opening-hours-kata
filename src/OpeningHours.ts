@@ -61,7 +61,7 @@ export class OpeningHours {
 export class Datetime {
     constructor(
         private date: string,
-        public locale = "en-AU",
+        public localeFormat = "en-AU",
     ) {}
 
     asDate() {
@@ -69,7 +69,7 @@ export class Datetime {
     }
 
     dayName() {
-        return this.asDate().toLocaleDateString(this.locale, {
+        return this.asDate().toLocaleDateString(this.localeFormat, {
             weekday: "short",
         })
     }
@@ -85,7 +85,7 @@ export class Datetime {
     }
 
     time() {
-        return new Date(this.date).toLocaleTimeString(this.locale, {
+        return new Date(this.date).toLocaleTimeString(this.localeFormat, {
             hour: "2-digit",
             minute: "2-digit",
         })
