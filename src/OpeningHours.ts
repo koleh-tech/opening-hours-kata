@@ -94,7 +94,9 @@ export class Datetime {
     }
 
     format() {
-        return `${this.date} (${this.shortDayName()})`
+        const asDate = this.asDate()
+
+        return `${asDate.getFullYear()}-${this.padZeroIfNeeded(asDate.getMonth())}-${asDate.getDate()}T${this.time()}`
     }
 
     time() {
@@ -102,6 +104,10 @@ export class Datetime {
             hour: "2-digit",
             minute: "2-digit",
         })
+    }
+
+    padZeroIfNeeded(input: number) {
+        return input < 10 ? `0${input}` : input
     }
 }
 

@@ -23,7 +23,21 @@ function App() {
                     />
                 </a>
             </div>
-            <h1>Business on {datetimeToCheck.longDayName()} at </h1>
+            <h1>Business on: </h1>
+            <input
+                // type="datetime-local"
+                type="text"
+                value={datetimeToCheck.format()}
+                onChange={(e) => {
+                    const newTime = Time.fromString(e.target.value)
+                    return setDatetimeToCheck(
+                        Datetime.fromDate(
+                            newTime.asSeenOn(datetimeToCheck.asDate()),
+                        ),
+                    )
+                }}
+            ></input>
+            <h1>at:</h1>
             <input
                 type="time"
                 value={datetimeToCheck.time()}
