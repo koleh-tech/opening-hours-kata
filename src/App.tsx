@@ -25,7 +25,7 @@ function App() {
                 </a>
             </div>
             <h1>
-                Business at {new Date(Date.now()).toLocaleTimeString()}{" "}
+                Business on {timeToCheck.dayName()} at {timeToCheck.time()}{" "}
                 {new OpeningHours(
                     ["Mon", "Fri"],
                     Period.fromStrings("08:00", "16:30"),
