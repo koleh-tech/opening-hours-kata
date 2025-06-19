@@ -9,8 +9,16 @@ describe("Period", () => {
                 Time.fromString("08:00"),
                 Time.fromString("16:30"),
                 japanTime,
-            ).formatInLocaleTime(),
+            ).formatTimeInPeriodLocale(),
         ).toBe("08:00 - 16:30")
+
+        expect(
+            new Period(
+                Time.fromString("08:00"),
+                Time.fromString("16:30"),
+                japanTime,
+            ).formatTimeForLocale("en-AU"),
+        ).toBe("08:00 am - 04:30 pm")
     })
 
     // TODO remove this once 'can close in the next day' is working
@@ -39,13 +47,13 @@ describe("Period", () => {
     describe("formatInLocalTime", () => {
         it.skip("Can close next day morning", () => {
             expect(
-                Period.fromStrings("20:00", "06:30").formatInLocaleTime(),
+                Period.fromStrings("20:00", "06:30").formatTimeInPeriodLocale(),
             ).toBe("08:00 pm - 6:30 am (next day)")
         })
 
         it("Basic", () => {
             expect(
-                Period.fromStrings("08:00", "23:30").formatInLocaleTime(),
+                Period.fromStrings("08:00", "23:30").formatTimeInPeriodLocale(),
             ).toBe("08:00 am - 11:30 pm")
         })
     })
