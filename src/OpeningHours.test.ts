@@ -1,10 +1,5 @@
 import { describe, expect, it } from "vitest"
-import {
-    Period,
-    Datetime,
-    Time,
-    ClosesBeforeOpeningError,
-} from "./OpeningHours"
+import { Period, Time, ClosesBeforeOpeningError } from "./OpeningHours"
 
 describe("Period", () => {
     it("Configured using local time", () => {
@@ -22,15 +17,14 @@ describe("Period", () => {
 
     describe(".includes", () => {
         it.skip("Hours can go into next day", () => {
-            const input = new Datetime("2016-05-07T06:30:11.824Z")
-            expect(input.dayName()).toBe("Sat")
+            const input = new Date("2016-05-07T06:30:11.824Z")
             expect(Period.fromStrings("22:30", "06:30").includes(input)).toBe(
                 true,
             )
         })
 
         it("Hourly", () => {
-            const input = new Datetime("2016-05-07T21:01:11.824Z")
+            const input = new Date("2016-05-07T21:01:11.824Z")
             expect(Period.fromStrings("06:00", "07:00").includes(input)).toBe(
                 true,
             )
@@ -54,7 +48,7 @@ describe("Period", () => {
 
 describe("Time.setTimeOn", () => {
     it("sets morning time", () => {
-        const input = new Datetime("2016-05-07T21:01:00.824Z")
+        const input = new Date("2016-05-07T21:01:00.824Z")
 
         const result = new Time(8, 0).setTimeFor(input).toDate()
         expect(result.toUTCString()).toEqual("Sat, 07 May 2016 22:30:00 GMT")

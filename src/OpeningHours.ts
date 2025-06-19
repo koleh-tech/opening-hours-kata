@@ -53,8 +53,8 @@ export class Time {
         public minute: number,
     ) {}
 
-    setTimeFor(input: Datetime) {
-        const date = input.toDate()
+    setTimeFor(input: Date) {
+        const date = new Date(input)
         date.setHours(this.hour, this.minute)
         date.setMinutes(this.minute)
         return new Datetime(date.toUTCString())
@@ -90,24 +90,22 @@ export class Period {
         }
     }
 
-    includes(datetime: Datetime) {
-        const time = datetime.toDate()
-
-        const opensOn = this.openTime.setTimeFor(datetime).toDate()
-        const closesOn = this.closeTime.setTimeFor(datetime).toDate()
-        return time >= opensOn && time < closesOn
+    includes(input: Date) {
+        const afterOpening = input >= this.openTime.setTimeFor(input).toDate()
+        const beforeClosing = input < this.closeTime.setTimeFor(input).toDate()
+        return afterOpening && beforeClosing
     }
 
     formatInLocalTime() {
         const opensOnLocal = this.openTime
-            .setTimeFor(new Datetime(`2016-05-13T11:11:00.000Z`))
+            .setTimeFor(new Date(`2016-05-13T11:11:00.000Z`))
             .toDate()
             .toLocaleTimeString("en-AU", {
                 hour: "2-digit",
                 minute: "2-digit",
             })
         const closesOnLocal = this.closeTime
-            .setTimeFor(new Datetime(`2016-05-13T11:11:00.000Z`))
+            .setTimeFor(new Date(`2016-05-13T11:11:00.000Z`))
             .toDate()
             .toLocaleTimeString("en-AU", {
                 hour: "2-digit",
@@ -136,7 +134,7 @@ export class OpeningHours {
     isOpenOn(input: Datetime) {
         return (
             this.openDayNames().includes(input.dayName()) &&
-            this.openingPeriod.includes(input)
+            this.openingPeriod.includes(input.toDate())
         )
     }
 
