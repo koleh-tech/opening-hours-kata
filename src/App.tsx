@@ -32,6 +32,47 @@ function App() {
         return setDatetimeToCheck(Datetime.fromDate(newTime.asSeenOn(newDate)))
     }
 
+    function setNewOpeningPeriod(newPeriod: Period) {
+        setOpeningHours(new OpeningHours(openingHours.openDays, newPeriod))
+    }
+
+    function tempNewD(checkboxDay) {
+        const newDays = openingHours.allDays.map((day) =>
+            day.name === checkboxDay.name
+                ? {
+                      ...day,
+                      isOpen: !day.isOpen,
+                  }
+                : day,
+        )
+        return newDays
+    }
+
+    const thi = (
+        <div>
+            {openingHours.allDays.map((checkboxDay, idx) => (
+                <div key={checkboxDay.name} className="configuration-option">
+                    <input
+                        type="checkbox"
+                        id={`day-${idx}`}
+                        checked={checkboxDay.isOpen}
+                        onChange={() => {
+                            const newDays = tempNewD(checkboxDay)
+                            setOpeningHours(
+                                new OpeningHours(
+                                    newDays
+                                        .filter((d) => d.isOpen)
+                                        .map((d) => d.name),
+                                    openingHours.openingPeriod,
+                                ),
+                            )
+                        }}
+                    />
+                    <label htmlFor={`day-${idx}`}>{checkboxDay.name}</label>
+                </div>
+            ))}
+        </div>
+    )
     return (
         <>
             <div>
@@ -67,13 +108,10 @@ function App() {
                         type="time"
                         value={openingHours.openingPeriod.formatOpenTime()}
                         onChange={(e) =>
-                            setOpeningHours(
-                                new OpeningHours(
-                                    openingHours.openDays,
-                                    Period.fromStrings(
-                                        e.target.value,
-                                        openingHours.openingPeriod.formatCloseTime(),
-                                    ),
+                            setNewOpeningPeriod(
+                                Period.fromStrings(
+                                    e.target.value,
+                                    openingHours.openingPeriod.formatCloseTime(),
                                 ),
                             )
                         }
@@ -85,13 +123,10 @@ function App() {
                         type="time"
                         value={openingHours.openingPeriod.formatCloseTime()}
                         onChange={(e) =>
-                            setOpeningHours(
-                                new OpeningHours(
-                                    openingHours.openDays,
-                                    Period.fromStrings(
-                                        openingHours.openingPeriod.formatOpenTime(),
-                                        e.target.value,
-                                    ),
+                            setNewOpeningPeriod(
+                                Period.fromStrings(
+                                    openingHours.openingPeriod.formatOpenTime(),
+                                    e.target.value,
                                 ),
                             )
                         }
@@ -100,42 +135,7 @@ function App() {
                 </div>
 
                 <h3>Configure days:</h3>
-                <div>
-                    {openingHours.allDays.map((checkboxDay, idx) => (
-                        <div
-                            key={checkboxDay.name}
-                            className="configuration-option"
-                        >
-                            <input
-                                type="checkbox"
-                                id={`day-${idx}`}
-                                checked={checkboxDay.isOpen}
-                                onChange={() => {
-                                    const newDays = openingHours.allDays.map(
-                                        (day) =>
-                                            day.name === checkboxDay.name
-                                                ? {
-                                                      ...day,
-                                                      isOpen: !day.isOpen,
-                                                  }
-                                                : day,
-                                    )
-                                    setOpeningHours(
-                                        new OpeningHours(
-                                            newDays
-                                                .filter((d) => d.isOpen)
-                                                .map((d) => d.name),
-                                            openingHours.openingPeriod,
-                                        ),
-                                    )
-                                }}
-                            />
-                            <label htmlFor={`day-${idx}`}>
-                                {checkboxDay.name}
-                            </label>
-                        </div>
-                    ))}
-                </div>
+                {thi}
             </div>
         </>
     )
