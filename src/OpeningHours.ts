@@ -64,6 +64,10 @@ export class Datetime {
         public localeFormat = "en-AU",
     ) {}
 
+    static fromDate(date: Date) {
+        return new Datetime(date.toISOString())
+    }
+
     asDate() {
         return new Date(this.date)
     }

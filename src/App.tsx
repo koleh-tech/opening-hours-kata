@@ -2,7 +2,7 @@ import { useState } from "react"
 import reactLogo from "./assets/react.svg"
 import viteLogo from "/vite.svg"
 import "./App.css"
-import { Datetime, OpeningHours, Period } from "./OpeningHours"
+import { Datetime, OpeningHours, Period, Time } from "./OpeningHours"
 
 function App() {
     const [datetimeToCheck, setDatetimeToCheck] = useState(
@@ -40,12 +40,11 @@ function App() {
                     type="time"
                     value={`${datetimeToCheck.time()}`}
                     onChange={(e) => {
-                        const thi = e.target.value
-                        const newDate = datetimeToCheck.asDate()
-                        newDate.setHours(parseInt(thi.split(":")[0]))
-                        newDate.setMinutes(parseInt(thi.split(":")[1]))
+                        const newTime = Time.fromString(e.target.value)
                         return setDatetimeToCheck(
-                            new Datetime(newDate.toISOString()),
+                            Datetime.fromDate(
+                                newTime.asSeenOn(datetimeToCheck.asDate()),
+                            ),
                         )
                     }}
                 ></input>
