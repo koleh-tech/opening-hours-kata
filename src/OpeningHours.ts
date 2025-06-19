@@ -137,24 +137,4 @@ export class Period {
             date < this.closeTime.asSeenOn(date)
         )
     }
-
-    formatTimeInPeriodLocale() {
-        return this.formatTimeForLocale(this.locale)
-    }
-
-    formatTimeForLocale(locale: string): any {
-        const opensOnLocal = this.openTime
-            .asSeenOn(new Date(`2016-05-13T11:11:00.000Z`))
-            .toLocaleTimeString(locale, {
-                hour: "2-digit",
-                minute: "2-digit",
-            })
-        const closesOnLocal = this.closeTime
-            .asSeenOn(new Date(`2016-05-13T11:11:00.000Z`))
-            .toLocaleTimeString(locale, {
-                hour: "2-digit",
-                minute: "2-digit",
-            })
-        return `${opensOnLocal} - ${closesOnLocal}`
-    }
 }
