@@ -29,16 +29,7 @@ label {
     font: inherit;
 }
 
-.hours {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
-    position: relative;
-    left: 23%;
-    gap: 0.5rem;
-}
-
-.day {
+.configuration {
     display: flex;
     align-items: center;
     margin-bottom: 0.5rem;

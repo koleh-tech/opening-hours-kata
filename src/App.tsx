@@ -63,7 +63,7 @@ function App() {
             </p>
             <div className="opening-hours">
                 <h3>Configure hours:</h3>
-                <div className="hours">
+                <div className="configuration">
                     <input
                         type="time"
                         value={openingHours.openingPeriod.formatOpenTime()}
@@ -81,7 +81,7 @@ function App() {
                     ></input>
                     <label>Open</label>
                 </div>
-                <div className="hours">
+                <div className="configuration">
                     <input
                         type="time"
                         value={openingHours.openingPeriod.formatCloseTime()}
@@ -103,7 +103,7 @@ function App() {
                 <h3>Configure days:</h3>
                 <div>
                     {openingHours.allDays.map((checkboxDay, idx) => (
-                        <div key={checkboxDay.name} className="day">
+                        <div key={checkboxDay.name} className="configuration">
                             <input
                                 type="checkbox"
                                 id={`day-${idx}`}
