@@ -1,8 +1,8 @@
 import { useState } from "react"
 import reactLogo from "./assets/react.svg"
-import viteLogo from "/vite.svg"
 import "./App.css"
 import { Datetime, OpeningHours, Period, Time } from "./OpeningHours"
+import openingHoursLogo from "./assets/opening-hours.png"
 
 function App() {
     const [datetimeToCheck, setDatetimeToCheck] = useState(
@@ -33,45 +33,32 @@ function App() {
     return (
         <>
             <div>
-                <a href="https://vite.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
+                <a
+                    href="https://www.flaticon.com/free-icons/opening-hours"
+                    title="opening hours icons"
+                    className="logo"
+                >
                     <img
-                        src={reactLogo}
-                        className="logo react"
-                        alt="React logo"
+                        src={openingHoursLogo}
+                        alt="Opening-hours-business-icon"
                     />
                 </a>
             </div>
-            <h1>Business on: </h1>
+            <p>Business on: </p>
             <input
                 type="datetime-local"
                 value={datetimeToCheck.format()}
                 onChange={handleDatetimeInput}
-            ></input>
-            <h1>({datetimeToCheck.longDayName()}) at:</h1>
-            <input
-                type="time"
-                value={datetimeToCheck.time()}
-                onChange={(e) => {
-                    const newTime = Time.fromString(e.target.value)
-                    return setDatetimeToCheck(
-                        Datetime.fromDate(
-                            newTime.asSeenOn(datetimeToCheck.asDate()),
-                        ),
-                    )
-                }}
-            ></input>
-            <h1>
-                is{" "}
+            ></input>{" "}
+            <p>
+                ({datetimeToCheck.longDayName()}) is{" "}
                 {new OpeningHours(
                     ["Mon", "Thu"],
                     Period.fromStrings("08:00", "16:30"),
                 ).isOpenOn(datetimeToCheck)
                     ? "open"
                     : "closed"}
-            </h1>
+            </p>
         </>
     )
 }

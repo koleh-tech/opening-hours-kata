@@ -3,7 +3,8 @@
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
-    font-family: sans-serif;
+    font-family: helvetica;
+    font-size: 1.3rem;
 }
 
 .logo {
@@ -19,28 +20,15 @@
     filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-@keyframes logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    a:nth-of-type(2) .logo {
-        animation: logo-spin infinite 20s linear;
-    }
-}
-
-input[type="time"] {
+input[type="datetime-local"] {
 	border: none;
 	color: #a4e1ff;
-	font-size: 35px;
+	/* font-size: 35px; */
+	font-size: inherit;
 	font-family: inherit;
 	border-radius: 8px;
 }
+
 
 .card {
     padding: 2em;
