@@ -3,14 +3,14 @@ import { Period, Datetime, Time } from "./OpeningHours"
 
 describe("Period", () => {
     it("Configured using local time", () => {
-        expect(new Period("08:00", "16:30").formatInLocalTime()).toBe(
+        expect(Period.fromStrings("08:00", "16:30").formatInLocalTime()).toBe(
             "08:00 am - 04:30 pm",
         )
     })
 
     // TODO remove this once 'can close in the next day' is working
     it("Opening needs to be before closing", () => {
-        expect(() => new Period("08:00", "06:30")).toThrowError(
+        expect(() => Period.fromStrings("08:00", "06:30")).toThrowError(
             "Store must close after it opens",
         )
     })
@@ -19,26 +19,30 @@ describe("Period", () => {
         it.skip("Hours can go into next day", () => {
             const input = new Datetime("2016-05-07T06:30:11.824Z")
             expect(input.dayName()).toBe("Sat")
-            expect(new Period("22:30", "06:30").includes(input)).toBe(true)
+            expect(Period.fromStrings("22:30", "06:30").includes(input)).toBe(
+                true,
+            )
         })
 
         it("Hourly", () => {
             const input = new Datetime("2016-05-07T21:01:11.824Z")
-            expect(new Period("06:00", "07:00").includes(input)).toBe(true)
+            expect(Period.fromStrings("06:00", "07:00").includes(input)).toBe(
+                true,
+            )
         })
     })
 
     describe("formatInLocalTime", () => {
         it.skip("Can close next day morning", () => {
-            expect(new Period("20:00", "06:30").formatInLocalTime()).toBe(
-                "08:00 pm - 6:30 am (next day)",
-            )
+            expect(
+                Period.fromStrings("20:00", "06:30").formatInLocalTime(),
+            ).toBe("08:00 pm - 6:30 am (next day)")
         })
 
         it("Basic", () => {
-            expect(new Period("08:00", "23:30").formatInLocalTime()).toBe(
-                "08:00 am - 11:30 pm",
-            )
+            expect(
+                Period.fromStrings("08:00", "23:30").formatInLocalTime(),
+            ).toBe("08:00 am - 11:30 pm")
         })
     })
 })

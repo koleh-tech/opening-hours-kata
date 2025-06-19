@@ -68,11 +68,20 @@ export class Time {
 const NullTime = () => new Time(-1, -1)
 
 export class Period {
-    private openTime: Time = NullTime()
     private closeTime: Time = NullTime()
 
-    constructor(openTimeOld: string, closeTimeOld: string) {
-        this.openTime = Time.fromString(openTimeOld)
+    static fromStrings(openTimeOld: string, closeTimeOld: string) {
+        return new Period(
+            Time.fromString(openTimeOld),
+            closeTimeOld,
+            // Time.fromString(closeTimeOld),
+        )
+    }
+
+    constructor(
+        private openTime: Time,
+        closeTimeOld: string,
+    ) {
         this.closeTime = Time.fromString(closeTimeOld)
         if (this.openTime.hour > this.closeTime.hour) {
             throw new ClosesBeforeOpeningError()

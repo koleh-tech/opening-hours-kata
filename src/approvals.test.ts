@@ -8,7 +8,10 @@ approvals.configure({
 
 describe("OpeningHours", function () {
     const days = ["Mon", "Wed", "Fri"]
-    const openHours = new OpeningHours(days, new Period("08:00", "16:00"))
+    const openHours = new OpeningHours(
+        days,
+        Period.fromStrings("08:00", "16:00"),
+    )
     const header = `CONFIG:\nDAYS OPEN: ${days}\nHOURS OPEN: ${"08:00"} - ${"16:00"}\n`
 
     it("is open on days", function () {
