@@ -85,21 +85,10 @@ export class Datetime {
     }
 
     time() {
-        const date = this.asDate()
-        // Using a locale that defaults to 24-hour format (e.g., 'en-GB')
-        return date.toLocaleTimeString("en-GB", {
+        return this.asDate().toLocaleTimeString("en-GB", {
             hour: "2-digit",
             minute: "2-digit",
         })
-
-        // Explicitly setting hourCycle to 'h23' for 24-hour format (0-23)
-        console.log(
-            date.toLocaleTimeString(undefined, {
-                hourCycle: "h23",
-                hour: "2-digit",
-                minute: "2-digit",
-            }),
-        )
     }
 }
 
