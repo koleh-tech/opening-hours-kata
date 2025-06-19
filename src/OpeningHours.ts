@@ -94,9 +94,10 @@ export class Datetime {
     }
 
     format() {
-        const asDate = this.asDate()
-
-        return `${asDate.getFullYear()}-${this.padZeroIfNeeded(asDate.getMonth())}-${asDate.getDate()}T${this.time()}`
+        const year = this.asDate().getFullYear()
+        const month = this.asDate().getUTCMonth() + 1
+        const day = this.asDate().getDate()
+        return `${year}-${this.makeDoubleDigit(month)}-${this.makeDoubleDigit(day)}T${this.time()}`
     }
 
     time() {
@@ -106,7 +107,7 @@ export class Datetime {
         })
     }
 
-    padZeroIfNeeded(input: number) {
+    makeDoubleDigit(input: number) {
         return input < 10 ? `0${input}` : input
     }
 }
