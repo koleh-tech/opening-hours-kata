@@ -5,8 +5,9 @@ import "./App.css"
 import { Datetime, OpeningHours, Period } from "./OpeningHours"
 
 function App() {
-    const [count, setCount] = useState(0)
+    const [inputTime, setInputTime] = useState(new Date(Date.now()))
 
+    const thi = inputTime
     return (
         <>
             <div>
@@ -22,17 +23,17 @@ function App() {
                 </a>
             </div>
             <h1>
-                Business at {new Date(Date.now()).toLocaleTimeString()}{" "}
+                Business at {thi.toLocaleTimeString()}{" "}
                 {new OpeningHours(
                     ["Mon", "Fri"],
-                    Period.fromStrings("08:00", "04:30"),
-                ).isOpenOn(new Datetime(new Date(Date.now()).toISOString()))
+                    Period.fromStrings("08:00", "16:30"),
+                ).isOpenOn(new Datetime(thi.toISOString()))
                     ? "open"
                     : "closed"}
             </h1>
             <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
+                <button onClick={() => setInputTime((count) => count + 1)}>
+                    count is {inputTime.toLocaleString()}
                 </button>
                 <p>
                     Edit <code>src/App.tsx</code> and save to test HMR
