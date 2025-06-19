@@ -5,10 +5,13 @@ import "./App.css"
 import { Datetime, OpeningHours, Period, Time } from "./OpeningHours"
 
 function App() {
-    const thi = new Date(Date.now())
     const [datetimeToCheck, setDatetimeToCheck] = useState(
-        new Datetime(thi.toISOString()),
+        new Datetime(new Date(Date.now()).toISOString()),
     )
+
+    function retrieveDateIndex(index: number, toSplit: string) {
+        return parseInt(toSplit.split("-")[index])
+    }
 
     return (
         <>
@@ -29,11 +32,14 @@ function App() {
                 type="datetime-local"
                 value={datetimeToCheck.format()}
                 onChange={(e) => {
+                    const toConvert = e.target.value
                     const newDate = new Date()
-                    newDate.setFullYear(parseInt(e.target.value.split("-")[0]))
-                    newDate.setMonth(parseInt(e.target.value.split("-")[1]) - 1)
-                    newDate.setDate(parseInt(e.target.value.split("-")[2]))
-                    return setDatetimeToCheck(Datetime.fromDate(newDate))
+                    const newTime = toConvert.split("T")[1]
+                    newDate.setFullYear(retrieveDateIndex(0, toConvert))
+                    newDate.setMonth(retrieveDateIndex(1, toConvert) - 1)
+                    newDate.setDate(retrieveDateIndex(2, toConvert))
+                    const t = Time.fromString(newTime).asSeenOn(newDate)
+                    return setDatetimeToCheck(Datetime.fromDate(t))
                 }}
             ></input>
             <h1>({datetimeToCheck.longDayName()}) at:</h1>
