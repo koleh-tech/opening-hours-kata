@@ -32,22 +32,21 @@ function App() {
         return setDatetimeToCheck(Datetime.fromDate(newTime.asSeenOn(newDate)))
     }
 
-    const header = (
-        <div>
-            <a
-                href="https://www.flaticon.com/free-icons/opening-hours"
-                title="opening hours icons"
-                className="logo"
-            >
-                <img src={openingHoursLogo} alt="Opening-hours-business-icon" />
-            </a>
-            <p>The business, on: </p>
-        </div>
-    )
-
     return (
         <>
-            {header}
+            <div>
+                <a
+                    href="https://www.flaticon.com/free-icons/opening-hours"
+                    title="opening hours icons"
+                    className="logo"
+                >
+                    <img
+                        src={openingHoursLogo}
+                        alt="Opening-hours-business-icon"
+                    />
+                </a>
+                <p>The business, on: </p>
+            </div>
             <input
                 type="datetime-local"
                 value={datetimeToCheck.format()}
