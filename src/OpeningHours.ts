@@ -21,10 +21,6 @@ export class ClosesBeforeOpeningError extends Error {
 }
 
 export class OpeningHours {
-    formatOpenTime() {
-        return this.openingPeriod.formatOpenTime()
-    }
-
     public allDays: Day[]
 
     constructor(
@@ -166,5 +162,9 @@ export class Period {
 
     formatOpenTime() {
         return `${formatAsDoubleDigit(this.openTime.hour)}:${formatAsDoubleDigit(this.openTime.minute)}`
+    }
+
+    formatCloseTime(): string {
+        return `${formatAsDoubleDigit(this.closeTime.hour)}:${formatAsDoubleDigit(this.closeTime.minute)}`
     }
 }

@@ -62,12 +62,15 @@ function App() {
                 <p>Business runs on:</p>
                 <input
                     type="time"
-                    value={openingHours.formatOpenTime()}
+                    value={openingHours.openingPeriod.formatOpenTime()}
                     onChange={(e) =>
                         setOpeningHours(
                             new OpeningHours(
                                 openingHours.openDays,
-                                Period.fromStrings(e.target.value, "16:30"),
+                                Period.fromStrings(
+                                    e.target.value,
+                                    openingHours.openingPeriod.formatCloseTime(),
+                                ),
                             ),
                         )
                     }
