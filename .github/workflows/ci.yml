@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Set consistent locale and timezone
         run: |
-          export TZ=UTC
+          export TZ=Australia/Adelaide 
           export LANG=en_AU.UTF-8
           export LC_ALL=en_AU.UTF-8
 
