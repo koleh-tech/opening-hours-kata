@@ -20,15 +20,33 @@
     filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-input[type="datetime-local"] {
-	border: none;
-	color: #a4e1ff;
-	/* font-size: 35px; */
-	font-size: inherit;
-	font-family: inherit;
-	border-radius: 8px;
+input {
+    border: none;
+    color: #a4e1ff;
+    display: inherit;
+    /* font-size: 35px; */
+    font-size: inherit;
+    font-family: inherit;
+    border-radius: 8px;
 }
 
+label {
+  font: inherit
+}
+
+input[type="checkbox"] {
+  margin: 0.4rem;
+}
+
+.hours,.day {
+    display: inline
+}
+
+.opening-hours {
+    border: 1px solid #2b2a33;
+    border-radius: 8px;
+    background-color: #2b2a33;
+}
 
 .card {
     padding: 2em;

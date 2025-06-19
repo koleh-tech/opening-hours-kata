@@ -42,7 +42,7 @@ function App() {
             >
                 <img src={openingHoursLogo} alt="Opening-hours-business-icon" />
             </a>
-            <p>Business on: </p>
+            <p>The business, on: </p>
         </div>
     )
 
@@ -56,29 +56,61 @@ function App() {
             ></input>{" "}
             <p>
                 ({datetimeToCheck.longDayName()}) is{" "}
-                {openingHours.isOpenOn(datetimeToCheck) ? "open" : "closed"}
+                {openingHours.isOpenOn(datetimeToCheck) ? "open" : "closed"}.
             </p>
-            <div>
-                <p>Business runs on:</p>
-                <input
-                    type="time"
-                    value={openingHours.openingPeriod.formatOpenTime()}
-                    onChange={(e) =>
-                        setOpeningHours(
-                            new OpeningHours(
-                                openingHours.openDays,
-                                Period.fromStrings(
-                                    e.target.value,
-                                    openingHours.openingPeriod.formatCloseTime(),
+            <div className="opening-hours">
+                <h3>Configure hours:</h3>
+                <div className="hours">
+                    Opens at:
+                    <input
+                        type="time"
+                        value={openingHours.openingPeriod.formatOpenTime()}
+                        onChange={(e) =>
+                            setOpeningHours(
+                                new OpeningHours(
+                                    openingHours.openDays,
+                                    Period.fromStrings(
+                                        e.target.value,
+                                        openingHours.openingPeriod.formatCloseTime(),
+                                    ),
                                 ),
-                            ),
-                        )
-                    }
-                ></input>
-                <div>
-                    <p>{openingHours.allDays[0].name}</p>
-                    <input type="text" value=""></input>
+                            )
+                        }
+                    ></input>
                 </div>
+                <p></p>
+
+                <div className="hours">
+                    Closes at:
+                    <input
+                        type="time"
+                        value={openingHours.openingPeriod.formatCloseTime()}
+                        onChange={(e) =>
+                            setOpeningHours(
+                                new OpeningHours(
+                                    openingHours.openDays,
+                                    Period.fromStrings(
+                                        openingHours.openingPeriod.formatOpenTime(),
+                                        e.target.value,
+                                    ),
+                                ),
+                            )
+                        }
+                    ></input>
+                </div>
+
+                <h3>Configure days:</h3>
+                <fieldset>
+                    <div className="day">
+                        <input
+                            type="checkbox"
+                            id="scales"
+                            name="scales"
+                            checked
+                        />
+                        <label>{openingHours.allDays[0].name}</label>
+                    </div>
+                </fieldset>
             </div>
         </>
     )
