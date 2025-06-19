@@ -5,7 +5,9 @@ import "./App.css"
 import { Datetime, OpeningHours, Period } from "./OpeningHours"
 
 function App() {
-    const [timeToCheck, setTimeToCheck] = useState(new Date(Date.now()))
+    const [timeToCheck, setTimeToCheck] = useState(
+        new Datetime(new Date(Date.now()).toISOString()),
+    )
     const [minute, setMinute] = useState(59)
 
     return (
@@ -35,13 +37,15 @@ function App() {
             <div className="card">
                 <input
                     type="time"
-                    value={`${timeToCheck.getHours()}:${timeToCheck.getMinutes()}`}
+                    value={`${timeToCheck.time()}`}
                     onChange={(e) => {
                         const thi = e.target.value
-                        const newDate = new Date(timeToCheck)
+                        const newDate = timeToCheck.asDate()
                         newDate.setHours(parseInt(thi.split(":")[0]))
                         newDate.setMinutes(parseInt(thi.split(":")[1]))
-                        return setTimeToCheck(newDate)
+                        return setTimeToCheck(
+                            new Datetime(newDate.toISOString()),
+                        )
                     }}
                 ></input>
                 <button onClick={() => setMinute((count) => count + 1)}>
