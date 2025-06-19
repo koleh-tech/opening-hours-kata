@@ -26,7 +26,7 @@ function App() {
             <h1>Business on {datetimeToCheck.longDayName()} at </h1>
             <input
                 type="time"
-                value={`${datetimeToCheck.time()}`}
+                value={datetimeToCheck.time()}
                 onChange={(e) => {
                     const newTime = Time.fromString(e.target.value)
                     return setDatetimeToCheck(
