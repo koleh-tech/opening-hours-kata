@@ -18,7 +18,7 @@ describe("Period", () => {
         })
 
         it("on the opening hour", () => {
-            const input = new Date("2016-05-07T21:01:11.824Z")
+            const input = new Date("2016-05-07T21:00:11.824Z")
             expect(Period.fromStrings("06:00", "07:00").includes(input)).toBe(
                 true,
             )
