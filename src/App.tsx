@@ -108,7 +108,23 @@ function App() {
                                     type="checkbox"
                                     id="scales"
                                     name="scales"
-                                    checked
+                                    checked={day.isOpen}
+                                    onChange={(e) => {
+                                        const enabled = e.target.value
+                                        const newDays = [
+                                            ...openingHours.allDays.filter(
+                                                (d) => d.isOpen,
+                                            ),
+                                            ...[day],
+                                        ]
+                                        // const newDays = openingHours.allDays.filter((d) => d.isOpen && d.name !== day.name)
+                                        setOpeningHours(
+                                            new OpeningHours(
+                                                newDays.map((d) => d.name),
+                                                openingHours.openingPeriod,
+                                            ),
+                                        )
+                                    }}
                                 />
                                 <label>{day.name}</label>
                             </div>
