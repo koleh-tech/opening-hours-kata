@@ -57,7 +57,7 @@ export class Time {
         const date = new Date(input)
         date.setHours(this.hour, this.minute)
         date.setMinutes(this.minute)
-        return new Datetime(date.toUTCString())
+        return date
     }
 
     static fromString(input: string) {
@@ -91,22 +91,20 @@ export class Period {
     }
 
     includes(input: Date) {
-        const afterOpening = input >= this.openTime.setTimeFor(input).toDate()
-        const beforeClosing = input < this.closeTime.setTimeFor(input).toDate()
+        const afterOpening = input >= this.openTime.setTimeFor(input)
+        const beforeClosing = input < this.closeTime.setTimeFor(input)
         return afterOpening && beforeClosing
     }
 
     formatInLocalTime() {
         const opensOnLocal = this.openTime
             .setTimeFor(new Date(`2016-05-13T11:11:00.000Z`))
-            .toDate()
             .toLocaleTimeString("en-AU", {
                 hour: "2-digit",
                 minute: "2-digit",
             })
         const closesOnLocal = this.closeTime
             .setTimeFor(new Date(`2016-05-13T11:11:00.000Z`))
-            .toDate()
             .toLocaleTimeString("en-AU", {
                 hour: "2-digit",
                 minute: "2-digit",
