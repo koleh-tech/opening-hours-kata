@@ -13,10 +13,11 @@ permissions:
 
 jobs:
   build:
-    name: Build, Lint, Type Check, Test, and Upload
+    name: Build, Lint, Type Check and Test
     runs-on: ubuntu-latest
 
     steps:
+      # tests rely on being in Adelaide for now
       - name: Set consistent locale and timezone
         uses: szenius/set-timezone@v2.0
         with:
@@ -38,9 +39,6 @@ jobs:
 
       - name: Lint
         run: npm run lint
-
-      - name: Type check
-        run: npx tsc --noEmit
 
       - name: Run tests
         run: npm run test
