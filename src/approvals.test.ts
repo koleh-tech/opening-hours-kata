@@ -38,7 +38,7 @@ describe("OpeningHours", function () {
         ].map((input) => new Datetime(input))
         const result = inputHours
             .map((input) => {
-                const inputText = `${input.dayName()} ${input.time()} (${input.toDate().toUTCString()})`
+                const inputText = `${input.dayName()} ${input.time()} (${input.asDate().toUTCString()})`
                 return `${inputText} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")

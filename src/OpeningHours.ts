@@ -16,21 +16,63 @@ export class ClosesBeforeOpeningError extends Error {
     }
 }
 
+export class OpeningHours {
+    private allDays: Day[]
+
+    constructor(
+        openDays: string[],
+        private openingPeriod: Period,
+    ) {
+        this.allDays = allDays.map(
+            (day) => new Day(day, openDays.includes(day)),
+        )
+    }
+
+    openDayNames() {
+        return this.allDays.filter((day) => day.isOpen).map((day) => day.name)
+    }
+
+    isOpenOn(input: Datetime) {
+        return (
+            this.openDayNames().includes(input.dayName()) &&
+            this.openingPeriod.includes(input.asDate())
+        )
+    }
+
+    nextOpeningDate(input: Datetime) {
+        const daysAfterInput = [
+            ...this.daysAfter(input),
+            ...this.allDays, // loop back to the beginning of the week
+        ]
+        return input
+            .incrementBy(daysAfterInput.findIndex((day) => day.isOpen) + 1)
+            .toISOString()
+    }
+
+    daysAfter(input: Datetime) {
+        return this.allDays.slice(this.weekIndexFor(input))
+    }
+
+    weekIndexFor(input: Datetime) {
+        return this.allDays.map((day) => day.name).indexOf(input.dayName()) + 1
+    }
+}
+
 export class Datetime {
     constructor(private date: string) {}
 
-    toDate() {
+    asDate() {
         return new Date(this.date)
     }
 
     dayName() {
-        return this.toDate().toLocaleDateString("en-AU", {
+        return this.asDate().toLocaleDateString("en-AU", {
             weekday: "short",
         })
     }
 
     incrementBy(incrementBy: number) {
-        const inputDay = this.toDate()
+        const inputDay = this.asDate()
         inputDay.setDate(inputDay.getDate() + incrementBy)
         return inputDay
     }
@@ -79,15 +121,14 @@ export class Period {
     constructor(
         private openTime: Time,
         private closeTime: Time,
+        public locale = "en-AU",
     ) {
-        if (this.openTime.hour > this.closeTime.hour) {
+        if (this.openTime.hour > this.closeTime.hour)
             throw new ClosesBeforeOpeningError()
-        }
-        if (this.openTime.hour === this.closeTime.hour) {
-            if (this.openTime.minute > this.closeTime.minute) {
+
+        if (this.openTime.hour === this.closeTime.hour)
+            if (this.openTime.minute > this.closeTime.minute)
                 throw new ClosesBeforeOpeningError()
-            }
-        }
     }
 
     includes(date: Date) {
@@ -100,58 +141,16 @@ export class Period {
     formatInLocalTime() {
         const opensOnLocal = this.openTime
             .asSeenOn(new Date(`2016-05-13T11:11:00.000Z`))
-            .toLocaleTimeString("en-AU", {
+            .toLocaleTimeString(this.locale, {
                 hour: "2-digit",
                 minute: "2-digit",
             })
         const closesOnLocal = this.closeTime
             .asSeenOn(new Date(`2016-05-13T11:11:00.000Z`))
-            .toLocaleTimeString("en-AU", {
+            .toLocaleTimeString(this.locale, {
                 hour: "2-digit",
                 minute: "2-digit",
             })
         return `${opensOnLocal} - ${closesOnLocal}`
-    }
-}
-
-export class OpeningHours {
-    private allDays: Day[]
-
-    constructor(
-        openDays: string[],
-        private openingPeriod: Period,
-    ) {
-        this.allDays = allDays.map(
-            (day) => new Day(day, openDays.includes(day)),
-        )
-    }
-
-    openDayNames() {
-        return this.allDays.filter((day) => day.isOpen).map((day) => day.name)
-    }
-
-    isOpenOn(input: Datetime) {
-        return (
-            this.openDayNames().includes(input.dayName()) &&
-            this.openingPeriod.includes(input.toDate())
-        )
-    }
-
-    nextOpeningDate(input: Datetime) {
-        const daysAfterInput = [
-            ...this.daysAfter(input),
-            ...this.allDays, // loop back to the beginning of the week
-        ]
-        return input
-            .incrementBy(daysAfterInput.findIndex((day) => day.isOpen) + 1)
-            .toISOString()
-    }
-
-    daysAfter(input: Datetime) {
-        return this.allDays.slice(this.weekIndexFor(input))
-    }
-
-    weekIndexFor(input: Datetime) {
-        return this.allDays.map((day) => day.name).indexOf(input.dayName()) + 1
     }
 }
