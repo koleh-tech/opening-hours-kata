@@ -48,9 +48,9 @@ export class OpeningHours {
             ...this.daysAfter(input),
             ...this.allDays, // loop back to the beginning of the week
         ]
-        return input
-            .incrementBy(daysAfterInput.findIndex((day) => day.isOpen) + 1)
-            .toISOString()
+        return input.incrementBy(
+            daysAfterInput.findIndex((day) => day.isOpen) + 1,
+        )
     }
 
     daysAfter(input: Datetime) {

@@ -20,7 +20,6 @@
 input {
     border: none;
     color: #a4e1ff;
-    display: inherit;
     font-size: inherit;
     font-family: inherit;
     border-radius: 8px;
@@ -31,7 +30,12 @@ label {
 }
 
 .hours {
-    display: inline;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    position: relative;
+    left: 23%;
+    gap: 0.5rem;
 }
 
 .day {
@@ -39,7 +43,7 @@ label {
     align-items: center;
     margin-bottom: 0.5rem;
     position: relative;
-    left: 35%;
+    left: 23%;
     gap: 0.5rem;
 }
 

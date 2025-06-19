@@ -53,14 +53,17 @@ function App() {
                 value={datetimeToCheck.format()}
                 onChange={handleDatetimeInput}
             ></input>{" "}
+            <small>({datetimeToCheck.longDayName()})</small>
             <p>
-                ({datetimeToCheck.longDayName()}) is{" "}
-                {openingHours.isOpenOn(datetimeToCheck) ? "open" : "closed"}.
+                is {openingHours.isOpenOn(datetimeToCheck) ? "open" : "closed"},
+                and opens again on{" "}
+                {Datetime.fromDate(
+                    openingHours.nextOpeningDate(datetimeToCheck),
+                ).longDayName()}
             </p>
             <div className="opening-hours">
                 <h3>Configure hours:</h3>
                 <div className="hours">
-                    Opens at:
                     <input
                         type="time"
                         value={openingHours.openingPeriod.formatOpenTime()}
@@ -76,11 +79,9 @@ function App() {
                             )
                         }
                     ></input>
+                    <label>Open</label>
                 </div>
-                <p></p>
-
                 <div className="hours">
-                    Closes at:
                     <input
                         type="time"
                         value={openingHours.openingPeriod.formatCloseTime()}
@@ -96,6 +97,7 @@ function App() {
                             )
                         }
                     ></input>
+                    <label>Close</label>
                 </div>
 
                 <h3>Configure days:</h3>

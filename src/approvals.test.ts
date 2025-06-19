@@ -53,7 +53,7 @@ describe("OpeningHours", function () {
         ]
         const result = input
             .map((input) => {
-                const result = openHours.nextOpeningDate(input)
+                const result = openHours.nextOpeningDate(input).toISOString()
                 const formattedInput = `${input.asDate().toISOString()} (${input.shortDayName()})`
                 return `${formattedInput} => ${result} (${new Datetime(result).shortDayName()})`
             })
