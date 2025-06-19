@@ -8,6 +8,9 @@ function App() {
     const [datetimeToCheck, setDatetimeToCheck] = useState(
         new Datetime(new Date(Date.now()).toISOString()),
     )
+    const [openingHours, setOpeningHours] = useState(
+        new OpeningHours(["Mon", "Thu"], Period.fromStrings("08:00", "16:30")),
+    )
 
     function retrieveDateIndex(index: number, toSplit: string) {
         return parseInt(toSplit.split("-")[index])
@@ -30,21 +33,22 @@ function App() {
         return setDatetimeToCheck(Datetime.fromDate(newTime.asSeenOn(newDate)))
     }
 
+    const header = (
+        <div>
+            <a
+                href="https://www.flaticon.com/free-icons/opening-hours"
+                title="opening hours icons"
+                className="logo"
+            >
+                <img src={openingHoursLogo} alt="Opening-hours-business-icon" />
+            </a>
+            <p>Business on: </p>
+        </div>
+    )
+
     return (
         <>
-            <div>
-                <a
-                    href="https://www.flaticon.com/free-icons/opening-hours"
-                    title="opening hours icons"
-                    className="logo"
-                >
-                    <img
-                        src={openingHoursLogo}
-                        alt="Opening-hours-business-icon"
-                    />
-                </a>
-            </div>
-            <p>Business on: </p>
+            {header}
             <input
                 type="datetime-local"
                 value={datetimeToCheck.format()}
@@ -52,13 +56,27 @@ function App() {
             ></input>{" "}
             <p>
                 ({datetimeToCheck.longDayName()}) is{" "}
-                {new OpeningHours(
-                    ["Mon", "Thu"],
-                    Period.fromStrings("08:00", "16:30"),
-                ).isOpenOn(datetimeToCheck)
-                    ? "open"
-                    : "closed"}
+                {openingHours.isOpenOn(datetimeToCheck) ? "open" : "closed"}
             </p>
+            <div>
+                <p>Business runs on:</p>
+                <input
+                    type="time"
+                    value={openingHours.formatOpenTime()}
+                    onChange={(e) =>
+                        setOpeningHours(
+                            new OpeningHours(
+                                openingHours.openDays,
+                                Period.fromStrings(e.target.value, "16:30"),
+                            ),
+                        )
+                    }
+                ></input>
+                <div>
+                    <p>{openingHours.allDays[0].name}</p>
+                    <input type="text" value=""></input>
+                </div>
+            </div>
         </>
     )
 }

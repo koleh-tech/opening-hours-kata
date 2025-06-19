@@ -1,4 +1,8 @@
-const allDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+export const allDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
+function formatAsDoubleDigit(input: number) {
+    return input < 10 ? `0${input}` : input
+}
 
 class Day {
     constructor(
@@ -17,11 +21,15 @@ export class ClosesBeforeOpeningError extends Error {
 }
 
 export class OpeningHours {
-    private allDays: Day[]
+    formatOpenTime() {
+        return this.openingPeriod.formatOpenTime()
+    }
+
+    public allDays: Day[]
 
     constructor(
-        openDays: string[],
-        private openingPeriod: Period,
+        public openDays: string[],
+        public openingPeriod: Period,
     ) {
         this.allDays = allDays.map(
             (day) => new Day(day, openDays.includes(day)),
@@ -97,7 +105,7 @@ export class Datetime {
         const year = this.asDate().getFullYear()
         const month = this.asDate().getUTCMonth() + 1
         const day = this.asDate().getDate()
-        return `${year}-${this.makeDoubleDigit(month)}-${this.makeDoubleDigit(day)}T${this.time()}`
+        return `${year}-${formatAsDoubleDigit(month)}-${formatAsDoubleDigit(day)}T${this.time()}`
     }
 
     time() {
@@ -105,10 +113,6 @@ export class Datetime {
             hour: "2-digit",
             minute: "2-digit",
         })
-    }
-
-    makeDoubleDigit(input: number) {
-        return input < 10 ? `0${input}` : input
     }
 }
 
@@ -158,5 +162,9 @@ export class Period {
             date >= this.openTime.asSeenOn(date) &&
             date < this.closeTime.asSeenOn(date)
         )
+    }
+
+    formatOpenTime() {
+        return `${formatAsDoubleDigit(this.openTime.hour)}:${formatAsDoubleDigit(this.openTime.minute)}`
     }
 }
