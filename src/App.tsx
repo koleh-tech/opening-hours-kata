@@ -13,6 +13,23 @@ function App() {
         return parseInt(toSplit.split("-")[index])
     }
 
+    type DatetimeInputEvent = {
+        target: {
+            value: string
+        }
+    }
+
+    function handleDatetimeInput(event: DatetimeInputEvent) {
+        const toConvert = event.target.value
+        const newDate = new Date()
+        newDate.setFullYear(retrieveDateIndex(0, toConvert))
+        newDate.setMonth(retrieveDateIndex(1, toConvert) - 1)
+        newDate.setDate(retrieveDateIndex(2, toConvert))
+
+        const newTime = Time.fromString(toConvert.split("T")[1])
+        return setDatetimeToCheck(Datetime.fromDate(newTime.asSeenOn(newDate)))
+    }
+
     return (
         <>
             <div>
@@ -31,16 +48,7 @@ function App() {
             <input
                 type="datetime-local"
                 value={datetimeToCheck.format()}
-                onChange={(e) => {
-                    const toConvert = e.target.value
-                    const newDate = new Date()
-                    const newTime = toConvert.split("T")[1]
-                    newDate.setFullYear(retrieveDateIndex(0, toConvert))
-                    newDate.setMonth(retrieveDateIndex(1, toConvert) - 1)
-                    newDate.setDate(retrieveDateIndex(2, toConvert))
-                    const t = Time.fromString(newTime).asSeenOn(newDate)
-                    return setDatetimeToCheck(Datetime.fromDate(t))
-                }}
+                onChange={handleDatetimeInput}
             ></input>
             <h1>({datetimeToCheck.longDayName()}) at:</h1>
             <input
