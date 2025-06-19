@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest"
-import { Period, Datetime, Time } from "./OpeningHours"
+import {
+    Period,
+    Datetime,
+    Time,
+    ClosesBeforeOpeningError,
+} from "./OpeningHours"
 
 describe("Period", () => {
     it("Configured using local time", () => {
@@ -11,7 +16,7 @@ describe("Period", () => {
     // TODO remove this once 'can close in the next day' is working
     it("Opening needs to be before closing", () => {
         expect(() => Period.fromStrings("08:00", "06:30")).toThrowError(
-            "Store must close after it opens",
+            ClosesBeforeOpeningError,
         )
     })
 

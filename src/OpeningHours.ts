@@ -7,9 +7,12 @@ class Day {
     ) {}
 }
 
-class ClosesBeforeOpeningError extends Error {
+export class ClosesBeforeOpeningError extends Error {
+    public votingLink = "https://www.badgerbadgerbadger.com/"
     constructor() {
-        super("Store must close after it opens")
+        super(
+            "Closing the next day is not supported yet. Vote here if you'd like to see this feature:",
+        )
     }
 }
 
