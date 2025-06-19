@@ -1,7 +1,9 @@
 import { describe, it } from "vitest"
 import { Datetime, OpeningHours, Period } from "./OpeningHours"
 
-var approvals = require("approvals")
+// TODO: figure out why TS screams about this
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const approvals = require("approvals")
 approvals.configure({
     reporters: ["kompare"],
 })
