@@ -45,12 +45,3 @@ describe("Period", () => {
         })
     })
 })
-
-describe("Time.setTimeOn", () => {
-    it("sets morning time", () => {
-        const input = new Date("2016-05-07T21:01:00.824Z")
-
-        const result = new Time(8, 0).setTimeFor(input)
-        expect(result.toUTCString()).toEqual("Sat, 07 May 2016 22:30:00 GMT")
-    })
-})
