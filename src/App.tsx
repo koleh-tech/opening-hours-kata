@@ -15,13 +15,7 @@ function App() {
         return parseInt(toSplit.split("-")[index])
     }
 
-    type DatetimeInputEvent = {
-        target: {
-            value: string
-        }
-    }
-
-    function handleDatetimeInput(event: DatetimeInputEvent) {
+    function handleDatetimeInput(event: { target: { value: string } }) {
         const toConvert = event.target.value
         const newDate = new Date()
         newDate.setFullYear(retrieveDateIndex(0, toConvert))
@@ -32,18 +26,20 @@ function App() {
         return setDatetimeToCheck(Datetime.fromDate(newTime.asSeenOn(newDate)))
     }
 
-    function setNewOpeningPeriod(newPeriod: Period) {
+    function setOpeningPeriod(newPeriod: Period) {
         setOpeningHours(new OpeningHours(openingHours.openDays, newPeriod))
     }
 
-    function handleOpeningDayConfiguration(checkboxDay: Day) {
+    function setOpenDay(checkboxDay: Day) {
         return setOpeningHours(
             new OpeningHours(
                 openingHours.allDays
-                    .map((d) => ({
-                        ...d,
+                    .map((day) => ({
+                        ...day,
                         isOpen:
-                            d.name === checkboxDay.name ? !d.isOpen : d.isOpen,
+                            day.name !== checkboxDay.name
+                                ? day.isOpen // leave as is
+                                : !day.isOpen,
                     }))
                     .filter((d) => d.isOpen)
                     .map((d) => d.name),
@@ -82,12 +78,13 @@ function App() {
             </p>
             <div className="configuration">
                 <h3>Configure hours:</h3>
+
                 <div className="configuration-option">
                     <input
                         type="time"
                         value={openingHours.openingPeriod.formatOpenTime()}
                         onChange={(e) =>
-                            setNewOpeningPeriod(
+                            setOpeningPeriod(
                                 Period.fromStrings(
                                     e.target.value,
                                     openingHours.openingPeriod.formatCloseTime(),
@@ -97,12 +94,13 @@ function App() {
                     ></input>
                     <label>Open</label>
                 </div>
+
                 <div className="configuration-option">
                     <input
                         type="time"
                         value={openingHours.openingPeriod.formatCloseTime()}
                         onChange={(e) =>
-                            setNewOpeningPeriod(
+                            setOpeningPeriod(
                                 Period.fromStrings(
                                     openingHours.openingPeriod.formatOpenTime(),
                                     e.target.value,
@@ -125,11 +123,7 @@ function App() {
                                     type="checkbox"
                                     id={`day-${idx}`}
                                     checked={checkboxDay.isOpen}
-                                    onChange={() =>
-                                        handleOpeningDayConfiguration(
-                                            checkboxDay,
-                                        )
-                                    }
+                                    onChange={() => setOpenDay(checkboxDay)}
                                 />
                                 <label htmlFor={`day-${idx}`}>
                                     {checkboxDay.name}
