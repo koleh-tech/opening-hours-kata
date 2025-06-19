@@ -1,6 +1,6 @@
 import { useState } from "react"
 import "./App.css"
-import { Datetime, Day, OpeningHours, Period, Time } from "./OpeningHours"
+import { Datetime, OpeningHours, Period, Time } from "./OpeningHours"
 import openingHoursLogo from "./assets/opening-hours.png"
 
 function App() {

@@ -30,17 +30,17 @@ label {
     font: inherit;
 }
 
-.hours{
+.hours {
     display: inline;
 }
 
 .day {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
     position: relative;
     left: 35%;
-  gap: 0.5rem; // spacing between checkbox and label
+    gap: 0.5rem;
 }
 
 .opening-hours {
