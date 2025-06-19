@@ -1,7 +1,6 @@
 import { useState } from "react"
-import reactLogo from "./assets/react.svg"
 import "./App.css"
-import { Datetime, OpeningHours, Period, Time } from "./OpeningHours"
+import { Datetime, Day, OpeningHours, Period, Time } from "./OpeningHours"
 import openingHoursLogo from "./assets/opening-hours.png"
 
 function App() {
@@ -101,23 +100,26 @@ function App() {
 
                 <h3>Configure days:</h3>
                 <div>
-                    {openingHours.allDays.map((day) => (
+                    {openingHours.allDays.map((checkboxDay) => (
                         <div>
                             <div className="day">
                                 <input
                                     type="checkbox"
                                     id="scales"
                                     name="scales"
-                                    checked={day.isOpen}
-                                    onChange={(e) => {
-                                        const enabled = e.target.value
+                                    checked={checkboxDay.isOpen}
+                                    onChange={() => {
+                                        const enabled = !checkboxDay.isOpen
+
                                         const newDays = [
                                             ...openingHours.allDays.filter(
-                                                (d) => d.isOpen,
+                                                (day) =>
+                                                    day.isOpen &&
+                                                    day.name !==
+                                                        checkboxDay.name,
                                             ),
-                                            ...[day],
+                                            ...(enabled ? [checkboxDay] : []),
                                         ]
-                                        // const newDays = openingHours.allDays.filter((d) => d.isOpen && d.name !== day.name)
                                         setOpeningHours(
                                             new OpeningHours(
                                                 newDays.map((d) => d.name),
@@ -126,7 +128,7 @@ function App() {
                                         )
                                     }}
                                 />
-                                <label>{day.name}</label>
+                                <label>{checkboxDay.name}</label>
                             </div>
                         </div>
                     ))}

@@ -4,7 +4,7 @@ function formatAsDoubleDigit(input: number) {
     return input < 10 ? `0${input}` : input
 }
 
-class Day {
+export class Day {
     constructor(
         public name: string,
         public isOpen: boolean,
