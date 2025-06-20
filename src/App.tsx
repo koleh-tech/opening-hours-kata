@@ -96,7 +96,21 @@ function App() {
                         <input
                             type="time"
                             value={option.currentConfig}
-                            onChange={option.handleChange}
+                            onChange={(e) => {
+                                try {
+                                    setErrorMessage(
+                                        new ClosesBeforeOpeningError(""),
+                                    )
+                                    return option.handleChange(e)
+                                } catch (error) {
+                                    if (
+                                        error instanceof
+                                        ClosesBeforeOpeningError
+                                    ) {
+                                        setErrorMessage(error)
+                                    }
+                                }
+                            }}
                         ></input>
                         <label>{option.label}</label>
                     </div>
