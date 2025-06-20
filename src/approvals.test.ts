@@ -30,13 +30,15 @@ describe("OpeningHours", function () {
                 return `${input.shortDayName()} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")
-        const timeUnderTest = new Date(
-            `2016-05-16T${timeToTest}:11.824Z`,
-        ).toLocaleTimeString()
+
         approvals.verify(
             approvalDataDir,
             "open-on-days",
-            header + `${timeUnderTest}\n` + result,
+            header +
+                `${new Date(
+                    `2016-05-16T${timeToTest}:11.824Z`,
+                ).toLocaleTimeString()}\n` +
+                result,
         )
     })
 
