@@ -44,7 +44,7 @@ describe("OpeningHours", function () {
                 return `${inputText} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")
-        approvals.verify(__dirname, "open-on-hours", header + result)
+        approvals.verify("approved-behavior", "open-on-hours", header + result)
     })
 
     it("next opening day", function () {
