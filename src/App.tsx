@@ -69,13 +69,11 @@ function App() {
             </p>
             <div className="configuration">
                 <h3>Configure hours:</h3>
-                {errorMessage.message !== "" ? (
+                {errorMessage.message ?? (
                     <div>
                         <p>{errorMessage.message}</p>
                         <a href={errorMessage.votingLink}>Vote here</a>
                     </div>
-                ) : (
-                    <p></p>
                 )}
                 {openingTimeOptions.map((option) => (
                     <div className="configuration-option">
