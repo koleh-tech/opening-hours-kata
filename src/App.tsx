@@ -79,6 +79,17 @@ function App() {
                 ),
             label: "Open",
         },
+        {
+            currentConfiguration: openingHours.openingPeriod.formatCloseTime(),
+            handleChange: (e: { target: { value: string } }) =>
+                setOpeningPeriod(
+                    Period.fromStrings(
+                        openingHours.openingPeriod.formatOpenTime(),
+                        e.target.value,
+                    ),
+                ),
+            label: "Close",
+        },
     ]
     return (
         <>
@@ -101,7 +112,6 @@ function App() {
             </p>
             <div className="configuration">
                 <h3>Configure hours:</h3>
-
                 {openingTimeOptions.map((option) => (
                     <div className="configuration-option">
                         <input
@@ -112,22 +122,6 @@ function App() {
                         <label>{option.label}</label>
                     </div>
                 ))}
-
-                <div className="configuration-option">
-                    <input
-                        type="time"
-                        value={openingHours.openingPeriod.formatCloseTime()}
-                        onChange={(e) =>
-                            setOpeningPeriod(
-                                Period.fromStrings(
-                                    openingHours.openingPeriod.formatOpenTime(),
-                                    e.target.value,
-                                ),
-                            )
-                        }
-                    ></input>
-                    <label>Close</label>
-                </div>
 
                 <h3>Configure days:</h3>
                 {openingHours.allDays.map((checkboxDay, idx) => (
