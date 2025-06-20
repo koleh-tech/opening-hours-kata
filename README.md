@@ -3,8 +3,8 @@
 ## Motivation
 
 I wanted to practice driving feature development with [Text based Approval testing](https://github.com/approvals/Approvals.NodeJS)
-and fewer unit tests. This project also gave a feel for how well that workflow integrates with
-[Vite](https://vitejs.dev/) + [React](https://reactjs.org/).
+and fewer unit tests. This project also gave a feel for how well that workflow integrates with frontend development,
+specifically, [Vite](https://vite.dev/) + [React](https://react.dev/).
 
 ## Kata description:
 
@@ -41,7 +41,7 @@ OpeningHours.nextOpeningDate(wednesday) === fridayMorning
 
 ## Getting started
 
-To get tests running, follow the steps in the ['build' step of deploy.yml](https://github.com/koleh-tech/opening-hours-kata/blob/main/.github/workflows/deploy.yml#L15C5-L15C10)
+To get tests running, follow the steps in the ['build' step of deploy.yml](https://github.com/koleh-tech/opening-hours-kata/blob/9af74f01c93793770a1eb3769e66e617d4dde4cc/.github/workflows/deploy.yml#L15)
 
 ### Viewing approval test differences
 
