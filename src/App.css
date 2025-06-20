@@ -55,5 +55,7 @@ label {
 }
 
 .error-message {
-    background-color: #ff0000;
+	background-color: #a32929;
+	border-radius: inherit;
+	border: 3px solid #a32929;
 }

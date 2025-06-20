@@ -72,14 +72,19 @@ function App() {
                 {errorMessage.message !== "" && (
                     <div className="error-message">
                         <p>{errorMessage.message}</p>
-                        <a href={errorMessage.votingLink}>Vote here</a>
+                        <button
+                            onClick={() => window.open(errorMessage.votingLink)}
+                        >
+                            Vote here
+                        </button>
                     </div>
                 )}
-                {openingTimeOptions.map((option) => (
+                {openingTimeOptions.map((option, index) => (
                     <div className="configuration-option">
                         <input
                             type="time"
                             value={option.currentConfig}
+                            id={`hour-${index}`}
                             onChange={(e) => {
                                 try {
                                     setErrorMessage(
@@ -96,7 +101,7 @@ function App() {
                                 }
                             }}
                         ></input>
-                        <label>{option.label}</label>
+                        <label> - {option.label}</label>
                     </div>
                 ))}
 
