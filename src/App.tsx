@@ -75,6 +75,7 @@ function App() {
                 openingHours.openingPeriod.formatCloseTime(),
             ),
         )
+    const label = "Open"
     const openingTimeOptions = [
         {
             currentConfiguration: currentConfiguration,
@@ -110,7 +111,7 @@ function App() {
                             value={option.currentConfiguration}
                             onChange={option.handleChange}
                         ></input>
-                        <label>Open</label>
+                        <label>{label}</label>
                     </div>
                 ))}
 
