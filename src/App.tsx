@@ -69,16 +69,6 @@ function App() {
             </p>
             <div className="configuration">
                 <h3>Configure hours:</h3>
-                {errorMessage.message !== "" && (
-                    <div className="error-message">
-                        <p>{errorMessage.message}</p>
-                        <button
-                            onClick={() => window.open(errorMessage.votingLink)}
-                        >
-                            Vote here
-                        </button>
-                    </div>
-                )}
                 {openingTimeOptions.map((option, index) => (
                     <div className="configuration-option">
                         <input
@@ -104,6 +94,16 @@ function App() {
                         <label> - {option.label}</label>
                     </div>
                 ))}
+                {errorMessage.message !== "" && (
+                    <div className="error-message">
+                        <p>{errorMessage.message}</p>
+                        <button
+                            onClick={() => window.open(errorMessage.votingLink)}
+                        >
+                            Vote here
+                        </button>
+                    </div>
+                )}
 
                 <h3>Configure days:</h3>
                 {openingHours.allDays.map((day, index) => (
