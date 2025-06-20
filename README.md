@@ -6,6 +6,33 @@ I wanted to practice driving feature development with [Text based Approval testi
 and fewer unit tests. This project also gave a feel for how well that workflow integrates with frontend development,
 specifically, [Vite](https://vite.dev/) + [React](https://react.dev/).
 
+## Getting started
+
+Install the dependencies, and check that basic tooling works:
+
+```{bash}
+npm ci
+npm run lint
+npm run build
+```
+
+Run tests in hot reload mode (best to leave this running in a separate window all the time):
+
+```{bash}
+npm run test
+```
+
+Run vite in hot reload mode:
+
+```{bash}
+npm run dev
+```
+
+### Viewing approval test differences
+
+For my Linux development environment , I found [Kompare](https://apps.kde.org/kompare/) to be the
+best easiest / quickest diff tool to work with. For your preffered environment, see the Node Approvals docs for supported diff tools.
+
 ## Kata description:
 
 Amy and Valerie, the shop owners, need you to develop a simple program that satisfies the following requirements:
@@ -38,12 +65,3 @@ OpeningHours.isOpenOn(thursday) == false
 
 OpeningHours.nextOpeningDate(wednesday) === fridayMorning
 ```
-
-## Getting started
-
-To get tests running, follow the steps in the ['build' step of deploy.yml](https://github.com/koleh-tech/opening-hours-kata/blob/9af74f01c93793770a1eb3769e66e617d4dde4cc/.github/workflows/deploy.yml#L15)
-
-### Viewing approval test differences
-
-For my Linux development environment , I found [Kompare](https://apps.kde.org/kompare/) to be the
-best easiest / quickest diff tool to work with. For your preffered environment, see the Node Approvals docs for supported diff tools.
