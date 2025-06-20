@@ -6,6 +6,9 @@ I wanted to practice driving feature development with [Text based Approval testi
 and fewer unit tests. This project also gave a feel for how well that workflow integrates with frontend development,
 specifically, [Vite](https://vite.dev/) + [React](https://react.dev/).
 
+One advantage of this approach is that approval data, readable by non devs, is stoerd in:
+[approved-behavior/](https://github.com/koleh-tech/opening-hours-kata/tree/main/approved-behavior)
+
 ## Getting started
 
 Install the dependencies, and check that basic tooling works:
