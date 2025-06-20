@@ -67,20 +67,17 @@ function App() {
         </a>
     )
 
-    const currentConfiguration = openingHours.openingPeriod.formatOpenTime()
-    const handleChange = (e: { target: { value: string } }) =>
-        setOpeningPeriod(
-            Period.fromStrings(
-                e.target.value,
-                openingHours.openingPeriod.formatCloseTime(),
-            ),
-        )
-    const label = "Open"
     const openingTimeOptions = [
         {
-            currentConfiguration: currentConfiguration,
-            handleChange: handleChange,
-            label: label,
+            currentConfiguration: openingHours.openingPeriod.formatOpenTime(),
+            handleChange: (e: { target: { value: string } }) =>
+                setOpeningPeriod(
+                    Period.fromStrings(
+                        e.target.value,
+                        openingHours.openingPeriod.formatCloseTime(),
+                    ),
+                ),
+            label: "Open",
         },
     ]
     return (
@@ -123,7 +120,7 @@ function App() {
                         onChange={(e) =>
                             setOpeningPeriod(
                                 Period.fromStrings(
-                                    currentConfiguration,
+                                    openingHours.openingPeriod.formatOpenTime(),
                                     e.target.value,
                                 ),
                             )
