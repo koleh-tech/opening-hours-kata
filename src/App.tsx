@@ -26,19 +26,12 @@ function App() {
         {
             currentConfig: openingHours.openingPeriod.formatOpenTime(),
             handleChange: (e: { target: { value: string } }) => {
-                try {
-                    setErrorMessage(new ClosesBeforeOpeningError(""))
-                    return setOpeningPeriod(
-                        Period.fromStrings(
-                            e.target.value,
-                            openingHours.openingPeriod.formatCloseTime(),
-                        ),
-                    )
-                } catch (error: any) {
-                    if (error instanceof ClosesBeforeOpeningError) {
-                        setErrorMessage(error)
-                    }
-                }
+                return setOpeningPeriod(
+                    Period.fromStrings(
+                        e.target.value,
+                        openingHours.openingPeriod.formatCloseTime(),
+                    ),
+                )
             },
             label: "Open",
         },
