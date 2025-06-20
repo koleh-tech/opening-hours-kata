@@ -1,6 +1,13 @@
 import { useState } from "react"
 import "./App.css"
-import { Datetime, Day, OpeningHours, Period, Time } from "./OpeningHours"
+import {
+    ClosesBeforeOpeningError,
+    Datetime,
+    Day,
+    OpeningHours,
+    Period,
+    Time,
+} from "./OpeningHours"
 import openingHoursLogo from "./assets/opening-hours.png"
 import closingHoursLogo from "./assets/closing-hours.png"
 
@@ -11,17 +18,27 @@ function App() {
     const [openingHours, setOpeningHours] = useState(
         new OpeningHours(["Mon", "Thu"], Period.fromStrings("08:00", "16:30")),
     )
+    const [errorMessage, setErrorMessage] = useState(
+        new ClosesBeforeOpeningError(""),
+    )
 
     const openingTimeOptions = [
         {
             currentConfig: openingHours.openingPeriod.formatOpenTime(),
-            handleChange: (e: { target: { value: string } }) =>
-                setOpeningPeriod(
-                    Period.fromStrings(
-                        e.target.value,
-                        openingHours.openingPeriod.formatCloseTime(),
-                    ),
-                ),
+            handleChange: (e: { target: { value: string } }) => {
+                try {
+                    return setOpeningPeriod(
+                        Period.fromStrings(
+                            e.target.value,
+                            openingHours.openingPeriod.formatCloseTime(),
+                        ),
+                    )
+                } catch (error: any) {
+                    if (error instanceof ClosesBeforeOpeningError) {
+                        setErrorMessage(error)
+                    }
+                }
+            },
             label: "Open",
         },
         {
@@ -55,6 +72,14 @@ function App() {
                     openingHours.nextOpeningDate(datetimeToCheck),
                 ).longDayName()}
             </p>
+            {errorMessage.message !== "" ? (
+                <div>
+                    <p>{errorMessage.message}</p>
+                    <a href={errorMessage.votingLink}>Vote here</a>
+                </div>
+            ) : (
+                <p></p>
+            )}
             <div className="configuration">
                 <h3>Configure hours:</h3>
                 {openingTimeOptions.map((option) => (
