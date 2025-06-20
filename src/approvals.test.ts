@@ -20,7 +20,7 @@ describe("OpeningHours", function () {
     it("is open on days", function () {
         const timeToTest = "02:29"
         const inputDays = [
-            ...[16, 17, 18, 19].map(
+            ...[16, 17, 18, 19, 20, 21, 22].map(
                 (dayNum) =>
                     new Datetime(`2016-05-${dayNum}T${timeToTest}:11.824Z`),
             ),

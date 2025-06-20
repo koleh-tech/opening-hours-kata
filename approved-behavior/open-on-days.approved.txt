@@ -7,3 +7,6 @@ Mon => OPEN
 Tue => CLOSED
 Wed => OPEN
 Thu => CLOSED
+Fri => OPEN
+Sat => CLOSED
+Sun => CLOSED
