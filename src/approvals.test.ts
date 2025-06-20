@@ -52,8 +52,8 @@ describe("OpeningHours", function () {
         ].map((input) => new Datetime(input))
         const result = inputHours
             .map((input) => {
-                const inputText = `${input.shortDayName()} ${input.time()} (${input.asDate().toISOString()})`
-                return `isOpen on: ${inputText}? => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
+                const inputText = `isOpen on: ${input.asDate().toISOString()} (${input.shortDayName()} ${input.time()})`
+                return `${inputText}? => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")
         approvals.verify("approved-behavior", "open-on-hours", header + result)
