@@ -91,9 +91,9 @@ export class Datetime {
         })
     }
 
-    incrementBy(incrementBy: number) {
+    incrementBy(numberOfDays: number) {
         const inputDay = this.asDate()
-        inputDay.setDate(inputDay.getDate() + incrementBy)
+        inputDay.setDate(inputDay.getDate() + numberOfDays)
         return inputDay
     }
 

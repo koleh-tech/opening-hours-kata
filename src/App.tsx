@@ -3,7 +3,7 @@ import "./App.css"
 import { Datetime, Day, OpeningHours, Period, Time } from "./OpeningHours"
 import openingHoursLogo from "./assets/opening-hours.png"
 import closingHoursLogo from "./assets/closing-hours.png"
-// <a >Closed icons created by Freepik - Flaticon</a>
+
 function App() {
     const [datetimeToCheck, setDatetimeToCheck] = useState(
         new Datetime(new Date(Date.now()).toISOString()),
@@ -66,6 +66,8 @@ function App() {
             <img src={closingHoursLogo} alt="Opening-hours-business-icon" />
         </a>
     )
+
+    const currentConfiguration = openingHours.openingPeriod.formatOpenTime()
     return (
         <>
             <div>
@@ -91,7 +93,7 @@ function App() {
                 <div className="configuration-option">
                     <input
                         type="time"
-                        value={openingHours.openingPeriod.formatOpenTime()}
+                        value={currentConfiguration}
                         onChange={(e) =>
                             setOpeningPeriod(
                                 Period.fromStrings(
@@ -111,7 +113,7 @@ function App() {
                         onChange={(e) =>
                             setOpeningPeriod(
                                 Period.fromStrings(
-                                    openingHours.openingPeriod.formatOpenTime(),
+                                    currentConfiguration,
                                     e.target.value,
                                 ),
                             )
@@ -121,26 +123,20 @@ function App() {
                 </div>
 
                 <h3>Configure days:</h3>
-                {
-                    <div>
-                        {openingHours.allDays.map((checkboxDay, idx) => (
-                            <div
-                                key={checkboxDay.name}
-                                className="configuration-option"
-                            >
-                                <input
-                                    type="checkbox"
-                                    id={`day-${idx}`}
-                                    checked={checkboxDay.isOpen}
-                                    onChange={() => setOpenDay(checkboxDay)}
-                                />
-                                <label htmlFor={`day-${idx}`}>
-                                    {checkboxDay.name}
-                                </label>
-                            </div>
-                        ))}
+                {openingHours.allDays.map((checkboxDay, idx) => (
+                    <div
+                        key={checkboxDay.name}
+                        className="configuration-option"
+                    >
+                        <input
+                            type="checkbox"
+                            id={`day-${idx}`}
+                            checked={checkboxDay.isOpen}
+                            onChange={() => setOpenDay(checkboxDay)}
+                        />
+                        <label htmlFor={`day-${idx}`}>{checkboxDay.name}</label>
                     </div>
-                }
+                ))}
             </div>
         </>
     )
