@@ -19,10 +19,11 @@
 
 input {
     border: none;
-    color: #2b2a33;
     font-size: inherit;
     font-family: inherit;
-    border-radius: 8px;
+    border-radius: 5px;
+    background-color: #6a0250;
+    color: white;
 }
 
 label {
@@ -39,9 +40,10 @@ label {
 }
 
 .configuration {
-    border: 1px solid #ffc269;
+    border: 3px solid #5d5291;
     border-radius: 8px;
-    background-color: #ffc269;
+    background-color: #5d5291;
+    color: white;
 }
 
 .card {
