@@ -12,61 +12,6 @@ function App() {
         new OpeningHours(["Mon", "Thu"], Period.fromStrings("08:00", "16:30")),
     )
 
-    function retrieveDateIndex(index: number, toSplit: string) {
-        return parseInt(toSplit.split("-")[index])
-    }
-
-    function handleDatetimeInput(event: { target: { value: string } }) {
-        const toConvert = event.target.value
-        const newDate = new Date()
-        newDate.setFullYear(retrieveDateIndex(0, toConvert))
-        newDate.setMonth(retrieveDateIndex(1, toConvert) - 1)
-        newDate.setDate(retrieveDateIndex(2, toConvert))
-
-        const newTime = Time.fromString(toConvert.split("T")[1])
-        return setDatetimeToCheck(Datetime.fromDate(newTime.asSeenOn(newDate)))
-    }
-
-    function setOpeningPeriod(newPeriod: Period) {
-        setOpeningHours(new OpeningHours(openingHours.openDays, newPeriod))
-    }
-
-    function setOpenDay(checkboxDay: Day) {
-        return setOpeningHours(
-            new OpeningHours(
-                openingHours.allDays
-                    .map((day) => ({
-                        ...day,
-                        isOpen:
-                            day.name !== checkboxDay.name
-                                ? day.isOpen // leave as is
-                                : !day.isOpen,
-                    }))
-                    .filter((d) => d.isOpen)
-                    .map((d) => d.name),
-                openingHours.openingPeriod,
-            ),
-        )
-    }
-
-    const logo = openingHours.isOpenOn(datetimeToCheck) ? (
-        <a
-            href="https://www.flaticon.com/free-icons/opening-hours"
-            title="opening hours icons"
-            className="logo"
-        >
-            <img src={openingHoursLogo} alt="Opening-hours-business-icon" />
-        </a>
-    ) : (
-        <a
-            href="https://www.flaticon.com/free-icons/closed"
-            title="closed icons"
-            className="logo"
-        >
-            <img src={closingHoursLogo} alt="Opening-hours-business-icon" />
-        </a>
-    )
-
     const openingTimeOptions = [
         {
             currentConfiguration: openingHours.openingPeriod.formatOpenTime(),
@@ -94,7 +39,7 @@ function App() {
     return (
         <>
             <div>
-                {logo}
+                {renderLogo()}
                 <p>The business, on: </p>
             </div>
             <input
@@ -141,6 +86,63 @@ function App() {
             </div>
         </>
     )
+
+    function retrieveDateIndex(index: number, toSplit: string) {
+        return parseInt(toSplit.split("-")[index])
+    }
+
+    function handleDatetimeInput(event: { target: { value: string } }) {
+        const toConvert = event.target.value
+        const newDate = new Date()
+        newDate.setFullYear(retrieveDateIndex(0, toConvert))
+        newDate.setMonth(retrieveDateIndex(1, toConvert) - 1)
+        newDate.setDate(retrieveDateIndex(2, toConvert))
+
+        const newTime = Time.fromString(toConvert.split("T")[1])
+        return setDatetimeToCheck(Datetime.fromDate(newTime.asSeenOn(newDate)))
+    }
+
+    function setOpeningPeriod(newPeriod: Period) {
+        setOpeningHours(new OpeningHours(openingHours.openDays, newPeriod))
+    }
+
+    function setOpenDay(checkboxDay: Day) {
+        return setOpeningHours(
+            new OpeningHours(
+                openingHours.allDays
+                    .map((day) => ({
+                        ...day,
+                        isOpen:
+                            day.name !== checkboxDay.name
+                                ? day.isOpen // leave as is
+                                : !day.isOpen,
+                    }))
+                    .filter((d) => d.isOpen)
+                    .map((d) => d.name),
+                openingHours.openingPeriod,
+            ),
+        )
+    }
+
+    function renderLogo() {
+        return openingHours.isOpenOn(datetimeToCheck) ? (
+            <a
+                href="https://www.flaticon.com/free-icons/opening-hours"
+                title="opening hours icons"
+                className="logo"
+            >
+                <img src={openingHoursLogo} alt="Opening-hours-business-icon" />
+            </a>
+        ) : (
+            <a
+                href="https://www.flaticon.com/free-icons/closed"
+                title="closed icons"
+                className="logo"
+            >
+                <img src={closingHoursLogo} alt="Opening-hours-business-icon" />
+            </a>
+        )
+    }
 }
 
 export default App
