@@ -18,7 +18,7 @@ describe("OpeningHours", function () {
     const header = `CONFIG:\nDAYS OPEN: ${days}\nHOURS OPEN: ${"08:00"} - ${"16:00"}\n`
 
     it("is open on days", function () {
-        const timeToTest = "06:29"
+        const timeToTest = "02:29"
         const inputDays = [
             ...[16, 17, 18, 19].map(
                 (dayNum) =>
@@ -35,7 +35,7 @@ describe("OpeningHours", function () {
             approvalDataDir,
             "open-on-days",
             header +
-                `${new Date(
+                `Testing days on time: ${new Date(
                     `2016-05-16T${timeToTest}:11.824Z`,
                 ).toLocaleTimeString()}\n` +
                 result,
