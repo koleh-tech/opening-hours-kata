@@ -27,6 +27,7 @@ function App() {
             currentConfig: openingHours.openingPeriod.formatOpenTime(),
             handleChange: (e: { target: { value: string } }) => {
                 try {
+                    setErrorMessage(new ClosesBeforeOpeningError(""))
                     return setOpeningPeriod(
                         Period.fromStrings(
                             e.target.value,
@@ -72,16 +73,16 @@ function App() {
                     openingHours.nextOpeningDate(datetimeToCheck),
                 ).longDayName()}
             </p>
-            {errorMessage.message !== "" ? (
-                <div>
-                    <p>{errorMessage.message}</p>
-                    <a href={errorMessage.votingLink}>Vote here</a>
-                </div>
-            ) : (
-                <p></p>
-            )}
             <div className="configuration">
                 <h3>Configure hours:</h3>
+                {errorMessage.message !== "" ? (
+                    <div>
+                        <p>{errorMessage.message}</p>
+                        <a href={errorMessage.votingLink}>Vote here</a>
+                    </div>
+                ) : (
+                    <p></p>
+                )}
                 {openingTimeOptions.map((option) => (
                     <div className="configuration-option">
                         <input
