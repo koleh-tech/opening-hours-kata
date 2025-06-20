@@ -7,7 +7,8 @@ const approvals = require("approvals")
 approvals.configure({
     reporters: ["kompare"],
 })
-const approvalDataDir = __dirname
+const thi = "approved-behavior"
+const approvalDataDir = thi
 
 describe("OpeningHours", function () {
     const days = ["Mon", "Wed", "Fri"]
@@ -45,7 +46,7 @@ describe("OpeningHours", function () {
                 return `${inputText} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")
-        approvals.verify("approved-behavior", "open-on-hours", header + result)
+        approvals.verify(thi, "open-on-hours", header + result)
     })
 
     it("next opening day", function () {
