@@ -80,6 +80,7 @@ function App() {
         {
             currentConfiguration: currentConfiguration,
             handleChange: handleChange,
+            label: label,
         },
     ]
     return (
@@ -111,7 +112,7 @@ function App() {
                             value={option.currentConfiguration}
                             onChange={option.handleChange}
                         ></input>
-                        <label>{label}</label>
+                        <label>{option.label}</label>
                     </div>
                 ))}
 
