@@ -18,9 +18,11 @@ describe("OpeningHours", function () {
     const header = `CONFIG:\nDAYS OPEN: ${days}\nHOURS OPEN: ${"08:00"} - ${"16:00"}\n`
 
     it("is open on days", function () {
+        const timeToTest = "06:29"
         const inputDays = [
             ...[16, 17, 18, 19].map(
-                (dayNum) => new Datetime(`2016-05-${dayNum}T06:29:11.824Z`),
+                (dayNum) =>
+                    new Datetime(`2016-05-${dayNum}T${timeToTest}:11.824Z`),
             ),
         ]
         const result = inputDays
@@ -28,7 +30,14 @@ describe("OpeningHours", function () {
                 return `${input.shortDayName()} => ${openHours.isOpenOn(input) ? "OPEN" : "CLOSED"}`
             })
             .join("\n")
-        approvals.verify(approvalDataDir, "open-on-days", header + result)
+        const timeUnderTest = new Date(
+            `2016-05-16T${timeToTest}:11.824Z`,
+        ).toLocaleTimeString()
+        approvals.verify(
+            approvalDataDir,
+            "open-on-days",
+            header + `${timeUnderTest}\n` + result,
+        )
     })
 
     it("is open on hours", function () {
