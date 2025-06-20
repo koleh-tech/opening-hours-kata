@@ -14,7 +14,7 @@ function App() {
 
     const openingTimeOptions = [
         {
-            currentConfiguration: openingHours.openingPeriod.formatOpenTime(),
+            currentConfig: openingHours.openingPeriod.formatOpenTime(),
             handleChange: (e: { target: { value: string } }) =>
                 setOpeningPeriod(
                     Period.fromStrings(
@@ -25,7 +25,7 @@ function App() {
             label: "Open",
         },
         {
-            currentConfiguration: openingHours.openingPeriod.formatCloseTime(),
+            currentConfig: openingHours.openingPeriod.formatCloseTime(),
             handleChange: (e: { target: { value: string } }) =>
                 setOpeningPeriod(
                     Period.fromStrings(
@@ -61,7 +61,7 @@ function App() {
                     <div className="configuration-option">
                         <input
                             type="time"
-                            value={option.currentConfiguration}
+                            value={option.currentConfig}
                             onChange={option.handleChange}
                         ></input>
                         <label>{option.label}</label>
@@ -69,18 +69,15 @@ function App() {
                 ))}
 
                 <h3>Configure days:</h3>
-                {openingHours.allDays.map((checkboxDay, idx) => (
-                    <div
-                        key={checkboxDay.name}
-                        className="configuration-option"
-                    >
+                {openingHours.allDays.map((day, index) => (
+                    <div key={day.name} className="configuration-option">
                         <input
                             type="checkbox"
-                            id={`day-${idx}`}
-                            checked={checkboxDay.isOpen}
-                            onChange={() => setOpenDay(checkboxDay)}
+                            id={`day-${index}`}
+                            checked={day.isOpen}
+                            onChange={() => setOpenDay(day)}
                         />
-                        <label htmlFor={`day-${idx}`}>{checkboxDay.name}</label>
+                        <label htmlFor={`day-${index}`}>{day.name}</label>
                     </div>
                 ))}
             </div>
@@ -106,14 +103,14 @@ function App() {
         setOpeningHours(new OpeningHours(openingHours.openDays, newPeriod))
     }
 
-    function setOpenDay(checkboxDay: Day) {
+    function setOpenDay(inputDay: Day) {
         return setOpeningHours(
             new OpeningHours(
                 openingHours.allDays
                     .map((day) => ({
                         ...day,
                         isOpen:
-                            day.name !== checkboxDay.name
+                            day.name !== inputDay.name
                                 ? day.isOpen // leave as is
                                 : !day.isOpen,
                     }))
