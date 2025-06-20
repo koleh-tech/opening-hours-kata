@@ -1,6 +1,13 @@
 import { useState } from "react"
 import "./App.css"
-import { Datetime, Day, OpeningHours, Period, Time } from "./OpeningHours"
+import {
+    ClosesBeforeOpeningError,
+    Datetime,
+    Day,
+    OpeningHours,
+    Period,
+    Time,
+} from "./OpeningHours"
 import openingHoursLogo from "./assets/opening-hours.png"
 import closingHoursLogo from "./assets/closing-hours.png"
 
@@ -11,28 +18,33 @@ function App() {
     const [openingHours, setOpeningHours] = useState(
         new OpeningHours(["Mon", "Thu"], Period.fromStrings("08:00", "16:30")),
     )
+    const [errorMessage, setErrorMessage] = useState(
+        new ClosesBeforeOpeningError(""),
+    )
 
     const openingTimeOptions = [
         {
             currentConfig: openingHours.openingPeriod.formatOpenTime(),
-            handleChange: (e: { target: { value: string } }) =>
-                setOpeningPeriod(
+            handleChange: (e: { target: { value: string } }) => {
+                return setOpeningPeriod(
                     Period.fromStrings(
                         e.target.value,
                         openingHours.openingPeriod.formatCloseTime(),
                     ),
-                ),
+                )
+            },
             label: "Open",
         },
         {
             currentConfig: openingHours.openingPeriod.formatCloseTime(),
-            handleChange: (e: { target: { value: string } }) =>
-                setOpeningPeriod(
+            handleChange: (e: { target: { value: string } }) => {
+                return setOpeningPeriod(
                     Period.fromStrings(
                         openingHours.openingPeriod.formatOpenTime(),
                         e.target.value,
                     ),
-                ),
+                )
+            },
             label: "Close",
         },
     ]
@@ -57,16 +69,41 @@ function App() {
             </p>
             <div className="configuration">
                 <h3>Configure hours:</h3>
-                {openingTimeOptions.map((option) => (
+                {openingTimeOptions.map((option, index) => (
                     <div className="configuration-option">
                         <input
                             type="time"
                             value={option.currentConfig}
-                            onChange={option.handleChange}
+                            id={`hour-${index}`}
+                            onChange={(e) => {
+                                try {
+                                    setErrorMessage(
+                                        new ClosesBeforeOpeningError(""),
+                                    )
+                                    return option.handleChange(e)
+                                } catch (error) {
+                                    if (
+                                        error instanceof
+                                        ClosesBeforeOpeningError
+                                    ) {
+                                        setErrorMessage(error)
+                                    }
+                                }
+                            }}
                         ></input>
-                        <label>{option.label}</label>
+                        <label> - {option.label}</label>
                     </div>
                 ))}
+                {errorMessage.message !== "" && (
+                    <div className="error-message">
+                        <p>{errorMessage.message}</p>
+                        <button
+                            onClick={() => window.open(errorMessage.votingLink)}
+                        >
+                            Vote here
+                        </button>
+                    </div>
+                )}
 
                 <h3>Configure days:</h3>
                 {openingHours.allDays.map((day, index) => (

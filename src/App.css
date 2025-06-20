@@ -53,3 +53,16 @@ label {
 .read-the-docs {
     color: #888;
 }
+
+.error-message {
+    background-color: #a32929;
+    border-radius: inherit;
+    border: 3px solid #a32929;
+    padding: 1rem;
+    margin: 1rem auto;
+    max-width: 315px;
+    width: fit-content;
+    text-align: center;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
