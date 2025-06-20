@@ -68,6 +68,19 @@ function App() {
     )
 
     const currentConfiguration = openingHours.openingPeriod.formatOpenTime()
+    const handleChange = (e: { target: { value: string } }) =>
+        setOpeningPeriod(
+            Period.fromStrings(
+                e.target.value,
+                openingHours.openingPeriod.formatCloseTime(),
+            ),
+        )
+    const openingTimeOptions = [
+        {
+            currentConfiguration: currentConfiguration,
+            handleChange: handleChange,
+        },
+    ]
     return (
         <>
             <div>
@@ -90,21 +103,16 @@ function App() {
             <div className="configuration">
                 <h3>Configure hours:</h3>
 
-                <div className="configuration-option">
-                    <input
-                        type="time"
-                        value={currentConfiguration}
-                        onChange={(e) =>
-                            setOpeningPeriod(
-                                Period.fromStrings(
-                                    e.target.value,
-                                    openingHours.openingPeriod.formatCloseTime(),
-                                ),
-                            )
-                        }
-                    ></input>
-                    <label>Open</label>
-                </div>
+                {openingTimeOptions.map((option) => (
+                    <div className="configuration-option">
+                        <input
+                            type="time"
+                            value={option.currentConfiguration}
+                            onChange={option.handleChange}
+                        ></input>
+                        <label>Open</label>
+                    </div>
+                ))}
 
                 <div className="configuration-option">
                     <input
