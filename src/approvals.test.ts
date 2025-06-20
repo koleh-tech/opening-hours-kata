@@ -35,9 +35,9 @@ describe("OpeningHours", function () {
             approvalDataDir,
             "open-on-days",
             header +
-                `Testing days on time: ${new Date(
+                `Given this time: ${new Date(
                     `2016-05-16T${timeToTest}:11.824Z`,
-                ).toLocaleTimeString()}\n` +
+                ).toLocaleTimeString()}, the following days are OPEN/CLOSED:\n\n` +
                 result,
         )
     })

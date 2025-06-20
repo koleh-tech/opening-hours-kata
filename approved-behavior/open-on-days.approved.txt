@@ -1,7 +1,8 @@
 CONFIG:
 DAYS OPEN: Mon,Wed,Fri
 HOURS OPEN: 08:00 - 16:00
-Testing days on time: 11:59:11 AM
+Given this time: 11:59:11 AM, the following days are OPEN/CLOSED:
+
 Mon => OPEN
 Tue => CLOSED
 Wed => OPEN
