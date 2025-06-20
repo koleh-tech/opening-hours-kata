@@ -53,3 +53,7 @@ label {
 .read-the-docs {
     color: #888;
 }
+
+.error-message {
+    background-color: #ff0000;
+}

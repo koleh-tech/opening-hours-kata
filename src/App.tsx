@@ -69,8 +69,8 @@ function App() {
             </p>
             <div className="configuration">
                 <h3>Configure hours:</h3>
-                {errorMessage.message ?? (
-                    <div>
+                {errorMessage.message !== "" && (
+                    <div className="error-message">
                         <p>{errorMessage.message}</p>
                         <a href={errorMessage.votingLink}>Vote here</a>
                     </div>
