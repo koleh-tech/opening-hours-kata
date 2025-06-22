@@ -1,7 +1,7 @@
-name: CI and Deploy
+name: Build and test
 
 on:
-    push:
+    pull_request:
         branches: [main]
 
 permissions:
@@ -49,15 +49,3 @@ jobs:
               with:
                   path: dist
 
-    deploy:
-        name: Deploy to GitHub Pages
-        needs: build
-        runs-on: ubuntu-latest
-        environment:
-            name: github-pages
-            url: ${{ steps.deployment.outputs.page_url }}
-
-        steps:
-            - name: Deploy to GitHub Pages
-              id: deployment
-              uses: actions/deploy-pages@v4

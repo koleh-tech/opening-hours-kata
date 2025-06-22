@@ -13,10 +13,10 @@ export class Day {
 
 export class ClosesBeforeOpeningError extends Error {
     public votingLink = "https://www.badgerbadgerbadger.com/"
-    constructor() {
-        super(
-            "Closing the next day is not supported yet. Vote here if you'd like to see this feature:",
-        )
+    constructor(
+        message: string = "Closing the next day is not supported yet. Vote here if you'd like to see this feature:",
+    ) {
+        super(message)
     }
 }
 
